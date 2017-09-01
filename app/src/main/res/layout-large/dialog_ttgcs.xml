@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#005789"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Tình trạng ghi chỉ số"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ibtDongttgcs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:background="@null"
+            android:src="@drawable/gcs_close" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_header"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/txtStyle"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="Quyển"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            style="@style/txtStyle"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="Điểm đo"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            style="@style/txtStyle"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="Đã ghi"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            style="@style/txtStyle"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:text="Chưa ghi"
+            android:textColor="#FFFFFF" />
+
+        <!-- Table Body -->
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lsvTTGCS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/darker_gray" >
+    </ListView>
+
+</LinearLayout>

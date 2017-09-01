@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#005789"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:text="Danh sách các công tơ có trạng thái bất thường"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnDong_ttbt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:background="@null"
+            android:src="@drawable/gcs_close" />
+    </LinearLayout>
+    
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <!-- Table Header -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/tblGCS_Header_ttbt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_header"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvSTT_ttbtct"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="STT"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvTENSO_ttbtct"
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Tên sổ"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvHOTEN_ttbtct"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Họ tên KH"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvNOCTO_ttbtct"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Số c.tơ"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvCSM_ttbtct"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="CS Mới"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvTTM_ttbtct"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Tình trạng"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvDC_csbtct"
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Địa chỉ"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+                <TextView
+                    android:id="@+id/tvGC_csbtct"
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="Ghi chú"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+                
+            </LinearLayout>
+
+            <!-- Table Body -->
+
+            <ListView
+                android:id="@+id/lsvGCS_ttbt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:choiceMode="singleChoice"
+                android:listSelector="@android:color/darker_gray" >
+            </ListView>
+        </LinearLayout>
+    </HorizontalScrollView>
+<!-- 
+    <Button
+        android:id="@+id/btnDong_ttbt"
+        style="@style/my_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/blue_button"
+        android:text="Đóng" /> -->
+
+</LinearLayout>

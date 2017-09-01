@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="settings">Settings</string>
+	
+	<string name="none_paired">No devices have been paired</string>
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_found">No devices found</string>
+    <string name="btnSearch">Connect  Bluetooth  Printer</string>
+    <string name="btnSend">Print</string>
+    <string name="btn_test">Print  Test  Page</string>
+    <string name="btnClose">Close</string>
+    <string name="txt_content">&quot;&quot;</string>
+    <string name="menu_settings">set</string>
+    <string name="strLang">en</string>
+    <string name="button_scan">Scan for devices</string>
+    
+	<string name="resolution_label">Resolution</string>
+	<string name="resolution_times"> x </string>
+	<string-array name="resolution_array">
+        <item>640x480</item>
+        <item>480x640</item>
+        <item>320x240</item>
+        <item>240x320</item>
+        <item>176x144</item>
+        <item>144x176</item>
+        <item>Custom</item>
+    </string-array>
+
+	<string name="ip_setting_label">Address</string>
+	<string name="port_setting_label">Port</string>
+	<string name="command_setting_label">Command</string>
+	
+	<string name="digits_increment">+</string>
+	<string name="digits_decrement">-</string>
+	<string name="address_dot">.</string>
+	<string name="port_80">80</string>
+	<string name="port_8080">8080</string>
+	<string name="port_80_with_explanation">80 (for Ai-ball)</string>
+	<string name="port_8080_with_explanation">8080 (for IP Webcam)</string>	
+	<string name="command_streaming">\?action=stream</string>
+	<string name="command_videofeed">videofeed</string>
+	<string name="command_streaming_with_explanation">\?action=stream (for Ai-ball)</string>
+	<string name="command_videofeed_with_explanation">videofeed (for IP Webcam)</string>
+	
+	<string name="settings_done">Done</string>
+	
+	<string name="title_disconnected">Disconnected</string>
+	<string name="title_connecting">Connecting&#8230;</string>
+	<string name="title_imageerror">Error on preparing images</string>
+	
+	
+	<string name="action_settings">Settings</string>
+    <string name="action1">Action1</string>
+    <string name="action2">Action2</string>
+    <string name="action3">Action3</string>
+    <string name="app_name">ES-GCS</string>
+    <string name="app_name_lc">LCGCS</string>
+    <string name="chon_so_gcs">Chọn sổ ghi chỉ số</string>
+    <string name="gui_nhan_du_lieu">Gửi/nhận dữ liệu</string>
+    <string name="cau_hinh">Cấu hình</string>
+    <string name="thoat">Thoát</string>
+    <string name="title_activity_chon_so">Chọn sổ ghi chỉ số</string>
+    <string name="so_da_luu">Sổ đã lưu</string>
+    <string name="ChonSoGCS_prompt">Chọn sổ</string>
+    <string name="title_activity_cau_hinh">Cấu hình</string>
+    <string name="title_activity_gcs">Ghi chỉ số</string>
+    <string name="title_activity_gcschi_tiet">Thông tin chi tiết</string>
+    <string name="title_activity_thsl">Tổng hợp sản lượng Activity</string>
+    <string name="BCS_lbl">BCS</string>
+    <string name="KY_lbl">Kỳ</string>
+    <string name="GHI_lbl">Ghi</string>
+    <string name="LUU_SO_lbl">Lưu sổ</string>
+    <string name="DA_GHI_lbl">Đã ghi</string>
+    <string name="CHI_TIET_lbl">Chi tiết</string>
+    <string name="MA_COT_lbl">Mã cột</string>
+    <string name="MA_TRAM_lbl">Mã trạm</string>
+    <string name="TTR_MOI_lbl">TT mới</string>
+    <string name="TTR_CU_lbl">TT cũ</string>
+    <string name="SL_THAO_lbl">SL tháo</string>
+    <string name="CS_CU_lbl">CS cũ</string>
+    <string name="HSN_lbl">HSN</string>
+    <string name="LOAI_BCS_lbl">Loại BCS</string>
+    <string name="MA_KH_lbl">Mã KH</string>
+    <string name="SL_MOI_lbl">SL mới</string>
+    <string name="SL_CU_lbl">SL cũ</string>
+    <string name="DTT_lbl">ĐTT</string>
+    <string name="CS_MOI_lbl">CS mới</string>
+    <string name="MA_GC_lbl">Mã GC</string>
+    <string name="SO_CTO_lbl">Số c.tơ</string>
+    <string name="TEN_KH_lbl">Tên KH</string>
+    <string name="DIA_CHI_lbl">Địa chỉ</string>
+    <string name="STT_lbl">STT</string>
+    <string name="Xoa_lbl">Xóa</string>
+    <string name="dang_ky_lbl">Đăng ký chương trình</string>
+    <string name="bcth_lbl">Báo cáo tổng hợp</string>
+    <string name="th_lbl">Tổng hợp</string>
+    <string name="empty_lbl"></string>
+    <string name="title_activity_dntt">DNTTActivity</string>
+    <string name="title_activity_connect_bt_device">ConnectBtDeviceActivity</string>
+    <string name="title_activity_sorting_route">SortingRouteActivity</string>
+    <string name="noct">Số Công tơ</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_quan_ly_so">QuanLySoActivity</string>
+    <string name="msg_error_non_supported_device">Unsupported device in this sample app.</string>
+    <string name="msg_error_connection">Failed to connect to the device.</string>
+    <string name="msg_error_take_picture">Failed to take a picture.</string>
+    <string name="msg_error_api_calling">Cannot control the device by API.</string>
+    <string name="msg_rec_start">Recording started.</string>
+    <string name="msg_rec_stop">Recording stopped.</string>
+    <string name="msg_device_search_finish">Device discovery successfully completed.</string>
+    <string name="msg_error_device_searching">Failed to search.\nStopped.</string>
+    <string name="msg_wifi_disconnect">(Wi-Fi chưa được kết nối)</string>
+    
+    <string name="sample_camera">Camera Remote API Sample</string>
+    <string name="button_take_picture">Take Picture</string>
+    <string name="button_rec_start">Start movie\nrecording</string>
+    <string name="button_rec_stop">Stop movie\nrecording</string>
+    <string name="button_start_search">Tìm thiết bị</string>
+    <string name="button_connect">Kết nối wifi</string>
+    <string name="button_contents_list">Contents List</string>
+    <string name="msg_search_devices">Vui lòng kết nối với wifi của thiết bị sau đó nhấn tìm thiết bị và chọn chuỗi kết nối</string>
+    <string name="msg_error_content">Contents not available.</string>
+    <string name="no_image">No image</string>
+    <string name="prompt_shoot_mode">Select shoot mode</string>
+    <string name="msg_error_no_supported_shootmode">Unsupported shoot mode in this sample app.</string>
+    <string name="title_activity_date_list">Date List</string>
+    <string name="title_activity_contents_grid">Contents</string>
+    <string name="title_activity_still_content">Still</string>
+    <string name="title_activity_movie_content">Movie</string>
+    
+    <string name="button_start">Start Rescan</string>
+    <string name="database_proc">Examined</string>
+    <string name="delete_proc">Removed reference to</string>
+    <string name="db_label">Will also check existing media database for updated or deleted files.</string>
+    <string name="db_error_failure">Encountered error reading media database, and might miss updated or deleted files or rescan up-to-date files.</string>
+    <string name="db_error_recovered">Encountered error reading media database, but recovered.</string>
+    <string name="db_error_retrying">Encountered error reading media database.  Retrying in 1 second...</string>
+    <string name="final_proc">Processed</string>
+    <string name="path_label">Path to check for new files:</string>
+    <string name="progress_completed_label">Completed, ready to start another scan.</string>
+    <string name="progress_error_bad_path_label">Scan failed: bad path specified for new file search.</string>
+    <string name="progress_filelist_label">Preparing initial list of files...</string>
+    <string name="progress_database_label">Querying database...</string>
+    <string name="progress_unstarted_label">Not yet started.</string>
+    <string name="restrict_label">Ignore updated and deleted files outside of the specified path.</string>
+    <string name="skipping_folder_label">Encountered an error and skipping</string>
+    <string name="title_activity_main">SD Scanner</string>
+    
+    <string name="version">		  version 4.1.5 - 28/04/2016</string>
+
+    <!--resource for gay camera-->
+    <string name="record" >record</string>
+    <string name="detectMotion" >detectMotion</string>
+    <string name="disabled" >disabled</string>
+    <string name="always" >always</string>
+</resources>

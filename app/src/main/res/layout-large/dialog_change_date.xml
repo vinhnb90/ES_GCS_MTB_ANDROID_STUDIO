@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:ems="10"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:hint="dd/MM/yyyy"
+        android:background="@drawable/etxt_selector"
+        android:layout_marginRight="10dp"
+        android:inputType="textNoSuggestions" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btOK"
+        style="@style/my_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@drawable/blue_button"
+        android:text="OK" />
+
+</LinearLayout>

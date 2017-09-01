@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/ivLogoApp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_app" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="@string/version"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:visibility="gone"
+            android:text="@string/dang_ky_lbl" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:text="Đăng nhập" />
+        
+        <Button
+            android:id="@+id/btnLogout"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:visibility="gone"
+            android:text="Đăng xuất" />
+        
+        <Button
+            android:id="@+id/btnTransferData"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:visibility="gone"
+            android:text="@string/gui_nhan_du_lieu" />
+        
+        <Button
+            android:id="@+id/btnCauHinh"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:text="@string/cau_hinh" />
+        
+        <Button
+            android:id="@+id/btnSortingRoute"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:text="Sắp xếp lộ trình GCS" />
+        
+        <Button
+            android:id="@+id/btnGCS"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:text="@string/chon_so_gcs" />
+        
+        <Button
+            android:id="@+id/btnBCTH"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:background="@drawable/blue_button"
+            android:text="@string/bcth_lbl" />
+    </LinearLayout>
+
+</LinearLayout>

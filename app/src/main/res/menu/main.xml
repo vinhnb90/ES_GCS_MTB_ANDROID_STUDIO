@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_cmd"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="CMD"/>
+    
+    <item
+        android:id="@+id/action_del_lotrinh"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Xóa lộ trình"/>
+    
+    <item
+        android:id="@+id/action_load"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Load photo folder"/>
+    
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Exit"/>
+
+</menu>

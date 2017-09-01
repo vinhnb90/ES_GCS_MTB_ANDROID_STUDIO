@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_main"
+        android:padding="10dp"
+        android:text="Chọn file backup bạn muốn lấy lại"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvBackup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <ListView 
+            android:id="@+id/lvBackup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        
+        <Button 
+            android:id="@+id/btBackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Lấy lại dữ liệu"
+            android:textColor="#FFF"
+            android:background="@drawable/blue_button"
+            android:layout_margin="10dp"/>
+        
+    </LinearLayout>
+    -->
+
+</LinearLayout>

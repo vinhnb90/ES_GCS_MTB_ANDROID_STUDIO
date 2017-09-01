@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#005789"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:id="@+id/tvTittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Chọn sổ"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ibtDong_csbt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:background="@null"
+            android:src="@drawable/gcs_close" />
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/lsvChonSo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:choiceMode="multipleChoice"
+        android:listSelector="@android:color/darker_gray" >
+    </ListView>
+    
+    <Button
+        android:id="@+id/btnTongHop_csbt"
+        style="@style/my_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/blue_button"
+        android:onClick="btnTongHopcsbt_Click"
+        android:text="@string/th_lbl" />
+    <!-- 
+    <Button
+        android:id="@+id/btnDong_csbt"
+        style="@style/my_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/blue_button"
+        android:text="Đóng" /> -->
+
+</LinearLayout>

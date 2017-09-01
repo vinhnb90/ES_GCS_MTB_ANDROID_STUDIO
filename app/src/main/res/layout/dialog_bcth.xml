@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#005789"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:text="Báo cáo tổng hợp"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnDongbcth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:background="@null"
+            android:src="@drawable/gcs_close" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <RadioGroup
+            android:id="@+id/rgBC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp" >
+
+            <RadioButton
+                android:id="@+id/rTTGCS"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Tổng hợp tình trạng ghi chỉ số" />
+
+            <RadioButton
+                android:id="@+id/rTHSo"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kết quả tổng hợp sổ" />
+
+            <RadioButton
+                android:id="@+id/rTHCSBT"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng hợp công tơ có sản lượng bất thường" />
+
+            <RadioButton
+                android:id="@+id/rTHTTBT"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng hợp công tơ có trạng thái bất thường" />
+
+            <RadioButton
+                android:id="@+id/rDNTT"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tính điện năng tổn thất" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnTongHop"
+            style="@style/my_button"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/blue_button"
+            android:onClick="btnTongHop_Click"
+            android:text="@string/th_lbl" />
+        <!--
+    <Button
+        android:id="@+id/btnDong"
+        style="@style/my_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/blue_button"
+        android:text="Đóng" />
+        -->
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,357 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activity_Config" >
+
+    <TextView
+        android:id="@+id/tv_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#afafaf"
+        android:shadowDx="-2"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:text="Cấu hình chương trình"
+        android:textColor="#055181"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/lnKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/etKey"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="7"
+                    android:background="@drawable/etxt_selector"
+                    android:hint="Enter key"
+                    android:inputType="textNoSuggestions|textPassword"
+                    android:padding="5dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btShow"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/blue_button"
+                    android:text="Show config"
+                    android:textColor="#FFF"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnCanhBao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <CheckBox
+                    android:id="@+id/chkbCanhBaoDungNhieu"
+                    style="@style/tvTblBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="chkbCanhBaoDungNhieu_Click"
+                    android:text="Cảnh báo khách hàng dùng quá 200%"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/chkbCanhBaoChenhLechSL"
+                    style="@style/tvTblBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="chkbCanhBaoChenhLechSL_Click"
+                    android:text="Cảnh báo chênh lệch sản lượng (%)"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="33dp"
+                    android:text="Cảnh báo nếu vượt mức qui định"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="33dp" >
+
+                    <TextView
+                        android:id="@+id/tv_valVuotMuc"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:text="000%"
+                        android:textSize="18sp" />
+
+                    <SeekBar
+                        android:id="@+id/sbVuotMuc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="99" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="33dp"
+                    android:text="Cảnh báo nếu dưới mức qui định"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="30dp"
+                    android:paddingLeft="33dp" >
+
+                    <TextView
+                        android:id="@+id/tv_valDuoiDinhMuc"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:text="000%"
+                        android:textSize="18sp" />
+
+                    <SeekBar
+                        android:id="@+id/sbDuoiDinhMuc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="99" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/chkbCanhBaoChenhLechSL2"
+                    style="@style/tvTblBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="chkbCanhBaoChenhLechSL2_Click"
+                    android:text="Cảnh báo chênh lệch sản lượng (kwh)"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="30dp"
+                    android:weightSum="10" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:paddingLeft="33dp"
+                        android:text="Cảnh báo nếu vượt quá mức qui định"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/etVuotMuc"
+                        style="@style/my_edittext"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="7"
+                        android:background="@android:drawable/editbox_background"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="30dp"
+                    android:weightSum="10" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:paddingLeft="33dp"
+                        android:text="Cảnh báo nếu dưới mức qui định"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/etDuoiDinhMuc"
+                        style="@style/my_edittext"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="7"
+                        android:background="@android:drawable/editbox_background"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chkbTuDongLuu"
+                style="@style/tvTblBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="chkbTuDongLuu_Click"
+                android:text="Tự động lưu dữ liệu"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp"
+                android:paddingLeft="33dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/tv_valTGTuDongLuu"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:text="000%"
+                    android:textSize="18sp" />
+
+                <SeekBar
+                    android:id="@+id/sbTuDongLuu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="29" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp" >
+
+                <TextView
+                    android:id="@+id/tv_URL_WS"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="IP máy chủ"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etxt_URL_WS"
+                    style="@style/my_edittext"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true"
+                    android:text="" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp" >
+
+                <TextView
+                    android:id="@+id/tv_DinhDang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Định dạng hình ảnh    "
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/ckDinhDang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </CheckBox>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp" >
+
+                <Button
+                    android:id="@+id/btnOrderColumns"
+                    style="@style/my_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/blue_button"
+                    android:onClick="btnOrderColumns_Click"
+                    android:text="Sắp xếp cột hiển thị"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp" >
+
+                <TextView
+                    android:id="@+id/tv_dien_luc"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn vị Q.lý :"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etxt_DienLuc"
+                    style="@style/my_edittext"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Nhập tên điện lực quản lý"
+                    android:singleLine="true"
+                    android:text="" >
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnSave"
+            style="@style/my_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_button"
+            android:onClick="btnSave_Click"
+            android:text="Lưu" />
+
+        <Button
+            android:id="@+id/btnBack"
+            style="@style/my_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_button"
+            android:onClick="btnBack_Click"
+            android:text="Quay lại"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

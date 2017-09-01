@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tv_STT"
+        style="@style/tvTblBody"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_TenKH"
+        style="@style/tvTblBody"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_HoTenKH"
+        style="@style/tvTblBody"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+        
+    <TextView
+        android:id="@+id/tv_SO_CTO"
+        style="@style/tvTblBody"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_CS_CU"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_CS_MOI"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_DTT"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_SL_MOI"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_SL_CU"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_SL_1"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_SL_2"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_SL_3"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_MA_KHANG"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_MaGC"
+        style="@style/tvTblBody"
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_LoaiBCS"
+        style="@style/tvTblBody"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_HSN"
+        style="@style/tvTblBody"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_CS_CU1"
+        style="@style/tvTblBody"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_SLThao"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_TTCu"
+        style="@style/tvTblBody"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_TTMoi"
+        style="@style/tvTblBody"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_MA_TRAM"
+        style="@style/tvTblBody"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_MaCot"
+        style="@style/tvTblBody"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+    <TextView
+        android:id="@+id/tv_DiaChi"
+        style="@style/tvTblBody"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/border"
+        android:textColor="#000"
+        android:gravity="center" />
+    
+
+</LinearLayout>

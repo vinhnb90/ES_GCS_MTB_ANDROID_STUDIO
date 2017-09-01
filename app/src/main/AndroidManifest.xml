@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="esolutions.com.gcs_svn_old"
+    android:versionCode="14"
+    android:versionName="4.1.6">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <!-- WIFI/3G -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- READ/WRITE FILE -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- BLUETOOTH -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="esolutions.com.gcs_svn_old.com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="esolutions.com.gcs_svn_old.com.esgcs.ui.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
+
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- Camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!--
+         <permission
+        android:name="esolutions.com.gcs_svn_old.com.esgcs.ui.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+
+
+    -->
+    <!-- SHORTCUT -->
+    <uses-permission android:name="esolutions.com.gcs_svn_old.com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="esolutions.com.gcs_svn_old.com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+
+    <!-- Read log -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_gcs"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Welcome"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Main"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.RUN" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.simplemjpeg.SettingsActivity"
+            android:label="@string/settings"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Config"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_cau_hinh"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Config" />
+
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Chon_So"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_chon_so"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Main" />
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_CAMERA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera_AS20"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_CAMERA_AS20" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.example.sony.cameraremote.CameraRemoteSampleApp"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera_MTB"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_CAMERA_MTB" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera_BN"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_CAMERA_BN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera_AiBall"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_CAMERA_AIBALL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.simplemjpeg.SettingCamera"
+            android:label="Cài đặt kết nối"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.ConnectBtDeviceActivity"
+            android:label="@string/title_activity_connect_bt_device"></activity>
+
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.SortingRouteActivity"
+            android:label="@string/title_activity_sorting_route"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.DNTTActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_dntt"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".com.camera.ui.DNTTActivity" />
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.QuanLySoActivity"
+            android:label="@string/title_activity_quan_ly_so">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".com.camera.ui.QuanLySoActivity" />
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Map"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_MAP" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.Activity_Maps"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY_MAPS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.camera.ui.DeviceListActivity"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
+        <meta-data
+            android:name="esolutions.com.gcs_svn_old.com.google.android.geo.API_KEY"
+            android:value="AIzaSyAZrJ1KacxTicCAZ8nKzihysGXgqOu-Q3A" />
+
+
+        <!--.....................................................................................-->
+        <!--
+             <meta-data
+            android:name="esolutions.com.gcs_svn_old.com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        -->
+
+        <!--   <service
+               android:name="esolutions.com.gcs_svn_old.com.squareup.leakcanary.internal.HeapAnalyzerService"
+               android:enabled="false"
+               android:process=":leakcanary" />
+           <service
+               android:name="esolutions.com.gcs_svn_old.com.squareup.leakcanary.DisplayLeakService"
+               android:enabled="false" />
+   -->
+        <!--
+        <activity
+            android:name="esolutions.com.gcs_svn_old.com.squareup.leakcanary.internal.DisplayLeakActivity"
+            android:enabled="false"
+            android:icon="@drawable/__leak_canary_icon"
+            android:label="@string/__leak_canary_display_activity_label"
+            android:taskAffinity="esolutions.com.gcs_svn_old.com.squareup.leakcanary"
+            android:theme="@style/__LeakCanary.Base" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+
+
+    </application>
+
+</manifest>

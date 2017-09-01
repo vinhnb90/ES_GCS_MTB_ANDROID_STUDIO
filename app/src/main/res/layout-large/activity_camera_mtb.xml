@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.meetme.android.horizontallistview.HorizontalListView
+        android:id="@+id/hlvSimpleList"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/spTieuChi"
+            style="@style/my_spinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:background="@drawable/spinner_selector" />
+
+        <EditText
+            android:id="@+id/etTimKiem"
+            style="@style/my_edittext"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="3"
+            android:background="@drawable/etxt_selector"
+            android:drawableRight="@drawable/gcs_search"
+            android:hint="Tìm kiếm"
+            android:imeOptions="actionDone"
+            android:textSize="20sp" >
+        </EditText>
+
+        <Button
+            android:id="@+id/btnXoa"
+            style="@style/my_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/blue_button"
+            android:onClick="btnXoa_Click"
+            android:text="Xóa" />
+
+        <ImageButton
+            android:id="@+id/ibtScanner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:background="@null"
+            android:onClick="ibtScanner_Click"
+            android:src="@drawable/ic_scanner"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+		<include 
+		    layout="@layout/include_camera_mtb"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="7.2"/>
+        <!-- Thanh chuc nang -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <Spinner
+                    android:id="@+id/spTrangThai"
+                    style="@style/my_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1.4"
+                    android:background="@drawable/spinner_selector2" />
+
+                <EditText
+                    android:id="@+id/etCSMoi"
+                    style="@style/my_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/etxt_selector2"
+                    android:hint="Chỉ số"
+                    android:imeOptions="actionDone"
+                    android:textSize="34sp" >
+
+                    <requestFocus />
+                </EditText>
+
+                <EditText
+                    android:id="@+id/etPmax"
+                    style="@style/my_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/etxt_selector2"
+                    android:hint="Pmax"
+                    android:imeOptions="actionDone"
+                    android:textSize="25sp" >
+                </EditText>
+
+                <Button
+                    android:id="@+id/etNgayPmax"
+                    style="@style/my_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/etxt_selector2"
+                    android:onClick="etNgayPmax_Click"
+                    android:textColor="#000"
+                    android:textSize="16sp" >
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btnChucNang"
+                    style="@style/my_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_button"
+                    android:onClick="btnChucNang_Click"
+                    android:text="Chức năng"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnSoKhac"
+                    style="@style/my_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_button"
+                    android:onClick="btnSoKhac_Click"
+                    android:text="Sổ khác"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnAnHienCamera"
+                    style="@style/my_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_button"
+                    android:onClick="btnAnHienCamera_Click"
+                    android:text="Ẩn camera"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnGhi"
+                    style="@style/my_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_button"
+                    android:onClick="btnGhi_Click"
+                    android:text="Ghi"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.2"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
