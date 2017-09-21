@@ -100,25 +100,25 @@ public class Activity_Chon_So extends Activity{
 			spnChonSo_GetData();
 		}
 		
-		if(Common.PHIEN_BAN.equals("HN")){
-			LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-			if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) || !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setTitle("Kích hoạt GPS");
-				builder.setMessage("Bạn phải kích hoạt GPS để tiếp tục sử dụng chương trình\nKích hoạt ở chế độ chính xác cao để thu thập tọa độ chính xác nhất");
-				builder.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialogInterface, int i) {
-								Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-								startActivity(intent);
-							}
-						});
-				alertDialog = builder.create();
-				alertDialog.setCanceledOnTouchOutside(false);
-				alertDialog.setCancelable(false);
-				alertDialog.show();
-			}
-		}
+//		if(Common.PHIEN_BAN.equals("HN")){
+//			LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+//			if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) || !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//				builder.setTitle("Kích hoạt GPS");
+//				builder.setMessage("Bạn phải kích hoạt GPS để tiếp tục sử dụng chương trình\nKích hoạt ở chế độ chính xác cao để thu thập tọa độ chính xác nhất");
+//				builder.setPositiveButton("OK",
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialogInterface, int i) {
+//								Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//								startActivity(intent);
+//							}
+//						});
+//				alertDialog = builder.create();
+//				alertDialog.setCanceledOnTouchOutside(false);
+//				alertDialog.setCancelable(false);
+//				alertDialog.show();
+//			}
+//		}
 //		if(!Common.PHIEN_BAN.equals("HN")){
 //			rgCamera.setVisibility(View.GONE);
 //		}
