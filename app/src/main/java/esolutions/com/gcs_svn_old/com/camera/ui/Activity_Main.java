@@ -214,13 +214,13 @@ public class Activity_Main extends Activity implements
                             // this.finish();
                         }
                     } else {
-                        if (!connection.getMaDvi()) {
-                            comm.ShowToast(
-                                    Activity_Main.this.getApplicationContext(),
-                                    "Đơn vị bạn chưa được cấp quyền sử dụng chương trình",
-                                    Toast.LENGTH_LONG);
-                            this.finish();
-                        }
+//                        if (!connection.getMaDvi()) {
+//                            comm.ShowToast(
+//                                    Activity_Main.this.getApplicationContext(),
+//                                    "Đơn vị bạn chưa được cấp quyền sử dụng chương trình",
+//                                    Toast.LENGTH_LONG);
+//                            this.finish();
+//                        }
                     }
 
                     // gps = new GPSTracker(Activity_Main.this);
@@ -319,13 +319,13 @@ public class Activity_Main extends Activity implements
                                         // this.finish();
                                     }
                                 } else {
-                                    if (!connection.getMaDvi()) {
-                                        comm.ShowToast(
-                                                Activity_Main.this.getApplicationContext(),
-                                                "Đơn vị bạn chưa được cấp quyền sử dụng chương trình",
-                                                Toast.LENGTH_LONG);
-                                        this.finish();
-                                    }
+//                                    if (!connection.getMaDvi()) {
+//                                        comm.ShowToast(
+//                                                Activity_Main.this.getApplicationContext(),
+//                                                "Đơn vị bạn chưa được cấp quyền sử dụng chương trình",
+//                                                Toast.LENGTH_LONG);
+//                                        this.finish();
+//                                    }
                                 }
 
                                 // gps = new GPSTracker(Activity_Main.this);
