@@ -2886,9 +2886,11 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                 String d, m, y;
                 d = m = y = "";
                 if (sqliteDate < min) {
-                    d = "01";
-                    m = "01";
-                    y = "1900";
+                    String dateNow = Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy);
+
+                    d = dateNow.substring(0, 2);
+                    m = dateNow.substring(3, 5);
+                    y = dateNow.substring(6, 10);
                 } else {
                     d = date.split("/")[0].toString();
                     m = date.split("/")[1].toString();

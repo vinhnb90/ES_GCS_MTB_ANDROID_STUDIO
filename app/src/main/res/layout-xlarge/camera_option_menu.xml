@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="50px"  android:layout_width="200px">
 
 	<item android:id="@+id/settings"
           android:title="@string/settings"

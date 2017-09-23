@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnConnect"
+        android:id="@+id/btnConnect_main"
         android:layout_width="fill_parent"
         android:layout_height="35sp"
         android:layout_margin="5dp"
