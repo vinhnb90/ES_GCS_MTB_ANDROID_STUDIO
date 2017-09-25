@@ -10,16 +10,16 @@ public class ConstantVariables {
 	public static final int[] TTGCS_COLID = new int[] { R.id.tv_Quyen, R.id.tv_DiemDo, R.id.tv_DaGhi, R.id.tv_ChuaGhi };
 	public static final String[] THSL_COLNAME = new String[] { "Quyen", "DiemDo", "SLHC", "SLVC" };
 	public static final int[] THSL_COLID = new int[] { R.id.tv_Quyen, R.id.tv_DiemDo, R.id.tv_SLHC, R.id.tv_SLVC };
-	public static final String[] COLARR = {"ID_ROUTE", "MA_NVGCS", "MA_KHANG", "MA_DDO",
+	public static final String[] COLARR = {"ID", "MA_NVGCS", "MA_KHANG", "MA_DDO",
 		"MA_DVIQLY", "MA_GC", "MA_QUYEN", "MA_TRAM", "BOCSO_ID",
 		"LOAI_BCS", "LOAI_CS", "TEN_KHANG", "DIA_CHI", "MA_NN", "SO_HO",
 		"MA_CTO", "SERY_CTO", "HSN", "CS_CU", "TTR_CU", "SL_CU",
 		"SL_TTIEP", "NGAY_CU", "CS_MOI", "TTR_MOI", "SL_MOI", "CHUOI_GIA",
 		"KY", "THANG", "NAM", "NGAY_MOI", "NGUOI_GCS", "SL_THAO",
 		"KIMUA_CSPK", "MA_COT", "CGPVTHD", "HTHUC_TBAO_DK", "DTHOAI_SMS",
-		"EMAIL", "THOI_GIAN", "X", "Y", "SO_TIEN", "HTHUC_TBAO_TH", "TENKHANG_RUTGON",
+		"EMAIL", "THOI_GIAN", "X", "Y", "Z", "SO_TIEN", "HTHUC_TBAO_TH", "TENKHANG_RUTGON",
 		"TTHAI_DBO", "DU_PHONG", "TEN_FILE", "GHICHU", "TT_KHAC", "ID_SQLITE",
-		"SLUONG_1","SLUONG_2","SLUONG_3","SO_HOM", "CHU_KY", "HINH_ANH", "PMAX", "NGAY_PMAX" };
+		"SLUONG_1","SLUONG_2","SLUONG_3","SO_HOM", "CHU_KY", "HINH_ANH", "PMAX", "NGAY_PMAX", "STR_CHECK_DSOAT"};
 	public static String[] MENU_PAGER = { "Xem chi tiết", "Thêm ghi chú", "Xóa chỉ số mới","Công tơ đã xóa chỉ số",
 		"Công tơ sản lượng bất thường", "Công tơ trạng thái bất thường", "Công tơ vượt quá sản lượng 200%",
 		"Thêm khách hàng phát triển mới", "Xem bản đồ", "Xem toàn bộ vị trí", "Tạm tính tiền điện", "Bật chế độ quét mã vạch", "In thông báo",

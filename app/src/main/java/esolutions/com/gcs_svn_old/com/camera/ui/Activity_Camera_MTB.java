@@ -4059,6 +4059,7 @@ public class Activity_Camera_MTB extends Activity {
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
 			try{
+				LinkedHashMap<String, String> a = adapter.getItem(selected_index);
 				String ID_SQLITE = adapter.getItem(selected_index).get("ID_SQLITE");
 				Cursor c = connection.getDataForImage(ID_SQLITE);
 				Bitmap bitmap = null;

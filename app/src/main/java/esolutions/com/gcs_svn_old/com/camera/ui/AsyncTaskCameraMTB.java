@@ -82,7 +82,7 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 //						map.put(colArr[i], c.getString(i + 1));
 //					}
 					for (int i = 1; i < ConstantVariables.COLARR.length - 4; i++) {
-						map.put(ConstantVariables.COLARR[i], c.getString(i));
+						map.put(ConstantVariables.COLARR[i], c.getString(c.getColumnIndex(ConstantVariables.COLARR[i])));
 					}
 					try{
 						map.put("PMAX", c.getString(57));
