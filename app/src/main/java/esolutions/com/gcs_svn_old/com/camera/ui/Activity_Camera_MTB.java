@@ -2679,7 +2679,7 @@ public class Activity_Camera_MTB extends Activity {
 			final String Y = longitude + "";
 			final String TTHAI_DBO = "1";
 			if(!SL_MOI.equals("") && Float.parseFloat(SL_MOI) >= 0){
-				if(etPmax.getText().toString().equals("")){
+				if(etPmax.getText().toString().equals("") || etPmax.getVisibility()==View.GONE){
 					PMAX = "";
 				} else {
 					PMAX = Common.ConvertFloatToString(Float.parseFloat(etPmax.getText().toString()), ConstantVariables.FORMAT_DECIMAL_PATTERN);
