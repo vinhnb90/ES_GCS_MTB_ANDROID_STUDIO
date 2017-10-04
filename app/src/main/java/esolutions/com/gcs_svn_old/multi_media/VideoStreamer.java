@@ -89,7 +89,7 @@ public class VideoStreamer implements Runnable {
 				try {
 					conn = mURL.openConnection();
 					String auth = "User-Agent";
-					conn.addRequestProperty (auth, "Application\nAuthorization: Basic " + basicAuth);
+					conn.addRequestProperty (auth, "Application Authorization: Basic " + basicAuth);
 					mDataInputStream = new DataInputStream(new BufferedInputStream(conn.getInputStream()));
 					break;
 				} catch(Exception ex) {

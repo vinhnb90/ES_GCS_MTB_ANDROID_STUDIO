@@ -32,6 +32,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -184,7 +185,18 @@ public class Activity_Main extends Activity implements
                         R.drawable.remote_metering1));
                 setTitle(getResources().getString(R.string.app_name_lc));
             }
-            tvVersion.append(" - IMEI: "
+
+            String version = "";
+            try {
+                PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                version = pInfo.versionName;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            tvVersion.append(version + " -" +
+                    Common.getDateVersion() +
+                    " - IMEI: "
                     + comm.GetIMEI(Activity_Main.this.getApplicationContext())
                     + " - " + Common.PHIEN_BAN);
             CheckLisence();
@@ -257,7 +269,9 @@ public class Activity_Main extends Activity implements
                 if (grantResults.length == 0
                         || grantResults[0] != PackageManager.PERMISSION_GRANTED
                         || grantResults[1] != PackageManager.PERMISSION_GRANTED
-                        || grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                        || grantResults[2] != PackageManager.PERMISSION_GRANTED
+                        || grantResults[3] != PackageManager.PERMISSION_GRANTED
+                        || grantResults[4] != PackageManager.PERMISSION_GRANTED) {
                     Log.e(getClass().getName(), "Unable to show permission required");
                 } else {
                     try {
@@ -289,9 +303,22 @@ public class Activity_Main extends Activity implements
                                     R.drawable.remote_metering1));
                             setTitle(getResources().getString(R.string.app_name_lc));
                         }
-                        tvVersion.append(" - IMEI: "
+
+
+                        String version = "";
+                        try {
+                            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                            version = pInfo.versionName;
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        tvVersion.append(version + " -" +
+                                Common.getDateVersion() +
+                                " - IMEI: "
                                 + comm.GetIMEI(Activity_Main.this.getApplicationContext())
                                 + " - " + Common.PHIEN_BAN);
+
                         CheckLisence();
                         // comm.LoadFolder(this.getApplicationContext());
 
