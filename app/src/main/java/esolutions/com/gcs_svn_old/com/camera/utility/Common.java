@@ -591,21 +591,17 @@ public class Common {
      * @param bloc
      * @param filePath
      */
-    public void ConvertByteToFile(byte[] bloc, String filePath) {
+    public void ConvertByteToFile(byte[] bloc, String filePath) throws Exception {
         File photo = new File(filePath);
 
         if (photo.exists()) {
             photo.delete();
         }
 
-        try {
-            FileOutputStream fos = new FileOutputStream(photo.getPath());
+        FileOutputStream fos = new FileOutputStream(photo.getPath());
 
-            fos.write(bloc);
-            fos.close();
-        } catch (IOException e) {
-            // String s = e.getMessage();
-        }
+        fos.write(bloc);
+        fos.close();
     }
 
     /**

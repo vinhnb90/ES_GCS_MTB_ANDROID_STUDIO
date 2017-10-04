@@ -456,8 +456,12 @@ public class Activity_Main extends Activity implements
         if (Common.checkPermission(this)) {
             return;
         }
-        comm.LoadFolder(this.getApplicationContext());
-
+        try {
+            comm.LoadFolder(this.getApplicationContext());
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -1468,6 +1472,7 @@ public class Activity_Main extends Activity implements
                     }
                     // ko trùng: tải về luôn
                     else {
+                        Common.IMEI = comm.GetIMEI(Activity_Main.this.getApplicationContext());
                         String result = (new AsyncCallWS())
                                 .WS_DOWNLOAD_SO_GCS_CALL(Common.MA_DVIQLY,
                                         Common.MA_NVGCS, array_selected,

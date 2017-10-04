@@ -1769,8 +1769,8 @@ public class Activity_Camera_AS20 extends Activity{
 					stt++;
 					LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 					map.put("STT", "" + stt);
-					map.put("ID", c.getString(0));
-					map.put("NOI_DUNG", c.getString(1));
+					map.put("ID", c.getString(c.getColumnIndex("ID")));
+					map.put("NOI_DUNG", c.getString(c.getColumnIndex("NOI_DUNG")));
 					arr_customer.add(map);
 				} while(c.moveToNext());
 			}

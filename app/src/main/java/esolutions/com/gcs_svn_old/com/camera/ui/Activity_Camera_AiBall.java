@@ -4292,8 +4292,8 @@ public class Activity_Camera_AiBall extends RootActivity implements IVideoSink, 
 			String CS_MOI = "";
 			if (c.moveToFirst()) {
 				do {
-					CS_MOI = c.getString(0);
-					TTR_MOI = c.getString(1);
+					CS_MOI = c.getString(c.getColumnIndex("CS_MOI"));
+					TTR_MOI = c.getString(c.getColumnIndex("TTR_MOI"));
 				} while (c.moveToNext());
 			}
 			GetPosition_spnTrangThai(TTR_MOI);

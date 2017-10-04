@@ -1390,7 +1390,7 @@ public class Activity_Camera_MTB extends Activity {
 			String LOAI_BCS = connection.getBCSById(ID_SQLITE);
 			Cursor c = connection.getDataCS(ID_SQLITE);
 			if(c.moveToFirst()){
-				if(comm.isSavedRow(c.getString(1), c.getString(0))){
+				if(comm.isSavedRow(c.getString(c.getColumnIndex("TTR_MOI")), c.getString(c.getColumnIndex("CS_MOI")))){
 					tvDaGhi.setText((Integer.parseInt(tvDaGhi.getText().toString().split("/")[0]) - 1) + "/" + tvDaGhi.getText().toString().split("/")[1]);
 				}
 			}
@@ -1770,8 +1770,8 @@ public class Activity_Camera_MTB extends Activity {
 					stt++;
 					LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 					map.put("STT", "" + stt);
-					map.put("ID", c.getString(0));
-					map.put("NOI_DUNG", c.getString(1));
+					map.put("ID", c.getString(c.getColumnIndex("ID")));
+					map.put("NOI_DUNG", c.getString(c.getColumnIndex("NOI_DUNG")));
 					arr_customer.add(map);
 				} while(c.moveToNext());
 			}
@@ -2016,8 +2016,8 @@ public class Activity_Camera_MTB extends Activity {
 				Cursor c = connection.getAllDataSoInData();
 				if(c.moveToFirst()){
 					do{
-						if(!maso.contains(c.getString(0))){
-							list.add(c.getString(0));
+						if(!maso.contains(c.getString(c.getColumnIndex("MA_QUYEN")))){
+							list.add(c.getString(c.getColumnIndex("MA_QUYEN")));
 						}
 					} while(c.moveToNext());
 				}
@@ -2704,7 +2704,7 @@ public class Activity_Camera_MTB extends Activity {
 //							public void run() {
 								Cursor c = connection.getDataCS(ID_SQLITE);
 								if(c.moveToFirst()){
-									if(!comm.isSavedRow(c.getString(1), c.getString(0))){
+									if(!comm.isSavedRow(c.getString(c.getColumnIndex("TTR_MOI")), c.getString(c.getColumnIndex("CS_MOI")))){
 										tvDaGhi.setText((Integer.parseInt(tvDaGhi.getText().toString().split("/")[0]) + 1) + "/" + tvDaGhi.getText().toString().split("/")[1]);
 									}
 								}
@@ -4053,7 +4053,7 @@ public class Activity_Camera_MTB extends Activity {
 	    return Bitmap.createBitmap(bitmapSrc, 0, 0, 
 	        bitmapSrc.getWidth(), bitmapSrc.getHeight(), matrix, true);
 	}
-	
+
 	private PictureCallback capturedIt = new PictureCallback() {
 
 		@Override
@@ -4064,7 +4064,7 @@ public class Activity_Camera_MTB extends Activity {
 				Cursor c = connection.getDataForImage(ID_SQLITE);
 				Bitmap bitmap = null;
 				if(c.moveToFirst()){
-					bitmap = drawTextToBitmap(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), c.getString(2), c.getString(3), c.getString(1), c.getString(4));
+					bitmap = drawTextToBitmap(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(c.getColumnIndex("TEN_KHANG")), c.getString(c.getColumnIndex("MA_DDO")), c.getString(c.getColumnIndex("SERY_CTO")), c.getString(c.getColumnIndex("CS_MOI")), c.getString(c.getColumnIndex("CHUOI_GIA")));
 				}
 				if(saveImageToFile(bitmap)){
 					setImage();
@@ -4347,10 +4347,10 @@ public class Activity_Camera_MTB extends Activity {
 			String NGAY_PMAX = "";
 			if (c.moveToFirst()) {
 				do {
-					CS_MOI = c.getString(0);
-					TTR_MOI = c.getString(1);
-					PMAX = c.getString(3);
-					NGAY_PMAX = c.getString(4);
+					CS_MOI = c.getString(c.getColumnIndex("CS_MOI"));
+					TTR_MOI = c.getString(c.getColumnIndex("TTR_MOI"));
+					PMAX = c.getString(c.getColumnIndex("PMAX"));
+					NGAY_PMAX = c.getString(c.getColumnIndex("NGAY_PMAX"));
 				} while (c.moveToNext());
 			}
 			if(NGAY_PMAX.equals("01/01/1000 00:00:00")){
@@ -4367,8 +4367,8 @@ public class Activity_Camera_MTB extends Activity {
 			String CS_MOI = "";
 			if (c.moveToFirst()) {
 				do {
-					CS_MOI = c.getString(0);
-					TTR_MOI = c.getString(1);
+					CS_MOI = c.getString(c.getColumnIndex("CS_MOI"));
+					TTR_MOI = c.getString(c.getColumnIndex("TTR_MOI"));
 				} while (c.moveToNext());
 			}
 			GetPosition_spnTrangThai(TTR_MOI);

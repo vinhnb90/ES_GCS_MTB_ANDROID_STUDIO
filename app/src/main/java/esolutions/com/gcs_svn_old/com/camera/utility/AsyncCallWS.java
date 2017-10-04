@@ -16,11 +16,13 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 
 import com.thoughtworks.xstream.XStream;
 
 public class AsyncCallWS {
 
+	private static final String TAG = AsyncCallWS.class.getName();
 	private Common comm = new Common();
 	private String URL_SERVICE;
 
@@ -627,7 +629,7 @@ public class AsyncCallWS {
 	 * @return
 	 */
 	public String DownloadSoGCS(String[] TEN_FILE, String FILE_NAME) {
-
+		String result = "";
 		try {
 			if (!CheckIMEI(Common.IMEI)) {
 				return "Thiết bị chưa đăng ký";
@@ -638,7 +640,6 @@ public class AsyncCallWS {
 
 			String LIST_TEN_FILE = comm.ConvertArray2String(TEN_FILE);
 			byte[] bloc = null;
-			String result = null;
 
 			String sdCardPath = Environment.getExternalStorageDirectory()
 					.toString();
@@ -671,11 +672,14 @@ public class AsyncCallWS {
 			}
 			comm.ConvertByteToFile(bloc, FileDownload.getAbsolutePath());
 
-			return "Đã tải về " + TEN_FILE.length + " sổ";
+			result = "Đã tải về " + TEN_FILE.length + " sổ";
 
 		} catch (Exception e) {
-			return "Tải về thất bại";
+            e.printStackTrace();
+			result =  "Tải về thất bại";
 		}
+
+		return result;
 	}
 	
 	
@@ -767,6 +771,8 @@ public class AsyncCallWS {
 		} catch (InterruptedException e) {
 			return "FAIL";
 		} catch (ExecutionException e) {
+			e.printStackTrace();
+			Log.e(TAG, "WS_DOWNLOAD_SO_GCS_CALL: " + e.getMessage());
 			return "FAIL";
 		}
 	}

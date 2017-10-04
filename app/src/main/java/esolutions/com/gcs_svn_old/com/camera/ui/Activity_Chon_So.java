@@ -399,13 +399,14 @@ public class Activity_Chon_So extends Activity{
 				Cursor c = connection.getAllDataSoInData();
 				if (c.moveToFirst()) {
 					do {
-						StringBuilder fileName = new StringBuilder(c.getString(0)); 
+						StringBuilder fileName = new StringBuilder(c.getString(0));
 						Cursor c2 = connection.getAllDataGCSByMaQuyen(fileName.toString());
 						int so_diem_do = c2.getCount();
 						int da_ghi = 0;
 						if (c2.moveToFirst()) {
 							do {
 								if(comm.isSavedRow(c2.getString(24), c2.getString(23))){
+//								if(comm.isSavedRow(c2.getString(c.getColumnIndex("TTR_MOI")), c2.getString(c.getColumnIndex("CS_MOI")))){
 									da_ghi++;
 								}
 							} while (c2.moveToNext());

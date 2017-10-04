@@ -6114,10 +6114,10 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             String NGAY_PMAX = "";
             if (c.moveToFirst()) {
                 do {
-                    CS_MOI = c.getString(0);
-                    TTR_MOI = c.getString(1);
-                    PMAX = c.getString(3);
-                    NGAY_PMAX = c.getString(4);
+                    CS_MOI = c.getString(c.getColumnIndex("CS_MOI"));
+                    TTR_MOI = c.getString(c.getColumnIndex("TTR_MOI"));
+                    PMAX = c.getString(c.getColumnIndex("PMAX"));
+                    NGAY_PMAX = c.getString(c.getColumnIndex("NGAY_PMAX"));
                 } while (c.moveToNext());
             }
             if (NGAY_PMAX.equals("01/01/1000 00:00:00")) {
@@ -6134,8 +6134,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             String CS_MOI = "";
             if (c.moveToFirst()) {
                 do {
-                    CS_MOI = c.getString(0);
-                    TTR_MOI = c.getString(1);
+                    CS_MOI = c.getString(c.getColumnIndex("CS_MOI"));
+                    TTR_MOI = c.getString(c.getColumnIndex("TTR_MOI"));
                 } while (c.moveToNext());
             }
             GetPosition_spnTrangThai(TTR_MOI);
