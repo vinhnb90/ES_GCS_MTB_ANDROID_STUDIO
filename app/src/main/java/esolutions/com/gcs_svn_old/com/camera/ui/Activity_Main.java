@@ -198,7 +198,7 @@ public class Activity_Main extends Activity implements
                     Common.getDateVersion() +
                     " - IMEI: "
                     + comm.GetIMEI(Activity_Main.this.getApplicationContext())
-                    + " - " + Common.PHIEN_BAN);
+                    + " - " + Common.PHIEN_BAN_NAME_SHOW_SCREEN);
             CheckLisence();
             // comm.LoadFolder(this.getApplicationContext());
 
@@ -317,7 +317,7 @@ public class Activity_Main extends Activity implements
                                 Common.getDateVersion() +
                                 " - IMEI: "
                                 + comm.GetIMEI(Activity_Main.this.getApplicationContext())
-                                + " - " + Common.PHIEN_BAN);
+                                + " - " + Common.PHIEN_BAN_NAME_SHOW_SCREEN);
 
                         CheckLisence();
                         // comm.LoadFolder(this.getApplicationContext());

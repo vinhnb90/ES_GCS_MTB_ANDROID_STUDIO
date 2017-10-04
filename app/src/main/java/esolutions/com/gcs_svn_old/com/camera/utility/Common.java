@@ -105,6 +105,7 @@ import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 public class Common {
     // Mã code chương trình
     public static String PHIEN_BAN = "HN";//Hà Nội
+    public static String PHIEN_BAN_NAME_SHOW_SCREEN = "TH";
     //	public static String PHIEN_BAN = "BN";//Bắc Ninh
 //	public static String PHIEN_BAN = "LC";//Lai châu
 //	public static String PHIEN_BAN = "SL";// Sơn La
