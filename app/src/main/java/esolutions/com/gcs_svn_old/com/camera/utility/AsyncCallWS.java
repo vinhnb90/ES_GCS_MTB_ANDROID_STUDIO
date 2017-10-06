@@ -629,6 +629,7 @@ public class AsyncCallWS {
 	public String DownloadSoGCS(String[] TEN_FILE, String FILE_NAME) {
 
 		try {
+
 			if (!CheckIMEI(Common.IMEI)) {
 				return "Thiết bị chưa đăng ký";
 			}

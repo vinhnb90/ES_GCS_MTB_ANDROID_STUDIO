@@ -1362,6 +1362,8 @@ public class Activity_Main extends Activity implements
                                                     // backup
                                                     comm.CreateBackup(null);
 
+                                                    Common.IMEI = comm.GetIMEI(Activity_Main.this.getApplicationContext());
+
                                                     // -> tải về
                                                     String result = (new AsyncCallWS())
                                                             .WS_DOWNLOAD_SO_GCS_CALL(
@@ -1495,6 +1497,7 @@ public class Activity_Main extends Activity implements
                     }
                     // ko trùng: tải về luôn
                     else {
+                        Common.IMEI = comm.GetIMEI(Activity_Main.this.getApplicationContext());
                         String result = (new AsyncCallWS())
                                 .WS_DOWNLOAD_SO_GCS_CALL(Common.MA_DVIQLY,
                                         Common.MA_NVGCS, array_selected,

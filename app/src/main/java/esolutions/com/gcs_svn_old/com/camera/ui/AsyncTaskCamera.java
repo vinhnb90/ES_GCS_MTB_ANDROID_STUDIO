@@ -81,7 +81,6 @@ public class AsyncTaskCamera extends AsyncTask<String, LinkedHashMap<String, Str
 					LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 					
 					for (int i = 0; i < colArr.length; i++) {
-//						map.put(colArr[i], c.getString(i + 1));
 						map.put(colArr[i], c.getString(c.getColumnIndex(colArr[i])));
 					}
 					try{
@@ -102,11 +101,11 @@ public class AsyncTaskCamera extends AsyncTask<String, LinkedHashMap<String, Str
 						map.put("DTT", String.format(Locale.ENGLISH, "%.0f", dtt));
 					}
 	
-					if (c.getString(9).equals("SG")) {
+					if (c.getString(c.getColumnIndex("LOAI_BCS")).equals("SG")) {
 						map.put("STT", "" + (stt - 3));
 						arrCustomer.add(map);
 						_stt = 3;
-					} else if(c.getString(9).equals("VC")){
+					} else if(c.getString(c.getColumnIndex("LOAI_BCS")).equals("VC")){
 						if(BCS.equals("KT") || BCS.equals("BT")){
 							map.put("STT", "" + stt);
 							arrCustomer.add(map);
@@ -116,7 +115,7 @@ public class AsyncTaskCamera extends AsyncTask<String, LinkedHashMap<String, Str
 							arrCustomer.add(map);
 							_stt = 3;
 						}
-					} else if(c.getString(9).equals("KT")){
+					} else if(c.getString(c.getColumnIndex("LOAI_BCS")).equals("KT")){
 						map.put("STT", "" + stt);
 						arrCustomer.add(map);
 						_stt = 0;
