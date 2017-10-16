@@ -102,11 +102,11 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 						map.put("DTT", String.format(Locale.ENGLISH, "%.0f", dtt));
 					}
 	
-					if (c.getString(9).equals("SG")) {
+					if (c.getString(c.getColumnIndex("LOAI_BCS")).equals("SG")) {
 						map.put("STT", "" + (stt - 3));
 						arrCustomer.add(map);
 						_stt = 3;
-					} else if(c.getString(9).equals("VC")){
+					} else if(c.getString(c.getColumnIndex("LOAI_BCS")).equals("VC")){
 						if(!BCS.equals("KT")){
 							map.put("STT", "" + (stt - 3));
 							arrCustomer.add(map);
@@ -116,7 +116,7 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 							arrCustomer.add(map);
 							_stt = 0;
 						}
-					} else if(c.getString(9).equals("KT")){
+					} else if(c.getString(c.getColumnIndex("LOAI_BCS")).equals("KT")){
 						map.put("STT", "" + stt);
 						arrCustomer.add(map);
 						_stt = 0;
@@ -126,7 +126,7 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 						_stt = 0;
 					}
 					
-					BCS = c.getString(9);
+					BCS = c.getString(c.getColumnIndex("LOAI_BCS"));
 					if(comm.isSavedRow(c.getString(24), c.getString(23))){
 						daghi++;
 					}
@@ -200,7 +200,8 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 	protected void onProgressUpdate(LinkedHashMap<String, String>... values) {
 		super.onProgressUpdate(values);
 		try{
-			Activity_Camera_MTB.arrCustomer.add(Activity_Camera_MTB.arrCustomer.size() - Integer.parseInt(values[1].get("stt")), values[0]);
+//			Activity_Camera_MTB.arrCustomer.add(Activity_Camera_MTB.arrCustomer.size() - Integer.parseInt(values[1].get("stt")), values[0]);
+			Activity_Camera_MTB.arrCustomer.add(values[0]);
 //			((Activity_Camera_MTB) activityParent).adapter.notifyDataSetChanged();
 //			((Activity_Camera_MTB) activityParent).lvCustomer.invalidate();
 			((Activity_Camera_MTB) activityParent).adapter = new AdapterCameraMTB(activityParent.getApplicationContext(), Activity_Camera_MTB.arrCustomer, R.layout.listview_gcs);

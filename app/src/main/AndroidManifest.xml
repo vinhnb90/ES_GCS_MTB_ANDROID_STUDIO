@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="esolutions.com.gcs_svn_old"
     android:versionCode="14"
-    android:versionName="5.0.0">
+    android:versionName="5.0.1">
 
     <uses-sdk
         android:minSdkVersion="8"
