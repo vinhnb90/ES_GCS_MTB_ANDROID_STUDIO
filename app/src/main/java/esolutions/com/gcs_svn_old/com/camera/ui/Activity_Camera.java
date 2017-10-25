@@ -5639,7 +5639,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     paint_background.setColor(Color.BLACK);
 
                     //TODO tạo paint text để vẽ text
-                    final int text_size = 20;
+                    final int text_size = 25;
                     final int paddingBetweenText = 10;
                     Paint paint_text = new Paint(Paint.ANTI_ALIAS_FLAG);
                     paint_text.setColor(Color.WHITE);
