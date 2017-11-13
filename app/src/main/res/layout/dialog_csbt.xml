@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_32sdp"
         android:background="#005789"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -16,22 +16,22 @@
             android:id="@+id/tvTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:padding="10dp"
             android:text="Chọn sổ"
             android:textColor="#FFF"
-            android:textSize="20sp"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/ibtDong_csbt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:background="@null"
             android:src="@drawable/gcs_close" />
     </LinearLayout>
-    
+
     <ListView
         android:id="@+id/lsvChonSo"
         android:layout_width="match_parent"
@@ -40,14 +40,14 @@
         android:choiceMode="multipleChoice"
         android:listSelector="@android:color/darker_gray" >
     </ListView>
-    
+
     <Button
         android:id="@+id/btnTongHop_csbt"
-        style="@style/my_button"
+        style="@style/my_button_copy"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:textSize="18sp"
+        android:layout_height="@dimen/_32sdp"
         android:background="@drawable/blue_button"
+        android:textSize="@dimen/_12sdp"
         android:onClick="btnTongHopcsbt_Click"
         android:text="@string/th_lbl" />
     <!-- 

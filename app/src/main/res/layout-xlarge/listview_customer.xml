@@ -7,33 +7,34 @@
     android:orientation="horizontal" >
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tvSTT"
         style="@style/tvTblBody"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:background="@drawable/border"
         android:text="abc"
-        android:padding="5dp"
+        android:padding="@dimen/_2sdp"
         android:gravity="center" />
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tvNoiDung"
         style="@style/tvTblBody"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="7"
         android:text="abc"
-        android:padding="5dp"
+        android:padding="@dimen/_2sdp"
         android:background="@drawable/border"
         android:gravity="center_vertical" />
-    
-    <CheckBox 
+
+    <CheckBox
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/cbCheck"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#DDD"
-        android:gravity="center"
         android:focusable="false"/>
 </LinearLayout>

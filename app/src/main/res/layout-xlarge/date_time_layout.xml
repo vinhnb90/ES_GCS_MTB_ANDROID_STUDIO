@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="vertical" >
 
-    <TextView 
+    <TextView
         android:id="@+id/tvNgay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="@dimen/_5sdp"
         android:gravity="center"
         android:text="01/11/2014"
         android:textColor="@color/red"
         android:textStyle="bold"
-        android:textSize="30sp"/>
-    
-    <DatePicker
-        android:id="@+id/datePicker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:calendarViewShown="true" > <!-- style="@style/date_picker_style" -->
-    </DatePicker>
-
-    <TimePicker
-        android:id="@+id/timePicker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TimePicker>
+        android:textSize="@dimen/_16sdp"/>
 
     <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" >
+        android:padding="@dimen/_5sdp" >
 
         <Button
+            android:textSize="@dimen/_12sdp"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,6 +34,7 @@
             android:text="Annuler" />
 
         <Button
+            android:textSize="@dimen/_12sdp"
             android:id="@+id/btOK"
             android:layout_width="0dip"
             android:layout_height="40dp"
@@ -53,4 +45,29 @@
             android:text="Ok" />
     </LinearLayout>
 
-</LinearLayout>
+    <TimePicker
+        android:layout_above="@+id/ll_1"
+        android:id="@+id/timePicker1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp" >
+    </TimePicker>
+
+    <DatePicker
+        android:layout_below="@+id/tvNgay"
+        android:layout_above="@+id/timePicker1"
+        android:id="@+id/datePicker1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:calendarViewShown="true" > <!-- style="@style/date_picker_style" -->
+    </DatePicker>
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

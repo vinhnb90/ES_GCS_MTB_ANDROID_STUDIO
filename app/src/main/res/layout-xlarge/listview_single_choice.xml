@@ -21,6 +21,7 @@
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
     android:textColor="#000"
+    android:textSize="@dimen/_11sdp"
     android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" />

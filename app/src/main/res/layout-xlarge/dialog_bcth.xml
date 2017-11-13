@@ -6,27 +6,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_32sdp"
         android:background="#005789"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="10" >
 
         <TextView
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="@dimen/_2sdp"
             android:text="Báo cáo tổng hợp"
             android:textColor="#FFF"
-            android:textSize="20sp"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/btnDongbcth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="8"
             android:background="@null"
             android:src="@drawable/gcs_close" />
     </LinearLayout>
@@ -35,13 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="@dimen/_5sdp" >
 
         <RadioGroup
             android:id="@+id/rgBC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp" >
+            android:layout_marginBottom="@dimen/_10sdp" >
 
             <RadioButton
                 android:id="@+id/rTTGCS"
@@ -49,9 +50,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:textSize="@dimen/_12sdp"
                 android:text="Tổng hợp tình trạng ghi chỉ số" />
 
             <RadioButton
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/rTHSo"
                 style="@style/tvTblBody"
                 android:layout_width="match_parent"
@@ -59,6 +62,7 @@
                 android:text="Kết quả tổng hợp sổ" />
 
             <RadioButton
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/rTHCSBT"
                 style="@style/tvTblBody"
                 android:layout_width="match_parent"
@@ -66,6 +70,7 @@
                 android:text="Tổng hợp công tơ có sản lượng bất thường" />
 
             <RadioButton
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/rTHTTBT"
                 style="@style/tvTblBody"
                 android:layout_width="match_parent"
@@ -73,6 +78,7 @@
                 android:text="Tổng hợp công tơ có trạng thái bất thường" />
 
             <RadioButton
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/rDNTT"
                 style="@style/tvTblBody"
                 android:layout_width="match_parent"
@@ -81,10 +87,11 @@
         </RadioGroup>
 
         <Button
+            android:textSize="@dimen/_12sdp"
             android:id="@+id/btnTongHop"
             style="@style/my_button"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/_32sdp"
             android:background="@drawable/blue_button"
             android:onClick="btnTongHop_Click"
             android:text="@string/th_lbl" />

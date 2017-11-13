@@ -8,4 +8,4 @@
     android:focusableInTouchMode="false"
     android:padding="10dp"
     android:textIsSelectable="false"
-    android:textSize="20sp" />
+    android:textSize="@dimen/_12sdp" />

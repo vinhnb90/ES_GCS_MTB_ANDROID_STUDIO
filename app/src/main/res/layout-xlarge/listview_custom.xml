@@ -34,16 +34,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="@dimen/_5sdp"
                 android:text="Danh sách khách hàng"
                 android:textColor="#FFF"
-                android:textSize="25sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/btnClose"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:background="@null"
                 android:src="@drawable/gcs_close" />
@@ -58,7 +58,7 @@
             android:listSelector="@android:color/darker_gray" >
         </ListView>
     </LinearLayout>
-    
+
     <!-- <LinearLayout
         android:id="@+id/lnBottom"
         android:layout_width="match_parent"
