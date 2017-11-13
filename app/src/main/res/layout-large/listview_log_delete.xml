@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_Stt"
         style="@style/txtStyle"
         android:layout_width="60dp"
@@ -14,7 +15,8 @@
         android:textColor="#000"
         android:gravity="center" />
 
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_MaQuyen"
         style="@style/txtStyle"
         android:layout_width="200dp"
@@ -24,7 +26,8 @@
         android:textColor="#000"
         android:gravity="center" />
 
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_SeryCto"
         style="@style/txtStyle"
         android:layout_width="200dp"
@@ -34,7 +37,8 @@
         android:textColor="#000"
         android:gravity="center" />
 
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_LyDo"
         style="@style/txtStyle"
         android:layout_width="350dp"
@@ -44,7 +48,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_CsXoa"
         style="@style/txtStyle"
         android:layout_width="150dp"
@@ -54,7 +59,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_Ngay"
         style="@style/txtStyle"
         android:layout_width="150dp"

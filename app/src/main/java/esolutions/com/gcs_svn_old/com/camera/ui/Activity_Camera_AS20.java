@@ -112,7 +112,8 @@ public class Activity_Camera_AS20 extends Activity{
 	private Button btnChucNang, btnSoKhac, btnAnHienCamera, btnGhi;
 	private Button etNgayPmax, btnXoa;
 	private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0,
-	btnDot, btnClear;
+	btnDot;
+	private ImageButton btnClear;
 	private Button btnQ, btnW, btnE, btnR, btnT, btnY, btnU, btnI, btnO, btnP,
 	btnA, btnS, btnD, btnF, btnG, btnH, btnJ, btnK, btnL, btnZ, btnX,
 	btnC, btnV, btnB, btnN, btnM, btnClear2, btnUpper, btnNumber,
@@ -3159,7 +3160,7 @@ public class Activity_Camera_AS20 extends Activity{
 		btn9 = (Button) findViewById(R.id.btn9);
 		btn0 = (Button) findViewById(R.id.btn0);
 		btnDot = (Button) findViewById(R.id.btnDot);
-		btnClear = (Button) findViewById(R.id.btnClear);
+		btnClear = (ImageButton) findViewById(R.id.btnClear);
 
 		btnQ = (Button) findViewById(R.id.btnQ);
 		btnW = (Button) findViewById(R.id.btnW);

@@ -5,6 +5,7 @@
     android:orientation="horizontal" >
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_STT"
         style="@style/txtStyle"
         android:layout_width="70dp"
@@ -13,6 +14,7 @@
         android:gravity="center" />
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_MA_GC"
         style="@style/txtStyle"
         android:layout_width="0dp"
@@ -22,6 +24,7 @@
         android:gravity="center" />
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_MA_COT"
         style="@style/txtStyle"
         android:layout_width="0dp"
@@ -31,6 +34,7 @@
         android:gravity="center" />
 
     <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_LOAI_BCS"
         style="@style/txtStyle"
         android:layout_width="0dp"

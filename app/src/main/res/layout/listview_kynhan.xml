@@ -6,7 +6,8 @@
     android:background="@drawable/list_item_selector"
     android:orientation="horizontal" >
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_STT_csbt"
         style="@style/tvTblBody"
         android:layout_width="60dp"
@@ -16,7 +17,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_TenSo_csbt"
         style="@style/tvTblBody"
         android:layout_width="180dp"
@@ -46,7 +48,8 @@
         android:textColor="#000"
         android:gravity="center" />
 
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_CS_CU_csbt"
         style="@style/tvTblBody"
         android:layout_width="100dp"
@@ -56,7 +59,8 @@
         android:textColor="#000"
         android:gravity="center" />
 
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_CS_MOI_csbt"
         style="@style/tvTblBody"
         android:layout_width="100dp"
@@ -66,7 +70,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_SL_CU_csbt"
         style="@style/tvTblBody"
         android:layout_width="100dp"
@@ -76,7 +81,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_SL_MOI_csbt"
         style="@style/tvTblBody"
         android:layout_width="100dp"
@@ -86,7 +92,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_DIA_CHI_csbt"
         style="@style/tvTblBody"
         android:layout_width="300dp"
@@ -96,7 +103,8 @@
         android:textColor="#000"
         android:gravity="center" />
     
-    <TextView
+      <TextView
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tv_GHI_CHU_csbt"
         style="@style/tvTblBody"
         android:layout_width="300dp"

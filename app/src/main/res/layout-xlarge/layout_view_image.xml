@@ -7,15 +7,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6.2"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="6.2" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,18 +29,18 @@
             <TextView
                 android:id="@+id/tvTittle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="@dimen/_5sdp"
                 android:text="Báo cáo tổng hợp"
                 android:textColor="#FFF"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/btnDong"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:background="@null"
                 android:src="@drawable/gcs_close" />
@@ -58,7 +59,8 @@
             <Button
                 android:id="@+id/btnChuyenAnh"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/_32sdp"
+                android:textSize="@dimen/_12sdp"
                 android:padding="5dp"
                 android:background="@drawable/blue_button"
                 android:textColor="@color/white"
@@ -70,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:max="256" />
         </LinearLayout>
 
@@ -85,8 +87,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.9"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="3.9" >
+
     </LinearLayout>
 
 </LinearLayout>

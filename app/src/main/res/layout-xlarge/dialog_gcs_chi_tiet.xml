@@ -2,143 +2,161 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_32sdp"
         android:background="#005789"
-        android:weightSum="10"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:weightSum="10">
 
         <TextView
             android:id="@+id/tv_Title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="@dimen/_5sdp"
             android:text="Chi tiết khách hàng"
             android:textColor="#FFF"
-            android:textSize="25sp"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
-        
-        <ImageButton 
+
+        <ImageButton
             android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="8"
             android:background="@null"
-            android:src="@drawable/gcs_close"/>
+            android:src="@drawable/gcs_close" />
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/ScrollView01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/instructions_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbars="vertical" >
+            android:scrollbars="vertical">
 
             <!-- block Tổng kết -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_TitleTongKet"
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
                     android:text="Tổng kết quyển"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:text="Tổng SLHC"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_TongSLHC"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Tổng sản lượng" />
+                    android:layout_weight="0.5"
+                    android:text="Tổng sản lượng"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Tổng SLVC"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_TongSLVC"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Tổng sản lượng" />
+                    android:layout_weight="0.5"
+                    android:text="Tổng sản lượng"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Đã nhập"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_TiLeNhap"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="345/678" />
+                    android:layout_weight="0.5"
+                    android:text="345/678"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Tình trạng bất thường"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_TTBatThuong"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="345/678" />
+                    android:layout_weight="0.5"
+                    android:text="345/678"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <!-- block Chi tiết -->
@@ -147,292 +165,351 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="30dp" >
+                android:paddingTop="@dimen/_15sdp">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="270dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Chi tiết khách hàng"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Tên KH"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_TenKH"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Tên KH" />
+                    android:layout_weight="0.5"
+                    android:text="Tên KH"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã KH"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaKH"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Ma KH" />
+                    android:layout_weight="0.5"
+                    android:text="Ma KH"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Địa chỉ"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_DiaChi"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Địa chỉ" />
+                    android:layout_weight="0.5"
+                    android:text="Địa chỉ"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã đ.đo"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaDiemDo"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mã đ.đo" />
+                    android:layout_weight="0.5"
+                    android:text="Mã đ.đo"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="BCS"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_BCS"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="BCS" />
+                    android:layout_weight="0.5"
+                    android:text="BCS"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã GC"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaGC"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mã GC" />
+                    android:layout_weight="0.5"
+                    android:text="Mã GC"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã cột"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaCot"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mã Cột" />
+                    android:layout_weight="0.5"
+                    android:text="Mã Cột"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã trạm"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaTram"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mã trạm" />
+                    android:layout_weight="0.5"
+                    android:text="Mã trạm"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Số hộ"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_SoHo"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Số hộ" />
+                    android:layout_weight="0.5"
+                    android:text="Số hộ"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Số C.Tơ"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_SoCTo"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Số C.Tơ" />
+                    android:layout_weight="0.5"
+                    android:text="Số C.Tơ"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="HSN"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_HSN"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="HSN" />
+                    android:layout_weight="0.5"
+                    android:text="HSN"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="SL tháo"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_SLThao"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="SL tháo" />
+                    android:layout_weight="0.5"
+                    android:text="SL tháo"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="CS cũ"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_CSCu"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="CS cũ" />
+                    android:layout_weight="0.5"
+                    android:text="CS cũ"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="SL cũ"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:textSize="@dimen/_12sdp"
                     android:id="@+id/tv_SLCu"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="SL cũ" />
             </LinearLayout>
@@ -440,156 +517,184 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="CS mới"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_CSMoi"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="CS mới" />
+                    android:layout_weight="0.5"
+                    android:text="CS mới"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="SL mới"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_SLMoi"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="SL mới" />
+                    android:layout_weight="0.5"
+                    android:text="SL mới"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Chuỗi giá"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_ChuoiGia"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Chuỗi giá" />
+                    android:layout_weight="0.5"
+                    android:text="Chuỗi giá"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Mã NN"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_MaNN"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mã NN" />
+                    android:layout_weight="0.5"
+                    android:text="Mã NN"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Ghi chú"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_Ghichu"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Ghi chú" />
+                    android:layout_weight="0.5"
+                    android:text="Ghi chú"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Pmax"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_Pmax"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="0" />
+                    android:layout_weight="0.5"
+                    android:text="0"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/txtStyle"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Ngày Pmax"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_Ngay_Pmax"
                     style="@style/txtStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="0" />
+                    android:layout_weight="0.5"
+                    android:text="0"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/chkbCSPK"
                     style="@style/txtStyle"
-                    android:layout_width="312dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-8dp"
                     android:enabled="false"
-                    android:text="Ký mua CSPK" />
+                    android:text="Ký mua CSPK"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

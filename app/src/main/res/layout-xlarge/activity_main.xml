@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="3">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical" >
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivLogoApp"
@@ -18,107 +20,120 @@
             android:src="@drawable/logo_app" />
     </LinearLayout>
 
+    <!--<TextView
+        android:text="n"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp"
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/tvVersion"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:text="@string/version"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:textColor="@color/black"
-            android:gravity="center_vertical"
-            android:textStyle="italic" />
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="italic"
+            tools:text="@string/version" />
 
         <Button
             android:id="@+id/btnRegister"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/tvVersion"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:visibility="gone"
-            android:text="@string/dang_ky_lbl" />
+            android:text="@string/dang_ky_lbl"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btnLogin"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/btnRegister"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:text="Đăng nhập" />
-        
+            android:text="Đăng nhập"
+            android:textSize="@dimen/_12sdp" />
+
         <Button
             android:id="@+id/btnLogout"
             style="@style/my_button"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="24sp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_below="@+id/btnLogin"
             android:background="@drawable/blue_button"
-            android:visibility="gone"
-            android:text="Đăng xuất" />
-        
+            android:text="Đăng xuất"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btnTransferData"
             style="@style/my_button"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="24sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnLogout"
             android:background="@drawable/blue_button"
-            android:visibility="gone"
-            android:text="@string/gui_nhan_du_lieu" />
-        
+            android:text="@string/gui_nhan_du_lieu"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btnCauHinh"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/btnTransferData"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:text="@string/cau_hinh" />
-        
+            android:text="@string/cau_hinh"
+            android:textSize="@dimen/_12sdp" />
+
         <Button
             android:id="@+id/btnSortingRoute"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/btnCauHinh"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:text="Sắp xếp lộ trình GCS" />
-        
+            android:text="Sắp xếp lộ trình GCS"
+            android:textSize="@dimen/_12sdp" />
+
         <Button
             android:id="@+id/btnGCS"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/btnSortingRoute"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:text="@string/chon_so_gcs" />
-        
+            android:text="@string/chon_so_gcs"
+            android:textSize="@dimen/_12sdp" />
+
         <Button
             android:id="@+id/btnBCTH"
             style="@style/my_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_below="@+id/btnGCS"
             android:layout_weight="1"
-            android:textSize="24sp"
             android:background="@drawable/blue_button"
-            android:text="@string/bcth_lbl" />
+            android:text="@string/bcth_lbl"
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
 </LinearLayout>

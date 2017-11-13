@@ -2,81 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_main"
         android:orientation="horizontal"
-        android:padding="2dp" >
+        android:padding="2dp">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Đã ghi:"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvDaGhi"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="0/0"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_14sdp"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Quyển:"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvMaQuyen"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="PD00000"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_14sdp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
+            android:background="@drawable/border"
             android:id="@+id/lnListCustom"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.8"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/hlvCustomer"
@@ -90,13 +92,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <!--
                 <LinearLayout
@@ -119,27 +121,27 @@
                     android:id="@+id/rlCamera"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1">
 
                     <FrameLayout
                         android:id="@+id/camera_preview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                    
+
                     <TextView
                         android:id="@+id/tvTop"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_alignParentTop="true"
                         android:background="#000" />
-                    
+
                     <TextView
                         android:id="@+id/tvBottom"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
                         android:background="#000" />
-                    
+
                 </RelativeLayout>
 
                 <esolutions.com.gcs_svn_old.com.es.zoomimage.ImageViewTouch
@@ -162,7 +164,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/btnDong"
@@ -177,69 +179,76 @@
                 android:id="@+id/lnButtonCamera"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_weight="5"
+                android:weightSum="6"
                 android:orientation="vertical"
-                android:padding="5dp" >
+                android:padding="@dimen/_2sdp"
+                >
 
                 <Button
                     android:id="@+id/btnLoad"
                     style="@style/my_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_button"
-                    android:gravity="left|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Chụp lại" />
+                    android:text="Chụp lại"
+                    android:textSize="@dimen/_12sdp" />
 
                 <Button
                     android:id="@+id/btnDelete"
                     style="@style/my_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_button"
-                    android:gravity="left|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Xóa ảnh" />
+                    android:text="Xóa ảnh"
+                    android:textSize="@dimen/_12sdp" />
 
                 <Button
                     android:id="@+id/btnView"
                     style="@style/my_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_button"
-                    android:gravity="left|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Xem ảnh" />
+                    android:text="Xem ảnh"
+                    android:textSize="@dimen/_12sdp" />
 
                 <Button
                     android:id="@+id/btnCapture"
                     style="@style/my_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_button"
-                    android:gravity="left|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Chụp ảnh" />
+                    android:text="Chụp ảnh"
+                    android:textSize="@dimen/_12sdp" />
 
                 <Button
                     android:id="@+id/btnChange"
                     style="@style/my_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
                     android:background="@drawable/blue_button"
-                    android:gravity="left|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Chuyển camera" />
+                    android:text="Chuyển camera"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -22,7 +22,7 @@
             android:shadowRadius="2"
             android:text="@string/title_activity_chon_so"
             android:textColor="#055181"
-            android:textSize="35sp"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
 
         <View
@@ -50,14 +50,14 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Gậy camera"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
 
             <RadioButton
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/rbMTB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Camera MTB"
-                android:textSize="20sp" />
+                android:text="Camera MTB" />
         </RadioGroup>
     </LinearLayout>
 
@@ -85,44 +85,43 @@
         android:padding="5dp" >
 
         <LinearLayout
+            android:layout_height="@dimen/_32sdp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/btnGCS"
-                style="@style/my_button"
+                style="@style/my_button_copy"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/_5sdp"
                 android:background="@drawable/blue_button"
                 android:text="GCS chưa đối soát"
-                android:textSize="24sp" />
-            
+                android:textSize="@dimen/_12sdp" />
+
             <Button
                 android:id="@+id/btnGCSAll"
-                style="@style/my_button"
+                style="@style/my_button_copy"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"
                 android:background="@drawable/blue_button"
                 android:text="GCS tất cả sổ"
-                android:textSize="24sp" />
-            
+                android:textSize="@dimen/_12sdp" />
+
         </LinearLayout>
 
         <Button
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="@dimen/_32sdp"
             android:id="@+id/btnQuanLySo"
-            style="@style/my_button"
+            style="@style/my_button_copy"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:background="@drawable/blue_button"
             android:text="Quản lý sổ"
-            android:textSize="24sp" />
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
 </LinearLayout>

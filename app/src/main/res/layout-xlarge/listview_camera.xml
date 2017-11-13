@@ -11,15 +11,15 @@
         android:orientation="horizontal"
         android:background="@drawable/border_bottom"
         android:gravity="center_vertical"
-        android:paddingLeft="5dp" >
+        android:paddingLeft="@dimen/_2sdp" >
 
         <TextView
             android:id="@+id/tvSTT"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_32sdp"
             android:gravity="center_vertical"
             android:text="1"
-            android:textSize="20sp"
+            android:textSize="@dimen/_12sdp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -28,14 +28,14 @@
             android:background="@drawable/blue_button"
             android:textColor="#FFF"
             android:textStyle="bold" />
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="Tên KH: "
             android:textColor="#000"
-            android:textSize="20sp"
+            android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:gravity="center_vertical"
             android:text="Nguyễn Vũ Tùng"
             android:textColor="@color/color_main"
-            android:textSize="20sp"
+            android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -69,7 +69,7 @@
                 android:layout_weight="0.8"
                 android:text="Số Ctơ:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:text="0000000000"
                 android:textColor="@color/red2"
                 android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +98,7 @@
                 android:gravity="center_vertical"
                 android:text="CS cũ:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -110,7 +110,7 @@
                 android:text="0"
                 android:textColor="@color/color_main"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +126,7 @@
                 android:gravity="center_vertical"
                 android:text="CS mới:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -138,7 +138,7 @@
                 android:text="0"
                 android:textColor="@color/red2"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -162,7 +162,7 @@
                 android:gravity="center_vertical"
                 android:text="Mã GC:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:gravity="center_vertical"
                 android:text="000000"
                 android:textColor="@color/color_main"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -190,7 +190,7 @@
                 android:gravity="center_vertical"
                 android:text="SL cũ:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -202,7 +202,7 @@
                 android:text="0"
                 android:textColor="@color/color_main"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -218,7 +218,7 @@
                 android:gravity="center_vertical"
                 android:text="SL mới:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -230,7 +230,7 @@
                 android:text="0"
                 android:textColor="@color/red2"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -254,7 +254,7 @@
                 android:gravity="center_vertical"
                 android:text="Mã trạm:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -265,14 +265,14 @@
                 android:gravity="center_vertical"
                 android:text="000000"
                 android:textColor="@color/color_main"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-             android:background="@drawable/border_right"
+            android:background="@drawable/border_right"
             android:orientation="horizontal" >
 
             <TextView
@@ -282,7 +282,7 @@
                 android:gravity="center_vertical"
                 android:text="TTR mới:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -294,7 +294,7 @@
                 android:text="U"
                 android:textColor="@color/red2"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -310,7 +310,7 @@
                 android:gravity="center_vertical"
                 android:text="SL tháo:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -322,9 +322,9 @@
                 android:text="0"
                 android:textColor="@color/color_main"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
-        
+
     </LinearLayout>
 
     <LinearLayout
@@ -347,7 +347,7 @@
                 android:gravity="center_vertical"
                 android:text="Mã cột:"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -358,7 +358,7 @@
                 android:gravity="center_vertical"
                 android:text="000000"
                 android:textColor="@color/color_main"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -374,7 +374,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center_vertical"
                 android:text="Bộ CS:"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -386,9 +386,9 @@
                 android:gravity="center_vertical"
                 android:text="000000"
                 android:textColor="@color/color_main"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -401,7 +401,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center_vertical"
                 android:text="Điện TT:"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -414,9 +414,9 @@
                 android:text="0"
                 android:textColor="@color/color_main"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
-        
+
     </LinearLayout>
 
     <LinearLayout
@@ -436,7 +436,7 @@
                 android:gravity="center_vertical"
                 android:text="Địa chỉ: "
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -446,9 +446,9 @@
                 android:gravity="center_vertical"
                 android:text="Hà Nội"
                 android:textColor="@color/color_main"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 
     </LinearLayout>
-    
+
 </LinearLayout>

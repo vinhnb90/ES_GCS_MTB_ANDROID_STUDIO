@@ -3,9 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
-    
-    
+    android:padding="@dimen/_2sdp" >
+
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
@@ -16,39 +16,39 @@
         android:shadowRadius="2"
         android:text="Đồng bộ dữ liệu"
         android:textColor="#055181"
-        android:textSize="35sp"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold" />
-     
+
     <LinearLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-		
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/rbGetData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-    		android:textColor="@color/green"
-        	android:textSize="25sp"
+            android:textColor="@color/green"
+            android:textSize="@dimen/_12sdp"
             android:text="Lấy sổ" />
 
         <RadioButton
             android:id="@+id/rbSendData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-    		android:textColor="@color/green"
-        	android:textSize="25sp"
+            android:textColor="@color/green"
+            android:textSize="@dimen/_12sdp"
             android:layout_weight="1"
             android:text="Gửi sổ" />
-        
+
     </LinearLayout>
-    
+
     <CheckBox
         android:id="@+id/chkCheckAll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-       	android:textSize="25sp"
+        android:textSize="@dimen/_12sdp"
         android:text="Chọn hết" />
 
     <View
@@ -65,30 +65,33 @@
         android:layout_below="@+id/view1"
         android:layout_marginTop="3dp"
         android:background="#055181" />
-    
+
     <ListView
         android:id="@+id/lvChonSo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:choiceMode="singleChoice"
         android:listSelector="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/btnGetData"
-        style="@style/my_button"
+        style="@style/my_button_copy"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_32sdp"
+        android:textSize="@dimen/_12sdp"
         android:background="@drawable/blue_button"
         android:text="Lấy dữ liệu" />
 
     <Button
+        android:layout_marginTop="2dp"
         android:id="@+id/btnSendData"
-        style="@style/my_button"
+        style="@style/my_button_copy"
+        android:layout_height="@dimen/_32sdp"
+        android:textSize="@dimen/_12sdp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:background="@drawable/blue_button"
         android:text="Gửi dữ liệu" />
 

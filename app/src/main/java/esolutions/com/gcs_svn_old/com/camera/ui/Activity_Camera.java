@@ -141,7 +141,9 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     private Button btnChucNang, btnSoKhac, btnAnHienCamera, btnGhi;
     private Button etNgayPmax, btnXoa;
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0,
-            btnDot, btnClear;
+            btnDot;
+
+    private ImageButton btnClear;
     private Button btnQ, btnW, btnE, btnR, btnT, btnY, btnU, btnI, btnO, btnP,
             btnA, btnS, btnD, btnF, btnG, btnH, btnJ, btnK, btnL, btnZ, btnX,
             btnC, btnV, btnB, btnN, btnM, btnClear2, btnUpper, btnNumber,
@@ -745,18 +747,20 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
     @Override
     protected void onDestroy() { //		clearReferences();
-        if (connection != null)
-            connection.close();
+
+        try {
+            if (connection != null)
+                connection.close();
 //        if (mv != null) {
 //            mv.freeCameraMemory();
 //        }
-        if (checkChangeCamera == 0) {
-            File photo = new File(Environment.getExternalStorageDirectory() + Common.programPath + "/Photo/" + TEN_FILE);
-            String[] allFilesBackup = photo.list();
-            if (allFilesBackup.length == 0) {
-                photo.delete();
+            if (checkChangeCamera == 0) {
+                File photo = new File(Environment.getExternalStorageDirectory() + Common.programPath + "/Photo/" + TEN_FILE);
+                String[] allFilesBackup = photo.list();
+                if (allFilesBackup.length == 0) {
+                    photo.delete();
+                }
             }
-        }
 
 
 //        if (Common.stateMachineBlueToothChoosePrinter == 1) {
@@ -770,10 +774,12 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 //            }
 //        }
 
-        sAddressPass = "";
-        super.onDestroy();
+            sAddressPass = "";
+            super.onDestroy();
 
+        } catch (Exception e) {
 
+        }
     }
 
 //	private void clearReferences(){
@@ -981,7 +987,9 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                                 isDeleleDisconnectWifi = true;
                             }
 
-                            setImage();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                setImage();
+                            }
                         } else {
                             comm.ShowToast(Activity_Camera.this.getApplicationContext(), "Không xóa được hình ảnh", Toast.LENGTH_LONG);
                         }
@@ -1425,14 +1433,28 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                                     etTimKiem.setText("Chưa ghi");
                                     etTimKiem.setEnabled(false);
                                     btnXoa.setText("Tìm");
+
+                                    String selected = String.valueOf(spTieuChi.getSelectedItem());
+                                    String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
+                                    CharSequence cs = "Chưa ghi";
+                                    (new AsyncTaskCameraFilt(Activity_Camera.this)).execute(col_selected, "" + cs);
+//
+
                                 } else if (Selected.equals("Đã ghi")) {
                                     etTimKiem.setText("Đã ghi");
                                     etTimKiem.setEnabled(false);
                                     btnXoa.setText("Tìm");
-                                } else if (Selected.equals("Chưa chụp")) {
+                                    String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
+                                    CharSequence cs = "Đã ghi";
+                                    (new AsyncTaskCameraFilt(Activity_Camera.this)).execute(col_selected, "" + cs);
+                                }
+                                else if (Selected.equals("Chưa chụp")) {
                                     etTimKiem.setText("Chưa chụp");
                                     etTimKiem.setEnabled(false);
                                     btnXoa.setText("Tìm");
+                                    String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
+                                    CharSequence cs = "Chưa chụp";
+                                    (new AsyncTaskCameraFilt(Activity_Camera.this)).execute(col_selected, "" + cs);
                                 } else if (!btnXoa.getText().equals("Xoa")) {
                                     etTimKiem.setText("");
                                     btnXoa.setText("Xóa");
@@ -4373,14 +4395,17 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     /**
      * Set bàn phím
      */
+    /**
+     * Set bàn phím
+     */
     private void setKeyboard() {
         try {
             controlInflater = LayoutInflater.from(getApplicationContext());
             viewControlNumber = controlInflater.inflate(R.layout.keyboard_number, null);
             viewControlText = controlInflater.inflate(R.layout.keyboard_text, null);
             LayoutParams layoutParamsControl = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-            this.addContentView(viewControlText, layoutParamsControl);
-            this.addContentView(viewControlNumber, layoutParamsControl);
+            ((LinearLayout) this.findViewById(R.id.ac_camera_Keyboard)).addView(viewControlNumber, layoutParamsControl);
+            ((LinearLayout) this.findViewById(R.id.ac_camera_Keyboard)).addView(viewControlText, layoutParamsControl);
         } catch (Exception ex) {
 
         }
@@ -4526,7 +4551,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
         btn9 = (Button) findViewById(R.id.btn9);
         btn0 = (Button) findViewById(R.id.btn0);
         btnDot = (Button) findViewById(R.id.btnDot);
-        btnClear = (Button) findViewById(R.id.btnClear);
+        btnClear = (ImageButton) findViewById(R.id.btnClear);
 
         btnQ = (Button) findViewById(R.id.btnQ);
         btnW = (Button) findViewById(R.id.btnW);

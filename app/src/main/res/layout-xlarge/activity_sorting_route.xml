@@ -2,33 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#FFFFFF"
-    tools:context=".SortingRouteActivity" >
+    android:orientation="vertical"
+    tools:context=".com.camera.ui.SortingRouteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="@dimen/_32sdp"
+        android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spnChonSo"
             style="@style/my_spinner"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_margin="2dp"
+            android:layout_weight="1"
             android:background="@drawable/spinner_selector"
             android:prompt="@string/ChonSoGCS_prompt" />
 
         <Button
             android:id="@+id/btnChooseFile"
             style="@style/my_button"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="match_parent"
             android:background="@drawable/blue_button"
             android:onClick="btnChooseFile_Click"
@@ -40,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/table_header"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/txtStyle"
@@ -88,72 +84,79 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:choiceMode="singleChoice"
-        android:listSelector="@android:color/darker_gray" >
-    </ListView>
+        android:listSelector="@android:color/darker_gray"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:layout_marginTop="5dp">
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etxtSTT"
             style="@style/my_edittext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
             android:layout_marginRight="3dp"
+            android:layout_marginTop="2dp"
             android:layout_weight="4"
             android:background="@drawable/etxt_selector"
-            android:inputType="number" />
+            android:inputType="number"
+            android:lines="1"
+            android:maxLines="1"
+            android:textSize="@dimen/_11sdp" />
 
         <Button
             android:id="@+id/btnChangePosition"
-            style="@style/my_button"
+            style="@style/my_button_copy"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/blue_button"
             android:onClick="btnChangePosition_Click"
-            android:text="Đổi vị trí" />
-        
+            android:text="Đổi vị trí"
+            android:textSize="@dimen/_12sdp" />
+
         <Button
             android:id="@+id/btnPrevPosition"
-            style="@style/my_button"
+            style="@style/my_button_copy"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:layout_weight="1"
             android:background="@drawable/blue_button"
             android:onClick="btnPrevPosition_Click"
-            android:text="V.trí trước" />
+            android:text="V.trí trước"
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.5" >
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_weight="0.5">
 
         <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
+                        android:layout_width="@dimen/_80sdp"
                         android:layout_height="wrap_content"
-                        android:text="No C.Tơ" />
+                        android:text="No C.Tơ"
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/tv_SERY_CTO"
@@ -162,19 +165,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
+                        android:layout_width="@dimen/_80sdp"
                         android:layout_height="wrap_content"
-                        android:text="Mã trạm" />
+                        android:text="Mã trạm"
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/tv_MA_TRAM"
@@ -183,19 +188,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
+                        android:layout_width="@dimen/_80sdp"
                         android:layout_height="wrap_content"
-                        android:text="@string/MA_GC_lbl" />
+                        android:text="@string/MA_GC_lbl"
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/tv_MA_GC"
@@ -204,19 +211,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/MA_COT_lbl" />
+                        android:layout_height="match_parent"
+                        android:text="@string/MA_COT_lbl"
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/tv_MA_COT"
@@ -225,24 +234,25 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
+                        android:layout_width="@dimen/_80sdp"
                         android:layout_height="wrap_content"
                         android:text="@string/TEN_KH_lbl" />
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         android:id="@+id/tv_TEN_KH"
                         style="@style/tvInfoStyle"
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
@@ -252,18 +262,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:text="Địa chỉ" />
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         android:id="@+id/tv_DIA_CHI"
                         style="@style/tvInfoStyle"
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
@@ -273,18 +283,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         style="@style/tvInfoStyle"
-                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:text="Bộ chỉ số" />
 
                     <TextView
+                        android:layout_width="@dimen/_80sdp"
                         android:id="@+id/tv_LOAI_BCS"
                         style="@style/tvInfoStyle"
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
@@ -296,8 +306,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="@dimen/_32sdp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnSaveRoute"
@@ -307,7 +317,8 @@
             android:layout_weight="1"
             android:background="@drawable/blue_button"
             android:onClick="btnSaveRoute_Click"
-            android:text="Lưu sắp xếp" />
+            android:text="Lưu sắp xếp"
+            android:textSize="@dimen/_12sdp" />
 
         <Button
             android:id="@+id/btnSortingRoute"
@@ -317,7 +328,8 @@
             android:layout_weight="1"
             android:background="@drawable/blue_button"
             android:onClick="btnSortingRoute_Click"
-            android:text="Xóa lộ trình" />
+            android:text="Xóa lộ trình"
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
 </LinearLayout>

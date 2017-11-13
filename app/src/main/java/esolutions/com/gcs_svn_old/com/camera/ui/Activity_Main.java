@@ -1366,6 +1366,8 @@ public class Activity_Main extends Activity implements
                                                     // backup
                                                     comm.CreateBackup(null);
 
+                                                    Common.IMEI = comm.GetIMEI(Activity_Main.this.getApplicationContext());
+
                                                     // -> tải về
                                                     String result = (new AsyncCallWS())
                                                             .WS_DOWNLOAD_SO_GCS_CALL(
