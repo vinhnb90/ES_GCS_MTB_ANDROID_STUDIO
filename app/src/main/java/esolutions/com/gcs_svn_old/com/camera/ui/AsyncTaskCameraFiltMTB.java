@@ -79,6 +79,7 @@ public class AsyncTaskCameraFiltMTB extends AsyncTask<String, LinkedHashMap<Stri
 	@Override
 	protected void onPostExecute(ArrayList<LinkedHashMap<String, String>> result) {
 		super.onPostExecute(result);
+		((Activity_Camera_MTB) activityParent).setKeyboard();
 		try{
 			Activity_Camera_MTB.arrCustomer_Filter = result;
 			((Activity_Camera_MTB) activityParent).adapter = new AdapterCameraMTB(activityParent, result, R.layout.listview_gcs);

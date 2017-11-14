@@ -312,6 +312,7 @@ public class Activity_Camera_MTB extends Activity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         try {
             if (connection != null)
                 connection.close();
@@ -325,7 +326,7 @@ public class Activity_Camera_MTB extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.onDestroy();
+
     }
 
     @Override
@@ -562,12 +563,12 @@ public class Activity_Camera_MTB extends Activity {
                             String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
                             CharSequence cs = "Chưa ghi";
 //							selected_index = 0;
-                            (new AsyncTaskCameraFilt(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
+                            (new AsyncTaskCameraFiltMTB(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
                         } else if (selected.equals("Đã ghi")) {
                             String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
                             CharSequence cs = "Đã ghi";
 //							selected_index = 0;
-                            (new AsyncTaskCameraFilt(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
+                            (new AsyncTaskCameraFiltMTB(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
                         } else {
                             etTimKiem.setText("");
                         }
@@ -701,7 +702,7 @@ public class Activity_Camera_MTB extends Activity {
                                     String selected = String.valueOf(spTieuChi.getSelectedItem());
                                     String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
                                     CharSequence cs = "Chưa ghi";
-                                    (new AsyncTaskCameraFilt(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
+                                    (new AsyncTaskCameraFiltMTB(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
 //
 
                                 } else if (Selected.equals("Đã ghi")) {
@@ -710,7 +711,7 @@ public class Activity_Camera_MTB extends Activity {
                                     btnXoa.setText("Tìm");
                                     String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
                                     CharSequence cs = "Đã ghi";
-                                    (new AsyncTaskCameraFilt(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
+                                    (new AsyncTaskCameraFiltMTB(Activity_Camera_MTB.this)).execute(col_selected, "" + cs);
                                 } else if (!btnXoa.getText().equals("Xoa")) {
                                     etTimKiem.setText("");
                                     btnXoa.setText("Xóa");

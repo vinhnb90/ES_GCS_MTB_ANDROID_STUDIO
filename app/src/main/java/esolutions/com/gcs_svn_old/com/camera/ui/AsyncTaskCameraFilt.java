@@ -37,7 +37,7 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
         params = para;
         try {
             ArrayList<LinkedHashMap<String, String>> filt = new ArrayList<LinkedHashMap<String, String>>();
-            for (LinkedHashMap<String, String> map : Activity_Camera_MTB.arrCustomer) {
+            for (LinkedHashMap<String, String> map : Activity_Camera.arrCustomer) {
                 String val = null;
                 // nếu ko phải tìm các kh chưa ghi và đã ghi
                 if (!para[0].equals("CHUA_GHI") && !para[0].equals("DA_GHI")) {
@@ -104,22 +104,22 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
     @Override
     protected void onPostExecute(ArrayList<LinkedHashMap<String, String>> result) {
         super.onPostExecute(result);
-        ((Activity_Camera_MTB) activityParent).setKeyboard();
+        ((Activity_Camera) activityParent).setKeyboard();
 
         try {
-            Activity_Camera_MTB.arrCustomer_Filter = result;
-            ((Activity_Camera_MTB) activityParent).adapter = new AdapterCameraMTB(activityParent, result, R.layout.listview_gcs);
-            ((Activity_Camera_MTB) activityParent).lvCustomer.setAdapter(((Activity_Camera_MTB) activityParent).adapter);
-            if (!((Activity_Camera_MTB) activityParent).etTimKiem.getText().toString().equals("")) {
-                Activity_Camera_MTB.selected_index = 0;
-                ((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
-                ((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index, 5);
-                ((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
+            Activity_Camera.arrCustomer_Filter = result;
+            ((Activity_Camera) activityParent).adapter = new AdapterCamera(activityParent, result, R.layout.listview_gcs);
+            ((Activity_Camera) activityParent).lvCustomer.setAdapter(((Activity_Camera) activityParent).adapter);
+            if (!((Activity_Camera) activityParent).etTimKiem.getText().toString().equals("")) {
+                Activity_Camera.selected_index = 0;
+                ((Activity_Camera) activityParent).lvCustomer.setSelection(Activity_Camera.selected_index);
+                ((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index, 5);
+                ((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
             } else {
-                ((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index, 6);
-                ((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
-                Activity_Camera_MTB.selected_index = ((Activity_Camera_MTB) activityParent).getPos();
-                ((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
+                ((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index, 6);
+                ((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
+                Activity_Camera.selected_index = ((Activity_Camera) activityParent).getPos();
+                ((Activity_Camera) activityParent).lvCustomer.setSelection(Activity_Camera.selected_index);
             }
 //			((Activity_Camera) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
 //	

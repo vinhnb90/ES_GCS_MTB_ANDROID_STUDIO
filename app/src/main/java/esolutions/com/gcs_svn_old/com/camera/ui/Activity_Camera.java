@@ -61,6 +61,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -744,7 +745,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
     @Override
     protected void onDestroy() { //		clearReferences();
-
+        super.onDestroy();
         try {
             if (connection != null)
                 connection.close();
@@ -772,7 +773,6 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 //        }
 
             sAddressPass = "";
-            super.onDestroy();
 
         } catch (Exception e) {
 
@@ -1003,7 +1003,6 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     lnButtonCamera.setVisibility(View.GONE);
                     lnListCustom.setVisibility(View.GONE);
                     lnButtonCloseCamera.setVisibility(View.VISIBLE);
-
                     String filePath = Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg";
                     Bitmap bmImage = BitmapFactory.decodeFile(filePath);
 //					ivViewImage.setImageBitmap(bmImage);
@@ -4395,14 +4394,15 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     /**
      * Set bàn phím
      */
-    private void setKeyboard() {
+    public void setKeyboard() {
         try {
             controlInflater = LayoutInflater.from(getApplicationContext());
             viewControlNumber = controlInflater.inflate(R.layout.keyboard_number, null);
             viewControlText = controlInflater.inflate(R.layout.keyboard_text, null);
             LayoutParams layoutParamsControl = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             ((LinearLayout) this.findViewById(R.id.ac_camera_Keyboard)).addView(viewControlNumber, layoutParamsControl);
-            ((LinearLayout) this.findViewById(R.id.ac_camera_Keyboard)).addView(viewControlText, layoutParamsControl);
+            LayoutParams layoutParamsControl1 = new LayoutParams(LayoutParams.MATCH_PARENT, 0);
+            ((LinearLayout) this.findViewById(R.id.ac_camera_Keyboard)).addView(viewControlText, layoutParamsControl1);
         } catch (Exception ex) {
 
         }

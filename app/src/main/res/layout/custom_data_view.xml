@@ -10,11 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:padding="5dp"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:textColor="#000"
+        android:paddingRight="5dp"
         android:background="@drawable/border_listitem_gcs2"
-        android:textSize="18sp" />
+        android:textSize="@dimen/_12sdp" />
 
 </LinearLayout>

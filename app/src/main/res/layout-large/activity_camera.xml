@@ -8,13 +8,12 @@
     <com.meetme.android.horizontallistview.HorizontalListView
         android:id="@+id/hlvSimpleList"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_32sdp" />
+        android:layout_height="@dimen/_20sdp" />
 
     <LinearLayout
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_24sdp"
-        android:layout_marginBottom="2dp"
+        android:layout_height="@dimen/_18sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -30,7 +29,7 @@
             android:id="@+id/etTimKiem"
             style="@style/my_edittext"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_24sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
 
@@ -39,7 +38,7 @@
             android:drawableRight="@drawable/gcs_search"
             android:hint="Tìm kiếm"
             android:imeOptions="actionDone"
-            android:textSize="@dimen/_12sdp"></EditText>
+            android:textSize="@dimen/_11sdp"></EditText>
 
         <Button
             android:id="@+id/btnXoa"
