@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import esolutions.com.gcs_svn_old.R;
 import esolutions.com.gcs_svn_old.com.camera.utility.Common;
@@ -138,6 +139,7 @@ public class AsyncTaskCameraMTB extends AsyncTask<String, LinkedHashMap<String, 
 			c.close();
 			return arrCustomer;
 		} catch(Exception ex) {
+			Toast.makeText(activityParent, ex.getMessage(), Toast.LENGTH_SHORT).show();
 			return null;
 		}
 	}

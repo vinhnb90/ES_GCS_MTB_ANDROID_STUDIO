@@ -103,7 +103,7 @@ import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 @SuppressLint("NewApi")
 public class Common {
-    public final static int SIZE_WIDTH_IMAGE_BASIC = 500; //lưu ý không thay đổi được vì chiều ngang 600 mới ghi đủ thông tin cơ bản.
+    public final static int SIZE_WIDTH_IMAGE_BASIC = 700; //lưu ý không thay đổi được vì chiều ngang 600 mới ghi đủ thông tin cơ bản.
     public final static int SIZE_HEIGHT_IMAGE = 600;
     // Mã code chương trình
     public static String PHIEN_BAN = "HN";//Hà Nội

@@ -78,6 +78,7 @@ import esolutions.com.gcs_svn_old.com.camera.utility.row_gcs;
 import esolutions.com.gcs_svn_old.com.es.zoomimage.ImageViewTouch;
 import esolutions.com.gcs_svn_old.com.meetme.android.horizontallistview.CustomArrayAdapterCameraMTB;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -4078,7 +4079,7 @@ public class Activity_Camera_MTB extends Activity {
                 Cursor c = connection.getDataForImage(ID_SQLITE);
                 Bitmap bitmap = null;
                 if (c.moveToFirst()) {
-                    bitmap = drawTextToBitmap(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), c.getString(2), c.getString(3), c.getString(1), c.getString(4));
+                    bitmap = Activity_Camera.drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                 }
                 if (saveImageToFile(bitmap)) {
                     setImage();

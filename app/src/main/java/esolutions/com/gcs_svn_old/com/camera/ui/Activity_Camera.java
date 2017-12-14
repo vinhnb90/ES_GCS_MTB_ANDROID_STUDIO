@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -1447,8 +1448,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                                     String col_selected = GetColNameFromString(String.valueOf(spTieuChi.getSelectedItem()));
                                     CharSequence cs = "Đã ghi";
                                     (new AsyncTaskCameraFilt(Activity_Camera.this)).execute(col_selected, "" + cs);
-                                }
-                                else if (Selected.equals("Chưa chụp")) {
+                                } else if (Selected.equals("Chưa chụp")) {
                                     etTimKiem.setText("Chưa chụp");
                                     etTimKiem.setEnabled(false);
                                     btnXoa.setText("Tìm");
@@ -5408,7 +5408,28 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 //                bitmap = drawTextToBitmap(ac, bitmap, c.getString(0), c.getString(2), c.getString(3), c.getString(1), c.getString(4));
 
                 try {
-                    bitmap = drawTextOnBitmapCongTo(ac, sPath, c.getString(0), "Chỉ số mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "");
+                    Bitmap bmRoot = null;
+                    String fileName = sPath;
+                    File fBitmap = new File(fileName);
+                    if (fBitmap.exists()) {
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+                        bmRoot = BitmapFactory.decodeFile(fileName, options);
+                    } else {
+                        throw new Exception("Không có ảnh trong máy!");
+                    }
+
+
+                    bitmap = drawTextOnBitmapCongTo(ac, bmRoot, c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+
+                    BufferedOutputStream bos = null;
+                    bos = new BufferedOutputStream(new FileOutputStream(fileName));
+                    bos.write(Common.encodeTobase64Byte(bitmap));
+                    bos.close();
+                    Common.scanFile(Activity_Camera.this, new String[]{fileName});
+
+
                 } catch (Exception e) {
                     publishProgress(e.getMessage());
                     e.printStackTrace();
@@ -5423,6 +5444,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             super.onProgressUpdate(values);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
@@ -5644,151 +5666,189 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
      * @param VI_TRI_4_2: dòng thứ 4 dưới cùng bên phải
      * @return
      */
-    public static Bitmap drawTextOnBitmapCongTo(Context context, String PATH_ANH, String VI_TRI_1, String VI_TRI_2_1, String VI_TRI_2_2, String VI_TRI_3, String VI_TRI_4_1, String VI_TRI_4_2) throws Exception {
+    public static Bitmap drawTextOnBitmapCongTo(Context context, Bitmap bmRoot, String VI_TRI_1, String VI_TRI_2_1, String VI_TRI_2_2, String VI_TRI_3, String VI_TRI_4_1, String VI_TRI_4_2) throws Exception {
         try {
-            String fileName = PATH_ANH;
-            File fBitmap = new File(fileName);
-            if (fBitmap.exists()) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                Bitmap bmRoot = BitmapFactory.decodeFile(fileName, options);
-                if (bmRoot != null) {
-                    Bitmap.Config bmConfig = bmRoot.getConfig();
-                    if (bmConfig == null) {
-                        bmConfig = android.graphics.Bitmap.Config.ARGB_8888;
-                    }
-                    bmRoot = bmRoot.copy(bmConfig, true);
 
-                    //TODO Tạo paint để vẽ nền đen
-                    Paint paint_background = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint_background.setColor(Color.BLACK);
+            if(bmRoot.getWidth()>Common.SIZE_WIDTH_IMAGE_BASIC)
+            {
+                bmRoot = Common.scaleDown(bmRoot, Common.SIZE_WIDTH_IMAGE_BASIC, false);
+            }
 
-                    //TODO tạo paint text để vẽ text
-                    final int text_size = 25;
-                    final int paddingBetweenText = 10;
-                    Paint paint_text = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint_text.setColor(Color.WHITE);
-                    paint_text.setTextSize(text_size);//textSize = 20
-                    final int textHeight = Math.round(paint_text.descent() - paint_text.ascent());
+            if (bmRoot.getWidth() > bmRoot.getHeight())
+            {
+                bmRoot = Activity_Camera.RotateBitmap(bmRoot, 90);
 
-                    // TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định TEN_KH, không cần xác định x, y
-                    int soDongCuaTextVI_TRI_1 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_1, paddingBetweenText);
-
-                    // TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định CHI_SO
-                    int soDongCuaTextVI_TRI_3 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_3, paddingBetweenText);
-
-                    //TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định Chuỗi giá
-                    int soDongCuaTextVI_TRI_4_1 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_4_1, paddingBetweenText);
-
-                    //TODO tạo bitmap với diện tích như khung chứa để vẽ ảnh và thông tin
-                    Bitmap.Config conf = Bitmap.Config.ARGB_8888;
-                    Bitmap bitmapResult = null;
-                    //TODO do fix cứng h của nội dung ảnh là SIZE_HEIGHT_IMAGE, nên khi resize thì w thay đổi,
-                    //TODO nếu < 1 giá trị nào đó thì không đủ bề ngang w để ghi thông tin, (SIZE_HEIGHT_IMAGE >600 thì ghi đủ), ta chèn thêm viền đen vào nếu không đủ ghi
-                    if (bmRoot.getWidth() > Common.SIZE_WIDTH_IMAGE_BASIC) {
-                        bitmapResult = Bitmap.createBitmap(
-                                bmRoot.getWidth(),
-                                paddingBetweenText / 2
-                                        + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
-                                        + textHeight
-                                        + paddingBetweenText
-                                        + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText)
-                                        + SIZE_HEIGHT_IMAGE
-                                        + paddingBetweenText
-                                        + (soDongCuaTextVI_TRI_4_1) * (textHeight + paddingBetweenText)
-                                        + paddingBetweenText / 2
-                                , conf);
-                    } else
-                        bitmapResult = Bitmap.createBitmap(
-                                Common.SIZE_WIDTH_IMAGE_BASIC,
-                                paddingBetweenText / 2
-                                        + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
-                                        + textHeight
-                                        + paddingBetweenText
-                                        + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText)
-                                        + SIZE_HEIGHT_IMAGE
-                                        + paddingBetweenText
-                                        + (soDongCuaTextVI_TRI_4_1) * (textHeight + paddingBetweenText)
-                                        + paddingBetweenText / 2
-                                , conf);
-
-                    //TODO khởi tạo canvas
-                    Canvas canvas = new Canvas(bitmapResult);
+            }
 
 
-                    //TODO vẽ ảnh lên khung tại tọa độ với trên ảnh (soDongCuaText  + 1dòng TYPE_IMAGE + 1 dòng chỉ số...) + (+ 1 dòng MA_DDO)
-                    //TODO kiểm tra nếu anh có chiều cao lớn hơn bình thường
-                    //TODO tức đã được đính kèm info thì ta lấy vị trí ảnh từ
-                    int x0 = 0;
-                    int y0 = paddingBetweenText / 2
-                            + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
-                            + textHeight
-                            + paddingBetweenText
-                            + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText); //vẽ từ vị trí trên Common.SIZE_HEIGHT_IMAGE
 
-                    //TODO tạo khung chứa bitmap từ tọa độ x0, y0 tới .. ...
-                    RectF frameBitmap = new RectF(x0, y0, x0 + bmRoot.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
+            if (bmRoot != null) {
+                Bitmap.Config bmConfig = bmRoot.getConfig();
+                if (bmConfig == null) {
+                    bmConfig = android.graphics.Bitmap.Config.ARGB_8888;
+                }
+                bmRoot = bmRoot.copy(bmConfig, true);
+
+                //TODO Tạo paint để vẽ nền đen
+                Paint paint_background = new Paint(Paint.ANTI_ALIAS_FLAG);
+                paint_background.setColor(Color.BLACK);
+
+                //TODO tạo paint text để vẽ text
+                final int text_size = 25;
+                final int paddingBetweenText = 10;
+                Paint paint_text = new Paint(Paint.ANTI_ALIAS_FLAG);
+                paint_text.setColor(Color.WHITE);
+                paint_text.setTextSize(text_size);//textSize = 20
+                final int textHeight = Math.round(paint_text.descent() - paint_text.ascent());
+
+                // TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định TEN_KH, không cần xác định x, y
+                int soDongCuaTextVI_TRI_1 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_1, paddingBetweenText);
+
+                // TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định CHI_SO
+                int soDongCuaTextVI_TRI_3 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_3, paddingBetweenText);
+
+                //TODO tính dòng sẽ được vẽ của chuỗi dài chưa xác định Chuỗi giá
+                int soDongCuaTextVI_TRI_4_1 = drawTextAndBreakLine(true, null, paint_text, 0, 0, textHeight, bmRoot.getWidth(), VI_TRI_4_1, paddingBetweenText);
+
+                //TODO tạo bitmap với diện tích như khung chứa để vẽ ảnh và thông tin
+                Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+                Bitmap bitmapResult = null;
+                //TODO do fix cứng h của nội dung ảnh là SIZE_HEIGHT_IMAGE, nên khi resize thì w thay đổi,
+                //TODO nếu < 1 giá trị nào đó thì không đủ bề ngang w để ghi thông tin, (SIZE_HEIGHT_IMAGE >600 thì ghi đủ), ta chèn thêm viền đen vào nếu không đủ ghi
+                if (bmRoot.getWidth() > Common.SIZE_WIDTH_IMAGE_BASIC) {
+                    bitmapResult = Bitmap.createBitmap(
+                            bmRoot.getWidth(),
+                            paddingBetweenText / 2
+                                    + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
+                                    + textHeight
+                                    + paddingBetweenText
+                                    + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText)
+
+//                                    + paddingBetweenText
+//                                    + 1 * (textHeight)
+                                    + SIZE_HEIGHT_IMAGE
+                                    + paddingBetweenText
+                                    + (soDongCuaTextVI_TRI_4_1) * (textHeight + paddingBetweenText)
+                                    + paddingBetweenText / 2
+                            , conf);
+                } else
+                    bitmapResult = Bitmap.createBitmap(
+                            Common.SIZE_WIDTH_IMAGE_BASIC,
+                            paddingBetweenText / 2
+                                    + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
+                                    + textHeight
+                                    + paddingBetweenText
+                                    + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText)
+//                                    + paddingBetweenText
+//                                    + 1 * (textHeight)
+                                    + SIZE_HEIGHT_IMAGE
+                                    + paddingBetweenText
+                                    + (soDongCuaTextVI_TRI_4_1) * (textHeight + paddingBetweenText)
+                                    + paddingBetweenText / 2
+                            , conf);
+
+                //TODO khởi tạo canvas
+                Canvas canvas = new Canvas(bitmapResult);
 
 
-                    //TODO vẽ full ảnh resultBimap với màu đen làm nền
-                    canvas.drawRect(0, 0, bitmapResult.getWidth(), bitmapResult.getHeight(), paint_background);
+                //TODO vẽ ảnh lên khung tại tọa độ với trên ảnh (soDongCuaText  + 1dòng TYPE_IMAGE + 1 dòng chỉ số...) + (+ 1 dòng MA_DDO)
+                //TODO kiểm tra nếu anh có chiều cao lớn hơn bình thường
+                //TODO tức đã được đính kèm info thì ta lấy vị trí ảnh từ
+                int x0 = 0;
+                int y0 = paddingBetweenText / 2
+                        + (soDongCuaTextVI_TRI_1) * (textHeight + paddingBetweenText)
+                        + textHeight
+                        + paddingBetweenText
+                        + (soDongCuaTextVI_TRI_3) * (textHeight + paddingBetweenText) //vẽ từ vị trí trên Common.SIZE_HEIGHT_IMAGE
+                        + paddingBetweenText
+                        + 1 * (textHeight);
 
-                    //TODO nếu đã được ghi
-                    if (bmRoot.getHeight() > SIZE_HEIGHT_IMAGE) {
-                        Rect src = new Rect(x0, bmRoot.getHeight() - textHeight - paddingBetweenText - Math.round(paddingBetweenText / 2) - SIZE_HEIGHT_IMAGE, bmRoot.getWidth(), bmRoot.getHeight() - textHeight - paddingBetweenText - Math.round(paddingBetweenText / 2));
-                        Rect des = null;
-                        //TODO nếu ảnh có w <= 600 thì vẽ ảnh ở giữa
-                        if (bmRoot.getWidth() <= Common.SIZE_WIDTH_IMAGE_BASIC) {
-                            des = new Rect(Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0, Common.SIZE_WIDTH_IMAGE_BASIC - Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0 + SIZE_HEIGHT_IMAGE);
-                        } else {
-                            des = new Rect(x0, y0, bitmapResult.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
-                        }
-                        //TODO ngược lại vẽ full ảnh
-                        //TODO vẽ một phần chính của ảnh bitmap trên trên khung chứa bitmap với bút paint màu đen
-                        canvas.drawBitmap(bmRoot, src, des, paint_background);
+                //TODO tạo khung chứa bitmap từ tọa độ x0, y0 tới .. ...
+                RectF frameBitmap = new RectF(x0, y0, x0 + bmRoot.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
+
+
+                //TODO vẽ full ảnh resultBimap với màu đen làm nền
+                canvas.drawRect(0, 0, bitmapResult.getWidth(), bitmapResult.getHeight(), paint_background);
+
+                //TODO nếu đã được ghi
+                if (bmRoot.getHeight() > SIZE_HEIGHT_IMAGE) {
+                    Rect src = new Rect(x0,
+                            bmRoot.getHeight()
+                                    - textHeight
+                                    - paddingBetweenText
+                                    - Math.round(paddingBetweenText / 2)
+                                    - SIZE_HEIGHT_IMAGE,
+                            bmRoot.getWidth(),
+                            bmRoot.getHeight() - textHeight - paddingBetweenText - Math.round(paddingBetweenText / 2));
+                    Rect des = null;
+                    //TODO nếu ảnh có w <= 600 thì vẽ ảnh ở giữa
+                    if (bmRoot.getWidth() <= Common.SIZE_WIDTH_IMAGE_BASIC) {
+                        des = new Rect(
+                                Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2),
+                                y0,
+                                Common.SIZE_WIDTH_IMAGE_BASIC - Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2),
+                                y0 + SIZE_HEIGHT_IMAGE);
                     } else {
-                        //TODO vẽ full ở giữa
-                        //TODO nếu ảnh có w <= 600 thì vẽ ảnh ở giữa
-                        RectF frameBitmapCenter = null;
-                        if (bmRoot.getWidth() <= Common.SIZE_WIDTH_IMAGE_BASIC) {
-                            frameBitmapCenter = new RectF(Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0, Common.SIZE_WIDTH_IMAGE_BASIC - Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0 + SIZE_HEIGHT_IMAGE);
-                        } else {
-                            frameBitmapCenter = new RectF(x0, y0, bitmapResult.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
-                        }
-                        //TODO vẽ full bitmap trên trên khung chứa bitmap với bút paint màu đen
-                        canvas.drawBitmap(bmRoot, null, frameBitmapCenter, paint_background);
+                        des = new Rect(x0, y0, bitmapResult.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
                     }
+                    //TODO ngược lại vẽ full ảnh
+                    //TODO vẽ một phần chính của ảnh bitmap trên trên khung chứa bitmap với bút paint màu đen
+                    canvas.drawBitmap(bmRoot, src, des, paint_background);
+                } else {
+                    //TODO vẽ full ở giữa
+                    //TODO nếu ảnh có w <= 600 thì vẽ ảnh ở giữa
+                    RectF frameBitmapCenter = null;
+                    if (bmRoot.getWidth() <= Common.SIZE_WIDTH_IMAGE_BASIC) {
+                        frameBitmapCenter = new RectF(Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0, Common.SIZE_WIDTH_IMAGE_BASIC - Math.round((Common.SIZE_WIDTH_IMAGE_BASIC - bmRoot.getWidth()) / 2), y0 + SIZE_HEIGHT_IMAGE);
+                    } else {
+                        frameBitmapCenter = new RectF(x0, y0, bitmapResult.getWidth(), y0 + SIZE_HEIGHT_IMAGE);
+                    }
+                    //TODO vẽ full bitmap trên trên khung chứa bitmap với bút paint màu đen
+                    canvas.drawBitmap(bmRoot, null, frameBitmapCenter, paint_background);
+                }
 
-                    //TODO vẽ TEN_KH
-                    drawTextAndBreakLine(false, canvas, paint_text, 0, paddingBetweenText / 2 + textHeight, textHeight, bmRoot.getWidth(), VI_TRI_1, paddingBetweenText);
+                //TODO vẽ TEN_KH
+                drawTextAndBreakLine(false, canvas, paint_text, 0, paddingBetweenText / 2 + textHeight, textHeight, bmRoot.getWidth(), VI_TRI_1, paddingBetweenText);
 
-                    //TODO vẽ TYPE IMAGE
-                    //Vẽ 1 khung chứa TYPE IMAGE
-                    Rect khungTYPE_IMAGE = new Rect();
-                    paint_text.getTextBounds(VI_TRI_2_1, 0, VI_TRI_2_1.length(), khungTYPE_IMAGE);
-                    int x_TYPE_IMAGE = 0;
-                    int y_TYPE_IMAGE = soDongCuaTextVI_TRI_1 * (textHeight + paddingBetweenText) + textHeight;
-                    canvas.drawRect(x_TYPE_IMAGE, y_TYPE_IMAGE - textHeight, VI_TRI_2_1.length(), y_TYPE_IMAGE + paddingBetweenText, paint_background);
+                //TODO vẽ TYPE IMAGE
+                //Vẽ 1 khung chứa TYPE IMAGE
+                Rect khungTYPE_IMAGE = new Rect();
+                paint_text.getTextBounds(VI_TRI_2_1, 0, VI_TRI_2_1.length(), khungTYPE_IMAGE);
+                int x_TYPE_IMAGE = 0;
+                int y_TYPE_IMAGE = soDongCuaTextVI_TRI_1 * (textHeight + paddingBetweenText) + textHeight;
+                canvas.drawRect(x_TYPE_IMAGE, y_TYPE_IMAGE - textHeight, VI_TRI_2_1.length(), y_TYPE_IMAGE + paddingBetweenText, paint_background);
 
-                    //Vẽ text TYPE IMAGE
-                    canvas.drawText(VI_TRI_2_1, x_TYPE_IMAGE, y_TYPE_IMAGE, paint_text);
+                //Vẽ text TYPE IMAGE
+                canvas.drawText(VI_TRI_2_1, x_TYPE_IMAGE, y_TYPE_IMAGE, paint_text);
 
-                    //TODO vẽ Ngày
+                //TODO vẽ Ngày
 //                    String VI_TRI_2_2 = Common.getDateNow(Common.TYPE_DATENOW.ddMMyyyyHHmmss_Slash_Space_Colon.toString());
-                    //Vẽ 1 khung chứa DATENOW
-                    Rect khungDATENOW = new Rect();
-                    paint_text.getTextBounds(VI_TRI_2_2, 0, VI_TRI_2_2.length(), khungDATENOW);
-                    int textWidthDATENOW = Math.round(paint_text.measureText(VI_TRI_2_2));
-                    int x_DATENOW = bitmapResult.getWidth() - textWidthDATENOW;
-                    int y_DATENOW = y_TYPE_IMAGE;
-                    canvas.drawRect(x_DATENOW, y_DATENOW - textHeight, bitmapResult.getWidth(), y_DATENOW + paddingBetweenText, paint_background);
+                //Vẽ 1 khung chứa DATENOW
+                Rect khungDATENOW = new Rect();
+                paint_text.getTextBounds(VI_TRI_2_2, 0, VI_TRI_2_2.length(), khungDATENOW);
+                int textWidthDATENOW = Math.round(paint_text.measureText(VI_TRI_2_2));
+                int x_DATENOW = bitmapResult.getWidth() - textWidthDATENOW;
+                int y_DATENOW = y_TYPE_IMAGE;
+                canvas.drawRect(x_DATENOW, y_DATENOW - textHeight, bitmapResult.getWidth(), y_DATENOW + paddingBetweenText, paint_background);
 
-                    //Vẽ text DATENOW
-                    canvas.drawText(VI_TRI_2_2, x_DATENOW, y_DATENOW, paint_text);
+                //Vẽ text DATENOW
+                canvas.drawText(VI_TRI_2_2, x_DATENOW, y_DATENOW, paint_text);
 
-                    //TODO vẽ CHI_SO
-                    int y_VI_TRI_3 =y_TYPE_IMAGE + textHeight + paddingBetweenText;
-                    drawTextAndBreakLine(false, canvas, paint_text, 0, y_VI_TRI_3, textHeight, bmRoot.getWidth(), VI_TRI_3, paddingBetweenText);
+                //TODO vẽ CHI_SO
+                int y_VI_TRI_3 = y_TYPE_IMAGE + textHeight + paddingBetweenText;
+                drawTextAndBreakLine(false, canvas, paint_text, 0, y_VI_TRI_3, textHeight, bmRoot.getWidth(), VI_TRI_3, paddingBetweenText);
+
+                //TODO điền MA_DDO
+                Rect khungMA_DDO = new Rect();
+                paint_text.getTextBounds(VI_TRI_4_2, 0, VI_TRI_4_2.length(), khungMA_DDO);
+                int textWidthMA_DDO = Math.round(paint_text.measureText(VI_TRI_4_2));
+                int x_MA_DDO = bitmapResult.getWidth() - textWidthMA_DDO;
+                int y_MA_DDO = y_VI_TRI_3;
+                canvas.drawRect(x_MA_DDO, y_MA_DDO - textHeight - paddingBetweenText, bitmapResult.getWidth(), y_MA_DDO, paint_background);
+
+                //Vẽ text MA_DDO cách thêm 1 khoảng dưới cùng 1 đoạn paddingBetweenText/2
+                canvas.drawText(VI_TRI_4_2, x_MA_DDO, y_MA_DDO - paddingBetweenText / 2, paint_text);
+
 
                  /*   //Vẽ 1 khung chứa CHI_SO
                     Rect khungCHI_SO = new Rect();
@@ -5799,47 +5859,25 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     //Vẽ text CHI_SO
                     canvas.drawText(VI_TRI_3, x_CHI_SO, y_CHI_SO, paint_text);*/
 
-                    //TODO điền CHUỖI GIÁ
-                    int y_VI_TRI_4 =  y0 + SIZE_HEIGHT_IMAGE + textHeight+ paddingBetweenText;
-                    drawTextAndBreakLine(false, canvas, paint_text, 0, y_VI_TRI_4, textHeight, bmRoot.getWidth(), VI_TRI_4_1, paddingBetweenText);
+                //TODO điền CHUỖI GIÁ
+                int y_VI_TRI_4 = y0 + SIZE_HEIGHT_IMAGE + textHeight + paddingBetweenText;
+                drawTextAndBreakLine(false, canvas, paint_text, 0, y_VI_TRI_4, textHeight, bmRoot.getWidth(), VI_TRI_4_1, paddingBetweenText);
 
                    /* //TODO điền SO_CTO
                     Rect khungSO_CTO = new Rect();
-                    paint_text.getTextBounds(VI_TRI_4_1, 0, (VI_TRI_4_1).length(), khungSO_CTO);
+                    paint_text.getTextBounds(VI_TRI_4_1, 0, (VI_TRI_4_1).length(), kh
+                    ungSO_CTO);
                     int x_SO_CTO = 0;
                     int y_SO_CTO = bitmapResult.getHeight();
                     canvas.drawRect(0, y_SO_CTO - textHeight - paddingBetweenText, VI_TRI_4_1.length(), y_SO_CTO, paint_background);
 
                     //Vẽ text SO_CTO cách thêm 1 khoảng dưới cùng 1 đoạn paddingBetweenText/2
                     canvas.drawText(VI_TRI_4_1, x_SO_CTO, y_SO_CTO - paddingBetweenText / 2, paint_text);*/
-
-                    /*//TODO điền MA_DDO
-                    Rect khungMA_DDO = new Rect();
-                    paint_text.getTextBounds(VI_TRI_4_2, 0, VI_TRI_4_2.length(), khungMA_DDO);
-                    int textWidthMA_DDO = Math.round(paint_text.measureText(VI_TRI_4_2));
-                    int x_MA_DDO = bitmapResult.getWidth() - textWidthMA_DDO;
-                    int y_MA_DDO = y_SO_CTO;
-                    canvas.drawRect(x_MA_DDO, y_MA_DDO - textHeight - paddingBetweenText, bitmapResult.getWidth(), y_MA_DDO, paint_background);
-
-                    //Vẽ text MA_DDO cách thêm 1 khoảng dưới cùng 1 đoạn paddingBetweenText/2
-                    canvas.drawText(VI_TRI_4_2, x_MA_DDO, y_MA_DDO - paddingBetweenText / 2, paint_text);*/
-
-                    BufferedOutputStream bos = null;
-                    try {
-                        bos = new BufferedOutputStream(new FileOutputStream(fileName));
-                        bos.write(Common.encodeTobase64Byte(bitmapResult));
-                        bos.close();
-                        Common.scanFile(context, new String[]{fileName});
-                    } catch (IOException ex) {
-                        throw new Exception(ex.getMessage());
-                    }
-                    return bitmapResult;
-                } else {
-                    throw new Exception("Lỗi khi xử lý ảnh!");
-                }
+                return bitmapResult;
             } else {
-                throw new Exception("Không có ảnh trong máy!");
+                throw new Exception("Lỗi khi xử lý ảnh!");
             }
+
 
         } catch (Exception ex) {
             throw new Exception("Lỗi ghi lên ảnh\n" + ex.toString());
@@ -6499,6 +6537,14 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
         } catch (Exception ex) {
             ex.toString();
         }
+    }
+
+
+    public static  Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
 }

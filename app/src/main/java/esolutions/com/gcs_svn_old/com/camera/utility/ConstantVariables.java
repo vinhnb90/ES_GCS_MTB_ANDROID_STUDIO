@@ -17,7 +17,7 @@ public class ConstantVariables {
 		"SL_TTIEP", "NGAY_CU", "CS_MOI", "TTR_MOI", "SL_MOI", "CHUOI_GIA",
 		"KY", "THANG", "NAM", "NGAY_MOI", "NGUOI_GCS", "SL_THAO",
 		"KIMUA_CSPK", "MA_COT", "CGPVTHD", "HTHUC_TBAO_DK", "DTHOAI_SMS",
-		"EMAIL", "THOI_GIAN", "X", "Y", "Z", "SO_TIEN", "HTHUC_TBAO_TH", "TENKHANG_RUTGON",
+		"EMAIL", "THOI_GIAN", "X", "Y", "SO_TIEN", "HTHUC_TBAO_TH", "TENKHANG_RUTGON",
 		"TTHAI_DBO", "DU_PHONG", "TEN_FILE", "GHICHU", "TT_KHAC", "ID_SQLITE",
 		"SLUONG_1","SLUONG_2","SLUONG_3","SO_HOM", "CHU_KY", "HINH_ANH", "PMAX", "NGAY_PMAX", "STR_CHECK_DSOAT"};
 	public static String[] MENU_PAGER = { "Xem chi tiết", "Thêm ghi chú", "Xóa chỉ số mới","Công tơ đã xóa chỉ số",
