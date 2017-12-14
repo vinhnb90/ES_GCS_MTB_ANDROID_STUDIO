@@ -96,6 +96,8 @@ import java.util.Locale;
 
 import esolutions.com.gcs_svn_old.esgcs.printer.InThongBao;
 
+import static esolutions.com.gcs_svn_old.com.camera.ui.Activity_Camera.drawTextOnBitmapCongTo;
+
 @SuppressWarnings("deprecation")
 public class Activity_Camera_MTB extends Activity {
 
@@ -2670,7 +2672,7 @@ public class Activity_Camera_MTB extends Activity {
     String PMAX = "";
     String NGAY_PMAX = "";
 
-    private void SaveToSelectedRow(final int tinh_trang_qua_sl, final String ID_SQLITE, float cs_moi, float sl_moi, String tinh_trang_moi, final String LOAI_BCS) {
+    private void SaveToSelectedRow(final int tinh_trang_qua_sl, String ID_SQLITE, float cs_moi, float sl_moi, String tinh_trang_moi, final String LOAI_BCS) {
         try {
             // cập nhật vị trí GPS
             double latitude = 0;
@@ -2737,10 +2739,33 @@ public class Activity_Camera_MTB extends Activity {
 
                 bm = createBitMap(Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg");
                 if (bm != null) {
-                    bm = drawCSMoiToBitmap(Activity_Camera_MTB.this, bm, CS_MOI);
-                    if (saveImageToFile(bm)) {
-                        comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+                    try {
+                        ID_SQLITE = adapter.getItem(selected_index).get("ID_SQLITE");
+                        c = connection.getDataForImage(ID_SQLITE);
+                        Bitmap bitmap = null;
+
+                        if (c.moveToFirst()) {
+                            bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "Chuỗi giá: " + c.getString(c.getColumnIndex("CHUOI_GIA")), "");
+                        }
+
+
+                        if (saveImageToFile(bitmap))
+                            comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+
+                    } catch (final Exception ex) {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                comm.ShowToast(Activity_Camera_MTB.this, "Error take picture: " + ex.toString(), Toast.LENGTH_LONG);
+                            }
+                        });
                     }
+
+//                    bm = drawCSMoiToBitmap(Activity_Camera_MTB.this, bm, CS_MOI);
+//                    if (saveImageToFile(bm)) {
+//                        comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+//                    }
                 }
 
                 if (LOAI_BCS.equals("CD")) {
@@ -4079,7 +4104,7 @@ public class Activity_Camera_MTB extends Activity {
                 Cursor c = connection.getDataForImage(ID_SQLITE);
                 Bitmap bitmap = null;
                 if (c.moveToFirst()) {
-                    bitmap = Activity_Camera.drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+                    bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                 }
                 if (saveImageToFile(bitmap)) {
                     setImage();
