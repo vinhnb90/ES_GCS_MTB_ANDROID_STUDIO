@@ -3488,7 +3488,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     String PMAX = "";
     String NGAY_PMAX = "";
 
-    private void SaveToSelectedRow(final int tinh_trang_qua_sl, final String ID_SQLITE, float cs_moi, float sl_moi, String tinh_trang_moi, final String LOAI_BCS) {
+    private void SaveToSelectedRow(final int tinh_trang_qua_sl, String ID_SQLITE, float cs_moi, float sl_moi, String tinh_trang_moi, final String LOAI_BCS) {
         try {
             // cập nhật vị trí GPS
             double latitude = 0;
@@ -3564,10 +3564,30 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                         adapter.getItem(selected_index).get("MA_DDO") + "_" +
                         adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg");
                 if (bm != null) {
-                    bm = drawCSMoiToBitmap(Activity_Camera.this, bm, CS_MOI);
-                    if (saveImageToFile(bm)) {
-//										comm.scanFile(Activity_Camera.this.getApplicationContext(), new String[] {Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+
+                    try {
+                        ID_SQLITE = adapter.getItem(selected_index).get("ID_SQLITE");
+                        c = connection.getDataForImage(ID_SQLITE);
+                        Bitmap bitmap = null;
+
+                        if (c.moveToFirst()) {
+                            bitmap = drawTextOnBitmapCongTo(Activity_Camera.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "Chuỗi giá: " + c.getString(c.getColumnIndex("CHUOI_GIA")), "");
+                        }
+
+
+                        if (saveImageToFile(bitmap))
+                            comm.scanFile(Activity_Camera.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+
+                    } catch (final Exception ex) {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                comm.ShowToast(Activity_Camera.this, "Error take picture: " + ex.toString(), Toast.LENGTH_LONG);
+                            }
+                        });
                     }
+
                 }
 
                 if (LOAI_BCS.equals("CD")) {
