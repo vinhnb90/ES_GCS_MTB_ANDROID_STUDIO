@@ -2745,12 +2745,14 @@ public class Activity_Camera_MTB extends Activity {
                         Bitmap bitmap = null;
 
                         if (c.moveToFirst()) {
-                            bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "Chuỗi giá: " + c.getString(c.getColumnIndex("CHUOI_GIA")), "");
+                            bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                         }
 
 
                         if (saveImageToFile(bitmap))
                             comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+
+                        connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
 
                     } catch (final Exception ex) {
                         runOnUiThread(new Runnable() {
@@ -4104,10 +4106,12 @@ public class Activity_Camera_MTB extends Activity {
                 Cursor c = connection.getDataForImage(ID_SQLITE);
                 Bitmap bitmap = null;
                 if (c.moveToFirst()) {
-                    bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+                    bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                 }
                 if (saveImageToFile(bitmap)) {
                     setImage();
+
+                    connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
                 } else {
                     runOnUiThread(new Runnable() {
 

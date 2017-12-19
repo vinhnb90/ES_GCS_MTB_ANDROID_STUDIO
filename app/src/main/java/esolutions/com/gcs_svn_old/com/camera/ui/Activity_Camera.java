@@ -3488,6 +3488,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     String PMAX = "";
     String NGAY_PMAX = "";
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void SaveToSelectedRow(final int tinh_trang_qua_sl, String ID_SQLITE, float cs_moi, float sl_moi, String tinh_trang_moi, final String LOAI_BCS) {
         try {
             // cập nhật vị trí GPS
@@ -3570,12 +3572,14 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                         Bitmap bitmap = null;
 
                         if (c.moveToFirst()) {
-                            bitmap = drawTextOnBitmapCongTo(Activity_Camera.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "Chuỗi giá: " + c.getString(c.getColumnIndex("CHUOI_GIA")), "");
+                            bitmap = drawTextOnBitmapCongTo(Activity_Camera.this, bm, c.getString(c.getColumnIndex("TEN_KHANG")), "CS mới: " + CS_MOI, "Mã Điểm đo: " + c.getString(c.getColumnIndex("MA_DDO")), "Seri: " + c.getString(c.getColumnIndex("SERY_CTO")), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                         }
 
 
                         if (saveImageToFile(bitmap))
                             comm.scanFile(Activity_Camera.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+
+                        connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
 
                     } catch (final Exception ex) {
                         runOnUiThread(new Runnable() {
@@ -3719,8 +3723,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     }
                 }
 //								if(Common.state_show_camera == 1){
-                setImage();
 //								}
+                setImage();
 //							}
 //						});
 //					}
@@ -5445,7 +5449,9 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     }
 
 
-                    bitmap = drawTextOnBitmapCongTo(ac, bmRoot, c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "Chuỗi giá: " + c.getString(4), "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+                    bitmap = drawTextOnBitmapCongTo(ac, bmRoot, c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+
+                    connection.updateImageGCS(ID_SQLITE[0], Common.encodeTobase64Byte(bitmap));
 
                     BufferedOutputStream bos = null;
                     bos = new BufferedOutputStream(new FileOutputStream(fileName));
@@ -6136,6 +6142,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     /**
      * Vẽ chữ lên ảnh
      */
+    @Deprecated
     public Bitmap drawCSMoiToBitmap(Context gContext, Bitmap bitmap, String cs_moi) {
 //		Resources resources = gContext.getResources();
 //		float scale = resources.getDisplayMetrics().density;
