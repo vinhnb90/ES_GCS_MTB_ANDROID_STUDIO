@@ -2010,7 +2010,7 @@ public class Common {
     }
 
     public static String getDateVersion() {
-        return "16/10/2017";
+        return "23/12/2017";
     }
 
     //region date time utils

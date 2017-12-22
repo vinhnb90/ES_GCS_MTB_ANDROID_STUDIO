@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -156,6 +157,7 @@ public class Activity_Camera_MTB extends Activity {
     AppLocationService appLocationService;
     private Dialog alertDialog;
     private int checkChangeCamera = 0;
+    private boolean stateTextKeyboardClick;
 
     @SuppressLint("NewApi")
     @Override
@@ -163,6 +165,13 @@ public class Activity_Camera_MTB extends Activity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_camera_mtb);
+
+//            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+//                public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
+//                    Log.e("Error"+Thread.currentThread().getStackTrace()[2],paramThrowable.getLocalizedMessage());
+//                }
+//            });
+
             connection = new SQLiteConnection(this.getApplicationContext(), "ESGCS.s3db", Environment.getExternalStorageDirectory() + Common.DBFolderPath);
             comm = new Common();
             gps = new GPSTracker(this.getApplicationContext());
@@ -190,15 +199,19 @@ public class Activity_Camera_MTB extends Activity {
 
             initComponent();
             ivViewImage.setVisibility(View.GONE);
+
+
             eventButton();
             setupSimpleList();
             showCamera();
             (new AsyncTaskCameraMTB(Activity_Camera_MTB.this, kieu_hthi)).execute(fileName);
             setKeyboard();
+            setKeyboard(true);
             hideSoftKeyboard();
-            handleKeyboard();
+            handleKeyboard(true);
             eventEdittext();
-            enableKeyboard(View.GONE);
+            etCSMoi.setFocusable(true);
+            etCSMoi.requestFocus();
             CreateSpnTieuChi();
             CreateSpnTrangThai();
 
@@ -719,8 +732,11 @@ public class Activity_Camera_MTB extends Activity {
                                     btnXoa.setText("Xóa");
                                 }
                                 etTimKiem.requestFocus();
+
                             } catch (Exception ex) {
                                 comm.msbox("Lỗi", ex.toString(), Activity_Camera_MTB.this);
+                            }finally {
+                                setKeyboard(false);
                             }
                         }
 
@@ -969,8 +985,8 @@ public class Activity_Camera_MTB extends Activity {
                         selected_index = getPos();
                         Activity_Camera_MTB.this.lvCustomer.setSelection(selected_index);
                         setDataOnEditText(selected_index, 0);
-                        etCSMoi.requestFocus();
-                        etCSMoi.selectAll();
+//                        etCSMoi.requestFocus();
+//                        etCSMoi.selectAll();
                         showHidePmax(selected_index);
                     }
                 } catch (Exception ex) {
@@ -3108,8 +3124,11 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                viewControlNumber.setVisibility(View.GONE);
-                enableKeyboard(View.VISIBLE);
+                if (etTimKiem.isPressed())
+                    setKeyboard(false);
+//                viewControlNumber.setVisibility(View.GONE);
+//                enableKeyboard(View.VISIBLE);
+//                viewControlText.setVisibility(View.VISIBLE);
             }
         });
 
@@ -3117,8 +3136,11 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onClick(View v) {
-                viewControlNumber.setVisibility(View.GONE);
-                enableKeyboard(View.VISIBLE);
+                if (etTimKiem.isPressed())
+                    setKeyboard(false);
+//                viewControlNumber.setVisibility(View.GONE);
+//                enableKeyboard(View.VISIBLE);
+//                viewControlText.setVisibility(View.VISIBLE);
             }
         });
 
@@ -3126,8 +3148,10 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                viewControlNumber.setVisibility(View.VISIBLE);
-                enableKeyboard(View.GONE);
+                setKeyboard(true);
+//                viewControlText.setVisibility(View.GONE);
+//                enableKeyboard(View.GONE);
+//                viewControlNumber.setVisibility(View.VISIBLE);
             }
         });
 
@@ -3135,8 +3159,8 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onClick(View v) {
-                viewControlNumber.setVisibility(View.VISIBLE);
-                enableKeyboard(View.GONE);
+                setKeyboard(true);
+//                enableKeyboard(View.GONE);
             }
         });
 
@@ -3144,8 +3168,10 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                viewControlNumber.setVisibility(View.VISIBLE);
-                enableKeyboard(View.GONE);
+                setKeyboard(true);
+//                viewControlText.setVisibility(View.GONE);
+//                enableKeyboard(View.GONE);
+//                viewControlNumber.setVisibility(View.VISIBLE);
             }
         });
 
@@ -3153,12 +3179,15 @@ public class Activity_Camera_MTB extends Activity {
 
             @Override
             public void onClick(View v) {
-                viewControlNumber.setVisibility(View.VISIBLE);
-                enableKeyboard(View.GONE);
+                setKeyboard(true);
+//                viewControlText.setVisibility(View.GONE);
+//                enableKeyboard(View.GONE);
+//                viewControlNumber.setVisibility(View.VISIBLE);
             }
         });
 
     }
+
 
     /**
      * Set bàn phím
@@ -3176,6 +3205,22 @@ public class Activity_Camera_MTB extends Activity {
 
         }
     }
+
+    public void setKeyboard(boolean isNumber) {
+        try {
+            controlInflater = LayoutInflater.from(getApplicationContext());
+            viewControlNumber = controlInflater.inflate(R.layout.keyboard_number, null);
+            viewControlText = controlInflater.inflate(R.layout.keyboard_text, null);
+            LayoutParams layoutParamsControl = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            ((LinearLayout) this.findViewById(R.id.ac_camera_mtb_Keyboard)).removeAllViewsInLayout();
+            ((LinearLayout) this.findViewById(R.id.ac_camera_mtb_Keyboard)).addView(isNumber ? viewControlNumber : viewControlText, layoutParamsControl);
+//            setNumberOrTextKeyboard(isNumber);
+            handleKeyboard(isNumber);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     /**
      * Thêm text khi nhấn vào bàn phím
@@ -3792,6 +3837,510 @@ public class Activity_Camera_MTB extends Activity {
         });
     }
 
+
+    private void handleKeyboard(boolean isNumber) {
+        View v = ((LinearLayout) this.findViewById(R.id.ac_camera_mtb_Keyboard));
+        if (isNumber) {
+            btn1 = (Button) v.findViewById(R.id.btn1);
+            btn2 = (Button) v.findViewById(R.id.btn2);
+            btn3 = (Button) v.findViewById(R.id.btn3);
+            btn4 = (Button) v.findViewById(R.id.btn4);
+            btn5 = (Button) v.findViewById(R.id.btn5);
+            btn6 = (Button) v.findViewById(R.id.btn6);
+            btn7 = (Button) v.findViewById(R.id.btn7);
+            btn8 = (Button) v.findViewById(R.id.btn8);
+            btn9 = (Button) v.findViewById(R.id.btn9);
+            btn0 = (Button) v.findViewById(R.id.btn0);
+            btnDot = (Button) v.findViewById(R.id.btnDot);
+            btnClear = (ImageButton) v.findViewById(R.id.btnClear);
+
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("1", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("1", etPmax);
+                }
+            });
+
+            btn2.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("2", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("2", etPmax);
+                }
+            });
+
+            btn3.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("3", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("3", etPmax);
+                }
+            });
+
+            btn4.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("4", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("4", etPmax);
+                }
+            });
+
+            btn5.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("5", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("5", etPmax);
+                }
+            });
+
+            btn6.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("6", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("6", etPmax);
+                }
+            });
+
+            btn7.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("7", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("7", etPmax);
+                }
+            });
+
+            btn8.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("8", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("8", etPmax);
+                }
+            });
+
+            btn9.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("9", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("9", etPmax);
+                }
+            });
+
+            btn0.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        insertText("0", etCSMoi);
+                    else if (etPmax.isFocused())
+                        insertText("0", etPmax);
+                }
+            });
+
+            btnDot.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        if (!etCSMoi.getText().toString().contains(".")) {
+                            insertText(".", etCSMoi);
+                        }
+//				if(etPmax.isFocused())
+//					if(!etPmax.getText().toString().contains(".")){
+//						insertText(".", etPmax);
+//					}
+                }
+            });
+
+            btnClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (etCSMoi.isFocused())
+                        deleteText(etCSMoi);
+                    else if (etPmax.isFocused())
+                        deleteText(etPmax);
+                }
+            });
+
+            btnClear.setOnLongClickListener(new OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    if (etCSMoi.isFocused())
+                        etCSMoi.setText("");
+                    else if (etPmax.isFocused())
+                        etPmax.setText("");
+                    return false;
+                }
+            });
+
+        } else {
+
+            btnQ = (Button) v.findViewById(R.id.btnQ);
+            btnW = (Button) v.findViewById(R.id.btnW);
+            btnE = (Button) v.findViewById(R.id.btnE);
+            btnR = (Button) v.findViewById(R.id.btnR);
+            btnT = (Button) v.findViewById(R.id.btnT);
+            btnY = (Button) v.findViewById(R.id.btnY);
+            btnU = (Button) v.findViewById(R.id.btnU);
+            btnI = (Button) v.findViewById(R.id.btnI);
+            btnO = (Button) v.findViewById(R.id.btnO);
+            btnP = (Button) v.findViewById(R.id.btnP);
+            btnA = (Button) v.findViewById(R.id.btnA);
+            btnS = (Button) v.findViewById(R.id.btnS);
+            btnD = (Button) v.findViewById(R.id.btnD);
+            btnF = (Button) v.findViewById(R.id.btnF);
+            btnG = (Button) v.findViewById(R.id.btnG);
+            btnH = (Button) v.findViewById(R.id.btnH);
+            btnJ = (Button) v.findViewById(R.id.btnJ);
+            btnK = (Button) v.findViewById(R.id.btnK);
+            btnL = (Button) v.findViewById(R.id.btnL);
+            btnZ = (Button) v.findViewById(R.id.btnZ);
+            btnX = (Button) v.findViewById(R.id.btnX);
+            btnC = (Button) v.findViewById(R.id.btnC);
+            btnV = (Button) v.findViewById(R.id.btnV);
+            btnB = (Button) v.findViewById(R.id.btnB);
+            btnN = (Button) v.findViewById(R.id.btnN);
+            btnM = (Button) v.findViewById(R.id.btnM);
+            btnClear2 = (Button) v.findViewById(R.id.btnClear2);
+            btnUpper = (Button) v.findViewById(R.id.btnUpper);
+            btnNumber = (Button) v.findViewById(R.id.btnNumber);
+            btnSpace = (Button) v.findViewById(R.id.btnSpace);
+            btnNext = (Button) v.findViewById(R.id.btnNext);
+            btnPhay = (Button) v.findViewById(R.id.btnPhay);
+            btnCham = (Button) v.findViewById(R.id.btnCham);
+            btnNgoacDong = (Button) v.findViewById(R.id.btnNgoacDong);
+
+
+            setNumberOrTextKeyboard(stateTextKeyboardClick);
+
+            btnQ.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnQ.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnW.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnW.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnE.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnE.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnR.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnR.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnT.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnT.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnY.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnY.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnU.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnU.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnI.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnI.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnO.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnO.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnP.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnP.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnA.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnA.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnS.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnS.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnD.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnD.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnF.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnF.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnG.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnG.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnH.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnH.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnJ.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnJ.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnK.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnK.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnL.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnL.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnZ.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnZ.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnX.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnX.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnC.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnC.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnV.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnV.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnB.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnB.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnN.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnN.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnM.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnM.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnCham.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnCham.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnPhay.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnPhay.getText().toString(), etTimKiem);
+                }
+            });
+
+            btnSpace.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(" ", etTimKiem);
+                }
+            });
+
+            btnClear2.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    deleteText(etTimKiem);
+                }
+            });
+
+            btnClear2.setOnLongClickListener(new OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    etTimKiem.setText("");
+                    return false;
+                }
+            });
+
+            btnNext.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            btnNumber.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    stateTextKeyboardClick = !stateTextKeyboardClick;
+                    if (btnQ.getText().toString().equals("q")
+                            || btnQ.getText().toString().equals("Q")) {
+                        setNumberOrTextKeyboard(true);
+                    } else {
+                        setNumberOrTextKeyboard(false);
+                    }
+                }
+            });
+
+            btnUpper.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (btnQ.getText().toString().equals("q")
+                            || btnQ.getText().toString().equals("Q")) {
+                        upperText();
+                    } else {
+                        upperNumber();
+                    }
+                }
+            });
+
+            btnNgoacDong.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    insertText(btnNgoacDong.getText().toString(), etTimKiem);
+                }
+            });
+        }
+
+        // Xử lý bàn phím số
+
+        // Xử lý bàn phím chữ
+    }
+
     /**
      * Thay đổi kiểu bàn phím chữ hay số
      *
@@ -4032,7 +4581,8 @@ public class Activity_Camera_MTB extends Activity {
             preview.addView(showCamera);
             setCameraFocus(myAutoFocusCallback);
         } catch (Exception ex) {
-            comm.ShowToast(Activity_Camera_MTB.this, "Error show camera: " + ex.toString(), Toast.LENGTH_LONG);
+            ex.printStackTrace();
+//            comm.ShowToast(Activity_Camera_MTB.this, "Error show camera: " + ex.toString(), Toast.LENGTH_LONG);
         }
     }
 
@@ -4106,7 +4656,7 @@ public class Activity_Camera_MTB extends Activity {
                 Cursor c = connection.getDataForImage(ID_SQLITE);
                 Bitmap bitmap = null;
                 if (c.moveToFirst()) {
-                    bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + c.getString(1), "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
+                    bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + "Chưa ghi", "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                 }
                 if (saveImageToFile(bitmap)) {
                     setImage();

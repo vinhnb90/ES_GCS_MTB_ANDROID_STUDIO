@@ -428,6 +428,8 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:paddingTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_weight="2"
                 android:id="@+id/ac_camera_Keyboard"
                 android:orientation="vertical"

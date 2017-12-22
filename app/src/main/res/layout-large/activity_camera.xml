@@ -295,12 +295,11 @@
         </LinearLayout> -->
 
         <include
-            android:layout_weight="7"
-            android:visibility="visible"
             layout="@layout/include_camera_aiball"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            />
+            android:layout_weight="7"
+            android:visibility="visible" />
         <!-- Thanh chuc nang -->
 
 
@@ -376,6 +375,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginBottom="@dimen/_3sdp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight=".5"

@@ -41,7 +41,7 @@ public class AsyncTaskCameraFiltMTB extends AsyncTask<String, LinkedHashMap<Stri
 					}
 				}
 				// kiểm tra theo tên ko dấu và có dấu
-				if (para[0].equals("TEN_KHANG") || para[0].equals("DIA_CHI")) {
+				if (para[0].equals("TEN_KHANG") || para[0].equals("MA_KHANG") || para[0].equals("DIA_CHI")) {
 					String ten_bo_dau = comm.VietnameseTrim(val);
 					if (val.toLowerCase().contains(para[1]) || ten_bo_dau.toLowerCase().contains(
 									comm.VietnameseTrim(para[1].toString().toLowerCase()))) {

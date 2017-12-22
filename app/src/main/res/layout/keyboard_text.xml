@@ -28,7 +28,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="q"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -40,7 +40,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="w"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -52,7 +52,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="e"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -64,9 +64,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="r"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnT"
                 android:layout_width="match_parent"
@@ -76,9 +76,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="t"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnY"
                 android:layout_width="match_parent"
@@ -88,9 +88,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="y"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnU"
                 android:layout_width="match_parent"
@@ -100,9 +100,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="u"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnI"
                 android:layout_width="match_parent"
@@ -112,9 +112,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="i"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnO"
                 android:layout_width="match_parent"
@@ -124,9 +124,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="o"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnP"
                 android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="p"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -156,7 +156,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="a"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -168,7 +168,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="s"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -180,7 +180,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="d"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -192,9 +192,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="f"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnG"
                 android:layout_width="match_parent"
@@ -204,9 +204,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="g"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnH"
                 android:layout_width="match_parent"
@@ -216,9 +216,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="h"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnJ"
                 android:layout_width="match_parent"
@@ -228,9 +228,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="j"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnK"
                 android:layout_width="match_parent"
@@ -240,9 +240,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="k"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnL"
                 android:layout_width="match_parent"
@@ -252,9 +252,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="l"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnNgoacDong"
                 android:layout_width="match_parent"
@@ -265,7 +265,7 @@
                 android:text=")"
                 android:textColor="@color/background_white"
                 android:visibility="gone"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -297,7 +297,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="z"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -309,7 +309,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="x"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -321,9 +321,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="c"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnV"
                 android:layout_width="0dp"
@@ -333,9 +333,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="v"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnB"
                 android:layout_width="0dp"
@@ -345,9 +345,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="b"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnN"
                 android:layout_width="0dp"
@@ -357,9 +357,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="n"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnM"
                 android:layout_width="0dp"
@@ -369,9 +369,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="m"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnClear2"
                 android:layout_width="0dp"
@@ -384,7 +384,7 @@
                 android:textColor="@color/background_white"
                 android:textStyle="bold" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -401,7 +401,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="123"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -413,7 +413,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text=","
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
@@ -437,9 +437,9 @@
                 android:background="@drawable/blue_button_small"
                 android:text="."
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="0dp"
@@ -449,7 +449,7 @@
                 android:background="@drawable/blue_button_small"
                 android:text="Next"
                 android:textColor="@color/background_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

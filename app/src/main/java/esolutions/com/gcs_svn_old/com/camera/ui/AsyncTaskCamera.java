@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import esolutions.com.gcs_svn_old.R;
 import esolutions.com.gcs_svn_old.com.camera.utility.Common;
+import esolutions.com.gcs_svn_old.com.camera.utility.ConstantVariables;
 import esolutions.com.gcs_svn_old.com.camera.utility.SQLiteConnection;
 
 public class AsyncTaskCamera extends AsyncTask<String, LinkedHashMap<String, String>, ArrayList<LinkedHashMap<String, String>>>{
@@ -79,10 +80,11 @@ public class AsyncTaskCamera extends AsyncTask<String, LinkedHashMap<String, Str
 				do {
 					stt++;
 					LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-					
-					for (int i = 0; i < colArr.length; i++) {
-						map.put(colArr[i], c.getString(c.getColumnIndex(colArr[i])));
+
+					for (int i = 1; i < ConstantVariables.COLARR.length - 4; i++) {
+						map.put(ConstantVariables.COLARR[i], c.getString(c.getColumnIndex(ConstantVariables.COLARR[i])));
 					}
+
 					try{
 						map.put("PMAX", c.getString(57));
 						map.put("NGAY_PMAX", c.getString(58));

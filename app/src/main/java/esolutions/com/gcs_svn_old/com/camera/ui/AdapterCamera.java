@@ -71,6 +71,8 @@ public class AdapterCamera extends ArrayAdapter<LinkedHashMap<String, String>> {
             TextView tvBoCS = (TextView) convertView.findViewById(R.id.tvBoCS);
             TextView tvTTRmoi = (TextView) convertView.findViewById(R.id.tvTTRmoi);
             TextView tvMaDiemDo = (TextView) convertView.findViewById(R.id.tvMaDiemDo);
+            TextView tvMaKHang = (TextView) convertView.findViewById(R.id.tvMaKHang);
+
             TextView tvDiaChi = (TextView) convertView.findViewById(R.id.tvDiaChi);
             TextView tvSTT = (TextView) convertView.findViewById(R.id.tvSTT);
 //			LinearLayout lnWidth = (LinearLayout)convertView.findViewById(R.id.lnWidth);
@@ -91,6 +93,7 @@ public class AdapterCamera extends ArrayAdapter<LinkedHashMap<String, String>> {
             tvTTRmoi.setText(val.get("TTR_MOI"));
             tvDiaChi.setText(val.get("DIA_CHI"));
             tvMaDiemDo.setText(val.get("MA_DDO"));
+            tvMaKHang.setText(val.get("MA_KHANG"));
 //			tvSTT.setText(val.get("STT"));
             tvSTT.setText(position + 1 + "");
 

@@ -37,7 +37,7 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
         params = para;
         try {
             ArrayList<LinkedHashMap<String, String>> filt = new ArrayList<LinkedHashMap<String, String>>();
-            for (LinkedHashMap<String, String> map : Activity_Camera_MTB.arrCustomer) {
+            for (LinkedHashMap<String, String> map : Activity_Camera.arrCustomer) {
                 String val = null;
                 // nếu ko phải tìm các kh chưa ghi và đã ghi
                 if (!para[0].equals("CHUA_GHI") && !para[0].equals("DA_GHI")) {
@@ -46,8 +46,9 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
                         val = val.toLowerCase();
                     }
                 }
+
                 // kiểm tra theo tên ko dấu và có dấu
-                if (para[0].equals("TEN_KHANG") || para[0].equals("DIA_CHI")) {
+                if (para[0].equals("TEN_KHANG") || para[0].equals("MA_KHANG") || para[0].equals("DIA_CHI")) {
                     String ten_bo_dau = comm.VietnameseTrim(val);
                     if (val.toLowerCase().contains(para[1]) || ten_bo_dau.toLowerCase().contains(
                             comm.VietnameseTrim(para[1].toString().toLowerCase()))) {
@@ -104,7 +105,7 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
     @Override
     protected void onPostExecute(ArrayList<LinkedHashMap<String, String>> result) {
         super.onPostExecute(result);
-        ((Activity_Camera_MTB) activityParent).setKeyboard();
+        ((Activity_Camera_MTB) activityParent).setKeyboard(false);
 
         try {
             Activity_Camera_MTB.arrCustomer_Filter = result;
@@ -121,18 +122,18 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
                 Activity_Camera_MTB.selected_index = ((Activity_Camera_MTB) activityParent).getPos();
                 ((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
             }
-//			((Activity_Camera) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
-//	
+//			((Activity_Camera_MTB) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
+//
 //				@Override
 //				public void onItemClick(AdapterView<?> parent, View view,
-//						
+//
 //						int position, long id) {
-//					Activity_Camera.selected_index = position;
-//					((Activity_Camera) activityParent).adapter.notifyDataSetChanged();
-//					((Activity_Camera) activityParent).lvCustomer.invalidate();
-//					((Activity_Camera) activityParent).setImage();
-//					((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index);
-//					((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
+//					Activity_Camera_MTB.selected_index = position;
+//					((Activity_Camera_MTB) activityParent).adapter.notifyDataSetChanged();
+//					((Activity_Camera_MTB) activityParent).lvCustomer.invalidate();
+//					((Activity_Camera_MTB) activityParent).setImage();
+//					((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index);
+//					((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
 //				}
 //			});
         } catch (Exception ex) {
