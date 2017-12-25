@@ -105,35 +105,36 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
     @Override
     protected void onPostExecute(ArrayList<LinkedHashMap<String, String>> result) {
         super.onPostExecute(result);
-        ((Activity_Camera_MTB) activityParent).setKeyboard(false);
+        ((Activity_Camera) activityParent).setKeyboard(false);
 
         try {
-            Activity_Camera_MTB.arrCustomer_Filter = result;
-            ((Activity_Camera_MTB) activityParent).adapter = new AdapterCameraMTB(activityParent, result, R.layout.listview_gcs);
-            ((Activity_Camera_MTB) activityParent).lvCustomer.setAdapter(((Activity_Camera_MTB) activityParent).adapter);
-            if (!((Activity_Camera_MTB) activityParent).etTimKiem.getText().toString().equals("")) {
-                Activity_Camera_MTB.selected_index = 0;
-                ((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
-                ((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index, 5);
-                ((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
+            Activity_Camera.arrCustomer_Filter = result;
+            ((Activity_Camera) activityParent).adapter = new AdapterCamera(activityParent, result, R.layout.listview_gcs);
+            ((Activity_Camera) activityParent).lvCustomer.setAdapter(((Activity_Camera) activityParent).adapter);
+            if (!((Activity_Camera) activityParent).etTimKiem.getText().toString().equals("")) {
+                Activity_Camera.selected_index = 0;
+                ((Activity_Camera) activityParent).lvCustomer.setSelection(Activity_Camera.selected_index);
+                ((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index, 5);
+                ((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
             } else {
-                ((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index, 6);
-                ((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
-                Activity_Camera_MTB.selected_index = ((Activity_Camera_MTB) activityParent).getPos();
-                ((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
+                ((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index, 6);
+                ((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
+                Activity_Camera.selected_index = ((Activity_Camera) activityParent).getPos();
+                ((Activity_Camera) activityParent).lvCustomer.setSelection(Activity_Camera.selected_index);
             }
-//			((Activity_Camera_MTB) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
+//			((Activity_Camera) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
 //
 //				@Override
 //				public void onItemClick(AdapterView<?> parent, View view,
 //
+            
 //						int position, long id) {
-//					Activity_Camera_MTB.selected_index = position;
-//					((Activity_Camera_MTB) activityParent).adapter.notifyDataSetChanged();
-//					((Activity_Camera_MTB) activityParent).lvCustomer.invalidate();
-//					((Activity_Camera_MTB) activityParent).setImage();
-//					((Activity_Camera_MTB) activityParent).setDataOnEditText(Activity_Camera_MTB.selected_index);
-//					((Activity_Camera_MTB) activityParent).showHidePmax(Activity_Camera_MTB.selected_index);
+//					Activity_Camera.selected_index = position;
+//					((Activity_Camera) activityParent).adapter.notifyDataSetChanged();
+//					((Activity_Camera) activityParent).lvCustomer.invalidate();
+//					((Activity_Camera) activityParent).setImage();
+//					((Activity_Camera) activityParent).setDataOnEditText(Activity_Camera.selected_index);
+//					((Activity_Camera) activityParent).showHidePmax(Activity_Camera.selected_index);
 //				}
 //			});
         } catch (Exception ex) {
