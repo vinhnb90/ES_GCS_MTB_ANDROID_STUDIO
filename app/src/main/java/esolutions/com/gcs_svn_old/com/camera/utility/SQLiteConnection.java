@@ -1022,6 +1022,12 @@ public class SQLiteConnection extends SQLiteOpenHelper {
         return database.rawQuery(strQuery, null);
     }
 
+    public Cursor getAllDataGCSByMaQuyenCustom(String MaQuyen) {
+        database = this.getReadableDatabase();
+        String strQuery = "SELECT TTR_MOI, CS_MOI FROM " + TABLE_NAME_CHISO + " WHERE MA_QUYEN = '" + MaQuyen + "'";
+        return database.rawQuery(strQuery, null);
+    }
+
     public Cursor getAllDataGCSFilt(String fileName, String tieu_chi, String gia_tri) {
         database = this.getReadableDatabase();
         String strQuery = "";

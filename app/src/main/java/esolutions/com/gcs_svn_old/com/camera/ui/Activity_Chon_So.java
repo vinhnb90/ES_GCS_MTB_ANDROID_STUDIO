@@ -208,8 +208,8 @@ public class Activity_Chon_So extends Activity{
 					try{
 //						if(connection.updateTTDsoatGCS() != -1){
 							CheckFileConfigExist();
-							comm.deleteBackup();
-							comm.CreateBackup(null);
+//							comm.deleteBackup();
+//							comm.CreateBackup(null);
 							if(comm.checkDB()){
 								if (lvChonSo.getAdapter().getCount() < 1)
 									return;
@@ -247,8 +247,8 @@ public class Activity_Chon_So extends Activity{
 				public void onClick(View v) {
 					try{
 						CheckFileConfigExist();
-						comm.deleteBackup();
-						comm.CreateBackup(null);
+//						comm.deleteBackup();
+//						comm.CreateBackup(null);
 						if(comm.checkDB()){
 							if (lvChonSo.getAdapter().getCount() < 1)
 								return;
@@ -400,13 +400,13 @@ public class Activity_Chon_So extends Activity{
 				if (c.moveToFirst()) {
 					do {
 						StringBuilder fileName = new StringBuilder(c.getString(0));
-						Cursor c2 = connection.getAllDataGCSByMaQuyen(fileName.toString());
+						Cursor c2 = connection.getAllDataGCSByMaQuyenCustom(fileName.toString());
 						int so_diem_do = c2.getCount();
 						int da_ghi = 0;
 						if (c2.moveToFirst()) {
 							do {
-								if(comm.isSavedRow(c2.getString(24), c2.getString(23))){
-//								if(comm.isSavedRow(c2.getString(c.getColumnIndex("TTR_MOI")), c2.getString(c.getColumnIndex("CS_MOI")))){
+//								if(comm.isSavedRow(c2.getString(24), c2.getString(23))){
+								if(comm.isSavedRow(c2.getString(c2.getColumnIndex("TTR_MOI")), c2.getString(c2.getColumnIndex("CS_MOI")))){
 									da_ghi++;
 								}
 							} while (c2.moveToNext());

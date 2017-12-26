@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ES_GCS_MTB_ANDROID_STUDIO.iml" filepath="$PROJECT_DIR$/ES_GCS_MTB_ANDROID_STUDIO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ES_GCS.iml" filepath="$PROJECT_DIR$/ES_GCS.iml" />
+      <module fileurl="file://E:\Code\ES\ES_GCS\ES_GCS_MTB_ANDROID_STUDIO.iml" filepath="E:\Code\ES\ES_GCS\ES_GCS_MTB_ANDROID_STUDIO.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidHorizontalListView/androidHorizontalListView.iml" filepath="$PROJECT_DIR$/androidHorizontalListView/androidHorizontalListView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
