@@ -38,6 +38,7 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.LruCache;
@@ -3141,13 +3142,20 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     private void CanhBaoChenhLechSL(String ID_SQLITE, Float SL_CU, Float SL_THAO, Float SL_MOI, Float CS_MOI, String tinh_trang_moi, String LOAI_BCS, String SO_CTO) {
         try {
             float SLChenhLech = 0;
-            if (SL_CU > 0) {
+            if (SL_CU == 0.0f) {
+                if (SL_MOI + SL_THAO > SL_CU) {
+                    SLChenhLech = (float) (SL_MOI - SL_CU + SL_THAO) / (float) 1;
+                } else {
+                    SLChenhLech = (float) (SL_CU - SL_MOI - SL_THAO) / (float) 1;
+                }
+            } else {
                 if (SL_MOI + SL_THAO > SL_CU) {
                     SLChenhLech = (float) (SL_MOI - SL_CU + SL_THAO) / (float) SL_CU;
                 } else {
                     SLChenhLech = (float) (SL_CU - SL_MOI - SL_THAO) / (float) SL_CU;
                 }
             }
+
 
             if (Common.cfgInfo.isWarningEnable3()) {
                 if (SL_CU >= 400) {
@@ -3381,6 +3389,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
     /**
      * Cảnh báo chênh lệch tổng sản lượng công tơ 3 pha
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void CanhBaoChenhLechTongSLCto3Pha(final int tinh_trang_qua_sl, final String ID_SQLITE, final float CS_MOI, final float SL_MOI, final String tinh_trang_moi, final String LOAI_BCS, String SO_CTO) {
         try {
             int sai_so_cto_tong = 2;
@@ -3586,10 +3596,9 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                         }
 
 
-                        if (saveImageToFile(bitmap))
-                            comm.scanFile(Activity_Camera.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+                        String pathFile = saveImageToFile(bitmap);
 
-                        connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
+                        connection.updateImageGCS(ID_SQLITE, Common.encodeStringToBase64(pathFile));
 
                     } catch (final Exception ex) {
                         runOnUiThread(new Runnable() {
@@ -5988,13 +5997,15 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
                     bitmap = drawTextOnBitmapCongTo(ac, bmRoot, c.getString(0), "CS mới: " + "Chưa ghi", "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
 
-                    connection.updateImageGCS(ID_SQLITE[0], Common.encodeTobase64Byte(bitmap));
 
-                    BufferedOutputStream bos = null;
-                    bos = new BufferedOutputStream(new FileOutputStream(fileName));
-                    bos.write(Common.encodeTobase64Byte(bitmap));
-                    bos.close();
-                    Common.scanFile(Activity_Camera.this, new String[]{fileName});
+                    String pathFile = saveImageToFile(bitmap);
+                    connection.updateImageGCS(ID_SQLITE[0], Common.encodeStringToBase64(pathFile));
+
+//                    BufferedOutputStream bos = null;
+//                    bos = new BufferedOutputStream(new FileOutputStream(fileName));
+//                    bos.write(Common.encodeTobase64Byte(bitmap));
+//                    bos.close();
+//                    Common.scanFile(Activity_Camera.this, new String[]{fileName});
 
 
                 } catch (Exception e) {
@@ -6025,11 +6036,16 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             /*ivCamera.setVisibility(View.GONE);
             ivViewImage.setVisibility(View.VISIBLE);
             ivViewImage.setImageBitmapReset(congTo, 0, true);*/
-            if (saveImageToFile(result)) {
-                ((Activity_Camera) ac).setImage();
-//		        tvTittle.setText(((Activity_Camera)ac).adapter.getItem(Activity_Camera.selected_index).get("TEN_KHANG"));
-//		        ((Activity_Camera)ac).Common.LoadFolder(ac);
-            } else {
+            try {
+                if (!TextUtils.isEmpty(saveImageToFile(result))) {
+                    ((Activity_Camera) ac).setImage();
+                    //		        tvTittle.setText(((Activity_Camera)ac).adapter.getItem(Activity_Camera.selected_index).get("TEN_KHANG"));
+                    //		        ((Activity_Camera)ac).Common.LoadFolder(ac);
+                } else {
+                    comm.ShowToast(ac, "Chưa lưu được hình ảnh", Toast.LENGTH_LONG);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 comm.ShowToast(ac, "Chưa lưu được hình ảnh", Toast.LENGTH_LONG);
             }
         }
@@ -6241,8 +6257,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             }
 
             if (bmRoot.getWidth() > bmRoot.getHeight()) {
-                bmRoot = Activity_Camera.RotateBitmap(bmRoot, 90);
-
+                if (context instanceof Activity_Camera_MTB)
+                    bmRoot = Activity_Camera.RotateBitmap(bmRoot, 90);
             }
 
 
@@ -6761,7 +6777,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
      * @param bmp_result
      * @return
      */
-    private boolean saveImageToFile(Bitmap bmp_result) {
+    private String saveImageToFile(Bitmap bmp_result) throws Exception {
         try {
             if (bmp_result != null) {
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -6776,13 +6792,12 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                 comm.scanFile(Activity_Camera.this.getApplicationContext(), new String[]{f.getAbsolutePath()});
                 fo.close();
 //				comm.scanFile(Activity_Camera.this, new String[] {Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg"});
-                return true;
+                return f.getPath();
             } else {
-                return false;
+                return "";
             }
         } catch (Exception ex) {
-            comm.ShowToast(Activity_Camera.this.getApplicationContext(), "Không chụp được hình ảnh", Toast.LENGTH_LONG);
-            return false;
+            throw new Exception("Không chụp được hình ảnh");
         }
     }
 

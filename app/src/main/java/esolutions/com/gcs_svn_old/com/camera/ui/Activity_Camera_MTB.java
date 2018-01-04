@@ -32,6 +32,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.LruCache;
@@ -87,6 +88,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -735,7 +737,7 @@ public class Activity_Camera_MTB extends Activity {
 
                             } catch (Exception ex) {
                                 comm.msbox("Lỗi", ex.toString(), Activity_Camera_MTB.this);
-                            }finally {
+                            } finally {
                                 setKeyboard(false);
                             }
                         }
@@ -2331,7 +2333,13 @@ public class Activity_Camera_MTB extends Activity {
     private void CanhBaoChenhLechSL(String ID_SQLITE, Float SL_CU, Float SL_THAO, Float SL_MOI, Float CS_MOI, String tinh_trang_moi, String LOAI_BCS, String SO_CTO) {
         try {
             float SLChenhLech = 0;
-            if (SL_CU > 0) {
+            if (SL_CU == 0.0f) {
+                if (SL_MOI + SL_THAO > SL_CU) {
+                    SLChenhLech = (float) (SL_MOI - SL_CU + SL_THAO) / (float) 1;
+                } else {
+                    SLChenhLech = (float) (SL_CU - SL_MOI - SL_THAO) / (float) 1;
+                }
+            }else {
                 if (SL_MOI + SL_THAO > SL_CU) {
                     SLChenhLech = (float) (SL_MOI - SL_CU + SL_THAO) / (float) SL_CU;
                 } else {
@@ -2765,10 +2773,9 @@ public class Activity_Camera_MTB extends Activity {
                         }
 
 
-                        if (saveImageToFile(bitmap))
-                            comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + "_" + adapter.getItem(selected_index).get("NAM") + "-" + adapter.getItem(selected_index).get("THANG") + "-" + adapter.getItem(selected_index).get("KY") + ".jpg"});
+                        String pathFile = saveImageToFile(bitmap);
 
-                        connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
+                        connection.updateImageGCS(ID_SQLITE, Common.encodeStringToBase64(pathFile));
 
                     } catch (final Exception ex) {
                         runOnUiThread(new Runnable() {
@@ -4658,19 +4665,11 @@ public class Activity_Camera_MTB extends Activity {
                 if (c.moveToFirst()) {
                     bitmap = drawTextOnBitmapCongTo(Activity_Camera_MTB.this, rotateImage(90, Common.decodeBase64Byte(data)), c.getString(0), "CS mới: " + "Chưa ghi", "Mã Điểm đo: " + c.getString(2), "Seri: " + c.getString(3), "", "Ngày chụp: " + Common.getDateTimeNow(Common.DATE_TIME_TYPE.ddMMyyyy));
                 }
-                if (saveImageToFile(bitmap)) {
-                    setImage();
 
-                    connection.updateImageGCS(ID_SQLITE, Common.encodeTobase64Byte(bitmap));
-                } else {
-                    runOnUiThread(new Runnable() {
+                String pathFile = saveImageToFile(bitmap);
+                setImage();
 
-                        @Override
-                        public void run() {
-                            comm.ShowToast(Activity_Camera_MTB.this, "Chưa lưu được hình ảnh", Toast.LENGTH_LONG);
-                        }
-                    });
-                }
+                connection.updateImageGCS(ID_SQLITE, Common.encodeStringToBase64(pathFile));
                 camera.startPreview();
             } catch (final Exception ex) {
                 runOnUiThread(new Runnable() {
@@ -4808,12 +4807,13 @@ public class Activity_Camera_MTB extends Activity {
     /**
      * Lưu hình ảnh
      */
-    private boolean saveImageToFile(Bitmap bmp_result) {
+    private String saveImageToFile(Bitmap bmp_result) throws Exception {
         try {
             if (bmp_result != null) {
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 bmp_result.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
                 File f = new File(Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg");
+
                 if (f.exists()) {
                     f.delete();
                 }
@@ -4822,13 +4822,13 @@ public class Activity_Camera_MTB extends Activity {
                 fo.write(bytes.toByteArray());
                 fo.close();
                 comm.scanFile(Activity_Camera_MTB.this.getApplicationContext(), new String[]{Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg"});
-                return true;
+                return f.getPath();
             } else {
-                return false;
+                return "";
             }
         } catch (Exception ex) {
-            comm.ShowToast(Activity_Camera_MTB.this.getApplicationContext(), "Không chụp được hình ảnh", Toast.LENGTH_LONG);
-            return false;
+            ex.printStackTrace();
+            throw new Exception("Không chụp được hình ảnh");
         }
     }
 

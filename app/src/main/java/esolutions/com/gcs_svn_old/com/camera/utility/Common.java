@@ -14,9 +14,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -100,6 +102,7 @@ import esolutions.com.gcs_svn_old.esgcs.printer.ESC_Bt_Printer;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static android.support.v4.content.PermissionChecker.checkSelfPermission;
+import static java.nio.charset.Charset.forName;
 
 @SuppressLint("NewApi")
 public class Common {
@@ -1549,6 +1552,17 @@ public class Common {
         byte[] b = baos.toByteArray();
         return b;
     }
+
+    public static byte[] encodeStringToBase64(String text) throws UnsupportedEncodingException {
+        byte[] data = text.getBytes(forName("UTF-8"));
+        return data;
+    }
+
+    public static String decodeBase64ToString(byte[] bytes) throws UnsupportedEncodingException {
+        String text = new String(bytes, Charset.forName("UTF-8"));
+        return text;
+    }
+
 
 //	public static String convertFile(String fileName, SQLiteConnection connection){
 //		try{
