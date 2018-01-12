@@ -42,7 +42,7 @@ public class CustomArrayAdapterCamera extends ArrayAdapter<LinkedHashMap<String,
 			textView.setBackgroundResource(R.drawable.border_listitem_gcs2);
 		}
 		
-		textView.setPadding(5, 5, 5, 5);
+//		textView.setPadding(5, 5, 5, 5);
 		return convertView;
 
 	}

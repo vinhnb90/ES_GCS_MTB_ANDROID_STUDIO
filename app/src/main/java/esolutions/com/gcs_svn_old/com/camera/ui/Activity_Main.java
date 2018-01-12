@@ -1,6 +1,7 @@
 package esolutions.com.gcs_svn_old.com.camera.ui;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -52,6 +54,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LruCache;
@@ -73,7 +76,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,6 +92,8 @@ import esolutions.com.gcs_svn_old.com.camera.utility.ConstantVariables;
 import esolutions.com.gcs_svn_old.com.camera.utility.SQLiteConnection;
 import esolutions.com.gcs_svn_old.com.camera.utility.row_gcs;
 import esolutions.com.gcs_svn_old.com.camera.utility.security;
+
+import static esolutions.com.gcs_svn_old.com.camera.utility.Common.zip;
 
 @TargetApi(VERSION_CODES.ICE_CREAM_SANDWICH)
 public class Activity_Main extends Activity implements
@@ -113,6 +120,14 @@ public class Activity_Main extends Activity implements
     private Button btnSendData;
     private RadioButton rbSendData;
     private RadioButton rbGetData;
+
+    //region upload
+    private RelativeLayout rlUpload;
+    private TextView tvCountUpload;
+    private TextView tvNotifyUpload;
+    private ProgressBar pbarUpload;
+    //endregion
+
 
     private THCSBTAdapter adapter;
     private THTTBTAdapter adapter2;
@@ -485,8 +500,7 @@ public class Activity_Main extends Activity implements
         }
         try {
             comm.LoadFolder(this.getApplicationContext());
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1305,6 +1319,13 @@ public class Activity_Main extends Activity implements
         rbGetData = (RadioButton) dialog_transfer_data
                 .findViewById(R.id.rbGetData);
 
+
+        rlUpload = (RelativeLayout) dialog_transfer_data.findViewById(R.id.rl_upload);
+        tvCountUpload = (TextView) dialog_transfer_data.findViewById(R.id.tv_percent);
+        tvNotifyUpload = (TextView) dialog_transfer_data.findViewById(R.id.tv_download);
+        pbarUpload = (ProgressBar) dialog_transfer_data.findViewById(R.id.pbar_download);
+
+
         btnSendData.setVisibility(View.GONE);
         btnGetData.setVisibility(View.GONE);
 
@@ -1590,60 +1611,246 @@ public class Activity_Main extends Activity implements
         btnSendData.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    // TODO lấy sổ được chọn từ listview và tải lên sv
-                    // AsyncCallWS acws = new AsyncCallWS();
-                    // String dirPath = sdCardPath + "/ESGCS/DB";
-                    // String[] arrFileTransfer =
-                    // acws.WS_GET_TEN_FILE_OF_NV_CALL(
-                    // common.MA_DVIQLY, common.MA_NVGCS); // danh sách sổ có
-                    // thể cập nhật lên server
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.VISIBLE);
+                                    tvCountUpload.setText("0%");
+                                    pbarUpload.setProgress(0);
+                                    tvNotifyUpload.setText("Đang xử lý nén file...");
+                                }
+                            });
 
-                    // Lấy danh sách các sổ được chọn đẩy lên server
-                    String[] array_selected = spnChonSo_GetSelectedItem(lvChonSo);
-                    ArrayList<String> arr_selected = new ArrayList<String>();
-                    for (String s : array_selected) {
-                        arr_selected.add(s.contains("_") ? s.split("_")[0]
-                                .toString() : s.replace(".", ",").split(",")[0]
-                                .toString());
-                    }
-                    comm.scanZipPhotoFiles(arr_selected);
+                            // TODO lấy sổ được chọn từ listview và tải lên sv
+                            // AsyncCallWS acws = new AsyncCallWS();
+                            // String dirPath = sdCardPath + "/ESGCS/DB";
+                            // String[] arrFileTransfer =
+                            // acws.WS_GET_TEN_FILE_OF_NV_CALL(
+                            // common.MA_DVIQLY, common.MA_NVGCS); // danh sách sổ có
+                            // thể cập nhật lên server
 
-                    String result = (new AsyncCallWS()).WS_UPLOAD_SO_GCS_CALL(
-                            Common.MA_DVIQLY, Common.MA_NVGCS, array_selected);
-                    if (result.contains("ERROR")) {
-                        comm.msbox(
-                                "Gửi sổ",
-                                "Gửi dữ liệu thất bại.\nĐợi 5 phút sau ấn gửi dữ liệu lại.",
-                                Activity_Main.this);
-                    } else {
-                        // Xóa file
-                        File file = new File(Environment
-                                .getExternalStorageDirectory()
-                                + "/ESGCS/ESGCS.zip");
-                        if (file.exists()) {
-                            file.delete();
-                        }
-                        File file2 = new File(Environment
-                                .getExternalStorageDirectory()
-                                + "/ESGCS/Photo/");
-                        String[] listF = file2.list();
-                        for (int i = 0; i < listF.length; i++) {
-                            if (listF[i].contains(".zip")) {
-                                File file3 = new File(Environment
-                                        .getExternalStorageDirectory()
-                                        + "/ESGCS/Photo/" + listF[i]);
-                                if (file3.exists()) {
-                                    file3.delete();
+                            // Lấy danh sách các sổ được chọn đẩy lên server
+                            String[] array_selected = spnChonSo_GetSelectedItem(lvChonSo);
+                            ArrayList<String> arr_selected = new ArrayList<String>();
+                            for (String s : array_selected) {
+                                arr_selected.add(s.contains("_") ? s.split("_")[0]
+                                        .toString() : s.replace(".", ",").split(",")[0]
+                                        .toString());
+                            }
+
+                            File file_photo = new File(Environment.getExternalStorageDirectory() + "/ESGCS/Photo");
+                            String[] allFilesPhoto = file_photo.list();
+                            final ArrayList<String> arr = new ArrayList<String>();
+
+                            for (int i = 0; i < allFilesPhoto.length; i++) {
+                                if (arr_selected.contains(allFilesPhoto[i].split("_")[0].toString())) {
+                                    allFilesPhoto[i] = Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + allFilesPhoto[i];
+                                    arr.add(allFilesPhoto[i]);
                                 }
                             }
+
+                            for (int i = 0; i < arr.size(); i++) {
+                                final int iI = i;
+                                dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        rlUpload.setVisibility(View.VISIBLE);
+                                        tvCountUpload.setText(iI + "%");
+                                        pbarUpload.setProgress(iI);
+                                        tvNotifyUpload.setText("Đang xử lý nén các file ảnh trong thư mục... \n" + arr.get(iI));
+                                    }
+                                });
+
+                                File f = new File(arr.get(i));
+                                String[] allFiles = f.list();
+                                for (int j = 0; j < allFiles.length; j++) {
+                                    allFiles[j] = arr.get(i) + "/" + allFiles[j];
+                                }
+                                zip(allFiles, arr.get(i) + ".zip");
+                            }
+
+
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.VISIBLE);
+                                    tvCountUpload.setText(100 + "%");
+                                    pbarUpload.setProgress(100);
+                                    tvNotifyUpload.setText("Kết thúc xử lý nén các file dữ liệu ảnh");
+                                }
+                            });
+
+                            Thread.sleep(500);
+
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.VISIBLE);
+                                    tvCountUpload.setText(0 + "%");
+                                    pbarUpload.setProgress(0);
+                                    tvNotifyUpload.setText("Đang xử lý nén các file zip...");
+                                }
+                            });
+
+                            arr.clear();
+
+                            String[] allFilesPhoto2 = file_photo.list();
+                            for (int i = 0; i < allFilesPhoto2.length; i++) {
+                                if (allFilesPhoto2[i].contains(".zip")) {
+                                    allFilesPhoto2[i] = Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + allFilesPhoto2[i];
+                                    arr.add(allFilesPhoto2[i]);
+                                }
+                            }
+
+                            arr.add(Environment.getExternalStorageDirectory() + Common.DBFolderPath + "/ESGCS.s3db");
+                            allFilesPhoto2 = arr.toArray(new String[arr.size()]);
+                            String zipFileName = Environment.getExternalStorageDirectory() + "/ESGCS/ESGCS.zip";
+
+                            try {
+                                final int BUFFER = 2048;
+                                BufferedInputStream origin = null;
+                                FileOutputStream dest = new FileOutputStream(zipFileName);
+                                ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest));
+                                byte data[] = new byte[BUFFER];
+
+                                dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        rlUpload.setVisibility(View.VISIBLE);
+                                        tvCountUpload.setText(0 + "%");
+                                        pbarUpload.setProgress(0);
+                                        tvNotifyUpload.setText("Đang xử lý nén các file zip...");
+                                    }
+                                });
+
+
+                                final String[] allFilesPhoto2Clone = allFilesPhoto2;
+                                for (int i = 0; i < allFilesPhoto2.length; i++) {
+                                    final int iI = i;
+                                    dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            rlUpload.setVisibility(View.VISIBLE);
+                                            tvCountUpload.setText(iI + "%");
+                                            pbarUpload.setProgress(iI);
+                                            tvNotifyUpload.setText("Đang xử lý nén các file zip...\n" + allFilesPhoto2Clone[iI]);
+                                        }
+                                    });
+
+
+                                    Log.v("Compress", "Adding: " + allFilesPhoto2[i]);
+                                    FileInputStream fi = new FileInputStream(allFilesPhoto2[i]);
+                                    origin = new BufferedInputStream(fi, BUFFER);
+
+                                    ZipEntry entry = new ZipEntry(allFilesPhoto2[i].substring(allFilesPhoto2[i].lastIndexOf("/") + 1));
+                                    out.putNextEntry(entry);
+                                    int count;
+
+                                    while ((count = origin.read(data, 0, BUFFER)) != -1) {
+                                        out.write(data, 0, count);
+                                    }
+                                    origin.close();
+                                }
+
+                                out.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                throw new Exception("Gặp lỗi khi nén các file zip. Nội dung lỗi: " + e.getMessage());
+                            }
+
+
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.VISIBLE);
+                                    tvCountUpload.setText(100 + "%");
+                                    pbarUpload.setProgress(100);
+                                    tvNotifyUpload.setText("Kết thúc xử lý nén các file zip");
+                                }
+                            });
+
+                            Thread.sleep(500);
+
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.VISIBLE);
+                                    tvCountUpload.setText(0 + "%");
+                                    pbarUpload.setProgress(0);
+                                    tvNotifyUpload.setText("Đang gửi các sổ lên máy chủ...");
+                                }
+                            });
+
+                            final String result = (new AsyncCallWS()).WS_UPLOAD_SO_GCS_CALL_NEW(
+                                    Common.MA_DVIQLY, Common.MA_NVGCS, array_selected, dialog_transfer_data.getWindow().getDecorView(), tvCountUpload, tvNotifyUpload, pbarUpload);
+
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.GONE);
+                                    tvCountUpload.setText(100 + "%");
+                                    pbarUpload.setProgress(100);
+                                    tvNotifyUpload.setText("Kết thúc quá trình gửi dữ liệu...");
+                                }
+                            });
+
+
+                            // Xóa file
+                            File file = new File(Environment
+                                    .getExternalStorageDirectory()
+                                    + "/ESGCS/ESGCS.zip");
+                            if (file.exists()) {
+                                file.delete();
+                            }
+                            File file2 = new File(Environment
+                                    .getExternalStorageDirectory()
+                                    + "/ESGCS/Photo/");
+                            String[] listF = file2.list();
+                            for (int i = 0; i < listF.length; i++) {
+                                if (listF[i].contains(".zip")) {
+                                    File file3 = new File(Environment
+                                            .getExternalStorageDirectory()
+                                            + "/ESGCS/Photo/" + listF[i]);
+                                    if (file3.exists()) {
+                                        file3.delete();
+                                    }
+                                }
+                            }
+
+                            if (TextUtils.isEmpty(result)) {
+                                throw new Exception("Gửi dữ liệu thất bại \nMất kết nối tới máy chủ, vui lòng kiểm tra lại kết nối internet hoặc kết nối tới máy chủ!");
+                            }
+
+                            if (result.contains("ERROR")) {
+                                throw new Exception("Gửi dữ liệu thất bại \nMáy chủ thông báo đã nhận dữ liệu nhưng xử lý các dữ liệu gặp vấn đề.\n Thử lại hoặc liên hệ hỗ trợ.");
+                            }
+
+                            throw new Exception(result);
+                        } catch (final Exception ex) {
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    comm.msbox("Gửi sổ", "Nội dung: " + ex.getMessage(),
+                                            Activity_Main.this);
+                                }
+                            });
+                        } finally {
+                            dialog_transfer_data.getWindow().getDecorView().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rlUpload.setVisibility(View.GONE);
+                                    tvCountUpload.setText(100 + "%");
+                                    pbarUpload.setProgress(100);
+                                    tvNotifyUpload.setText("Kết thúc quá trình gửi dữ liệu...");
+                                }
+                            });
                         }
-                        comm.msbox("Gửi sổ", result, Activity_Main.this);
                     }
-                } catch (Exception ex) {
-                    comm.msbox("Đồng bộ sổ", "Gửi dữ liệu thất bại",
-                            Activity_Main.this);
-                }
+                }).start();
             }
         });
 
@@ -1695,6 +1902,7 @@ public class Activity_Main extends Activity implements
 
         dialog_transfer_data.show();
     }
+
 
     public static void unzip(String zipFile, String location)
             throws IOException {

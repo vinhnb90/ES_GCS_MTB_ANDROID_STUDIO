@@ -42,7 +42,6 @@ public class CustomArrayAdapterCameraMTB extends ArrayAdapter<LinkedHashMap<Stri
 			textView.setBackgroundResource(R.drawable.border_listitem_gcs2);
 		}
 		
-		textView.setPadding(5, 5, 5, 5);
 		return convertView;
 
 	}
