@@ -1436,6 +1436,7 @@ public class Common {
             db_conn.CreateTableSqlite_GCS_LO_TRINH();
             db_conn.CreateTableSqlite_GCS_LOG_DELETE();
             db_conn.CreateTableSqlite_GCS_LOG();
+            db_conn.CreateTableSqlite_TABLE_NAME_CUSTOMER();
             db_conn.close();
             return "EXIST";
         } catch (Exception ex) {

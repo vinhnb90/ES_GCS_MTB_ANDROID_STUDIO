@@ -198,7 +198,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
     private TextView mTvStatus;
     private static final int REQUEST_WIFI_SETTING = 1008;
-    private boolean SNAPSHOT;
+    private boolean SNAPSHOT, isSNAPSHOT;
     private int BUFFER_LOAD_CAMERA = 1229000;
     private byte[] mARefStore;
     private byte[] mADiffStore;
@@ -397,25 +397,48 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
             btnCapture.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    btnCapture.setEnabled(false);
+                    btnLoad.setEnabled(true);
+                    isSNAPSHOT = false;
                     SNAPSHOT = true;
-                    Bitmap bitmap = null;
 
-                    try {
-                        bitmap = ((BitmapDrawable) ivCamera.getDrawable()).getBitmap();
-                    } catch (ClassCastException e) {
-                        Log.e(TAG, "onClick: Chưa có kết nối tới gây camera");
-                    }
+                    getRootView().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Bitmap bitmap = null;
+                            try {
+                                if (ivCamera.getDrawable() == null)
+                                    throw new Exception("");
+                                bitmap = ((BitmapDrawable) ivCamera.getDrawable()).getBitmap();
+                            } catch (Exception e) {
+                                Log.e(TAG, "onClick: Chưa có kết nối tới gây camera");
+                                comm.msbox("Thông báo", " Cần kết nối tới gây camera", Activity_Camera.this);
+                                btnCapture.setEnabled(true);
+                                btnLoad.setEnabled(false);
+                                return;
+                            }
 
-                    WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                    if (bitmap == null || !wifiManager.isWifiEnabled()) {
-                        ivViewImage.setVisibility(View.GONE);
-                        ivCamera.setVisibility(View.VISIBLE);
-                        comm.msbox("Thông báo", "Chưa có kết nối tới gậy camera", Activity_Camera.this);
+                            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                            if (bitmap == null || !wifiManager.isWifiEnabled()) {
+                                ivViewImage.setVisibility(View.GONE);
+                                ivCamera.setVisibility(View.VISIBLE);
+                                btnCapture.setEnabled(true);
+                                btnLoad.setEnabled(false);
+                                comm.msbox("Thông báo", "Cần kết nối tới gậy camera", Activity_Camera.this);
+                            } else if (!isSNAPSHOT) {
+                                showDialogMessageOK("Mất kết nối tới gậy camera. \nCần làm mới lại kết nối gậy camera", new IDialog() {
+                                    @Override
+                                    public void clickOK() throws Exception {
+                                        refreshGayCamera(Activity.RESULT_OK);
+                                    }
+                                });
+                            } else {
+                                ivViewImage.setVisibility(View.VISIBLE);
+                                ivCamera.setVisibility(View.GONE);
+                            }
+                        }
+                    }, 200);
 
-                    } else {
-                        ivViewImage.setVisibility(View.VISIBLE);
-                        ivCamera.setVisibility(View.GONE);
-                    }
                 }
             });
             setThresHold();
@@ -532,6 +555,44 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 //        });
 
 
+    }
+
+    private void showDialogMessageOK(String message, final IDialog click) {
+        final Dialog dialog = new Dialog(this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_message);
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.getWindow().setLayout(
+                android.app.ActionBar.LayoutParams.MATCH_PARENT,
+                android.app.ActionBar.LayoutParams.WRAP_CONTENT);
+
+        TextView tvMESSage =(TextView) dialog.findViewById(R.id.tv_content_OK);
+        tvMESSage.setText(TextUtils.isEmpty(message) ? "" : message);
+
+        dialog.findViewById(R.id.btnOk_OK).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    click.clickOK();
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    getRootView().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            comm.msbox("Thông báo lỗi", e.toString(), Activity_Camera.this);
+                        }
+                    })
+                    ;
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+    private View getRootView() {
+        return this.getWindow().getDecorView();
     }
 
     /**
@@ -725,11 +786,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             CreateEventTimKiem();
             btnChange.setVisibility(View.GONE);
 //			Common.clearApplicationData(Activity_Camera.this.getApplicationContext());
-        } catch (
-                Exception ex
-                )
-
-        {
+        } catch (Exception ex) {
             comm.msbox("onResume error", ex.toString(), Activity_Camera.this);
         }
     }
@@ -1015,7 +1072,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                 @Override
                 public void onClick(View v) {
                     lnButtonCamera.setVisibility(View.GONE);
-                    lnListCustom.setVisibility(View.GONE);
+//                    lnListCustom.setVisibility(View.GONE);
+                    findViewById(R.id.rl_aaaa).setVisibility(View.GONE);
                     lnButtonCloseCamera.setVisibility(View.VISIBLE);
 
                     String filePath = Environment.getExternalStorageDirectory() + "/ESGCS/Photo/" + TEN_FILE + "/" + fileName + "_" + adapter.getItem(selected_index).get("MA_CTO") + "_" + adapter.getItem(selected_index).get("NAM") + "_" + adapter.getItem(selected_index).get("THANG") + "_" + adapter.getItem(selected_index).get("KY") + "_" + adapter.getItem(selected_index).get("MA_DDO") + "_" + adapter.getItem(selected_index).get("LOAI_BCS") + ".jpg";
@@ -2036,6 +2094,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             btnCloseDialog.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    findViewById(R.id.rl_aaaa).setVisibility(View.VISIBLE);
                     dialog.dismiss();
                 }
             });
@@ -3193,17 +3252,23 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                         CreateDialogCanhBao(Color.parseColor("#005789"), "Sản lượng mới dưới ngưỡng định mức "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getDuoiDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 50 && SLChenhLech * 100 < 100) {
                         CreateDialogCanhBao(Color.parseColor("#FFCC00"), "Sản lượng mới dưới ngưỡng định mức "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getDuoiDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình"
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 100) {
                         CreateDialogCanhBao(Color.parseColor("#FF0000"), "Sản lượng mới dưới ngưỡng định mức "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getDuoiDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_CU - SL_MOI - SL_THAO) + "kw/h" : "") +
+                                "Bạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     }
                 } else {
                     CanhBaoChenhLechTongSLCto3Pha(0, ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
@@ -4194,6 +4259,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             }
 
             if (SNAPSHOT) {
+                isSNAPSHOT = true;
                 SNAPSHOT = false;
                 saveImage(frame);
 
@@ -5853,58 +5919,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     height = data.getIntExtra("height", height);
                     ip_ad = data.getStringExtra("ip_ad");
                     ip_command = data.getStringExtra("ip_command");
-
-//                    if (mv != null) {
-//                        mv.setResolution(width, height);
-//                    }
-                    SharedPreferences preferences = getSharedPreferences("SAVED_VALUES", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("width", width);
-                    editor.putInt("height", height);
-                    editor.putString("ip_ad", ip_ad);
-                    editor.putString("ip_command", ip_command);
-
-                    editor.commit();
-
-                    if (Common.state_show_camera == 0) {
-                        btnLoad.setEnabled(false);
-                        btnDelete.setEnabled(false);
-                        btnView.setEnabled(false);
-                        btnCapture.setEnabled(false);
-                    } else {
-//    					if(Common.getSSID(Activity_Camera.this).toLowerCase().contains("evn") || !Common.PHIEN_BAN.equals("HN")){
-                        btnLoad.setEnabled(true);
-                        btnDelete.setEnabled(true);
-                        btnView.setEnabled(true);
-                        btnCapture.setEnabled(true);
-//    					} else {
-//    						btnLoad.setEnabled(false);
-//        					btnDelete.setEnabled(false);
-//        					btnView.setEnabled(false);
-//        					btnCapture.setEnabled(false);
-//        					WifiManager wifiManager = (WifiManager) Activity_Camera.this.getSystemService(Context.WIFI_SERVICE);
-//    						if (wifiManager.isWifiEnabled()) {
-//    							wifiManager.setWifiEnabled(false);
-//    						}
-//        					comm.msbox("Thông báo", "Bạn kết nối chưa đúng camera\nVui lòng kết nối lại", Activity_Camera.this);
-//    					}
-                    }
-
-//                    if (Common.CAMERA_TYPE.equals("AIBALL") && mv != null) {
-//                        showCamera();
-//                        setImage();
-//                    }
-                    Common.CAMERA_AIBALL_RUN = 1;
-
-//                    Intent intent = new Intent(Activity_Camera.this, Activity_Camera.class);
-//
-//                    startActivityForResult(intent, REQUEST_WIFI_SETTING);
-//                    onClickGotoWiFiSetting();
-
-                    Common.state_show_camera = 1;
-                    finish();
-                    startActivity(getIntent());
                 }
+                refreshGayCamera(resultCode);
                 break;
             case REQUEST_ENABLE_BT:
                 if (resultCode == Activity.RESULT_OK) {
@@ -5921,6 +5937,62 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     bs.connect(con_dev);
                 }
                 break;
+        }
+    }
+
+    private void refreshGayCamera(int resultCode) {
+        if (resultCode == Activity.RESULT_OK) {
+
+//                    if (mv != null) {
+//                        mv.setResolution(width, height);
+//                    }
+            SharedPreferences preferences = getSharedPreferences("SAVED_VALUES", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("width", width);
+            editor.putInt("height", height);
+            editor.putString("ip_ad", ip_ad);
+            editor.putString("ip_command", ip_command);
+
+            editor.commit();
+
+            if (Common.state_show_camera == 0) {
+                btnLoad.setEnabled(false);
+                btnDelete.setEnabled(false);
+                btnView.setEnabled(false);
+                btnCapture.setEnabled(false);
+            } else {
+//    					if(Common.getSSID(Activity_Camera.this).toLowerCase().contains("evn") || !Common.PHIEN_BAN.equals("HN")){
+                btnLoad.setEnabled(true);
+                btnDelete.setEnabled(true);
+                btnView.setEnabled(true);
+                btnCapture.setEnabled(true);
+//    					} else {
+//    						btnLoad.setEnabled(false);
+//        					btnDelete.setEnabled(false);
+//        					btnView.setEnabled(false);
+//        					btnCapture.setEnabled(false);
+//        					WifiManager wifiManager = (WifiManager) Activity_Camera.this.getSystemService(Context.WIFI_SERVICE);
+//    						if (wifiManager.isWifiEnabled()) {
+//    							wifiManager.setWifiEnabled(false);
+//    						}
+//        					comm.msbox("Thông báo", "Bạn kết nối chưa đúng camera\nVui lòng kết nối lại", Activity_Camera.this);
+//    					}
+            }
+
+//                    if (Common.CAMERA_TYPE.equals("AIBALL") && mv != null) {
+//                        showCamera();
+//                        setImage();
+//                    }
+            Common.CAMERA_AIBALL_RUN = 1;
+
+//                    Intent intent = new Intent(Activity_Camera.this, Activity_Camera.class);
+//
+//                    startActivityForResult(intent, REQUEST_WIFI_SETTING);
+//                    onClickGotoWiFiSetting();
+
+            Common.state_show_camera = 1;
+            finish();
+            startActivity(getIntent());
         }
     }
 

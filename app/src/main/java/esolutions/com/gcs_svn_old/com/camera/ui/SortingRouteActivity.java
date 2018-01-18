@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,8 @@ import esolutions.com.gcs_svn_old.R;
 import esolutions.com.gcs_svn_old.com.camera.utility.Common;
 import esolutions.com.gcs_svn_old.com.camera.utility.ConstantVariables;
 import esolutions.com.gcs_svn_old.com.camera.utility.SQLiteConnection;
+
+import static android.content.ContentValues.TAG;
 
 @SuppressLint("DefaultLocale")
 public class SortingRouteActivity extends RootActivity {
@@ -511,6 +514,7 @@ public class SortingRouteActivity extends RootActivity {
 			}
 			return ListViewData;
 		} catch (Exception e) {
+			Log.e(TAG, "GetGCSDataFromFile: " + e.getMessage() );
 			return null;
 		}
 		
@@ -523,12 +527,17 @@ public class SortingRouteActivity extends RootActivity {
 		// Khoi tao Array chứa các row
 		ArrayList<LinkedHashMap<String, String>> ListViewData = new ArrayList<LinkedHashMap<String, String>>();
 		try {
+			int count = 0;
 			String FileNameSelected = mapSo.get(String.valueOf(spnChonSo.getSelectedItem()));
 			Cursor c_lotrinh = connection.getDataRouteByFileName(comm.convertFile(FileNameSelected, connection));
 			Cursor c = connection.getAllDataGCSsoft(FileNameSelected);
 			if(!c.moveToFirst() || !c_lotrinh.moveToFirst()){
 				c = connection.getAllDataGCS(FileNameSelected);
+				count = c.getCount();
 			}
+
+			c_lotrinh.close();
+
 			int i = 0;
 			ArrayList<String> arr_ID = new ArrayList<String>();
 			if(c.moveToFirst()){
@@ -562,6 +571,9 @@ public class SortingRouteActivity extends RootActivity {
 						if(c1.moveToFirst()){
 							BCS_END = c1.getString(0);
 						}
+
+						c1.close();
+
 						if(map.get("LOAI_BCS").equals("KT") || map.get("LOAI_BCS").equals(BCS_END)){
 							map.put("STT_ORG", stt + "");
 							map.put("STT_ROUTE", stt + "");
@@ -571,11 +583,17 @@ public class SortingRouteActivity extends RootActivity {
 					}
 					
 					i++;
+					if(i == 291)
+					Log.i(TAG, "GetGCSDataFromFile2: " + i);
 				} while(c.moveToNext());
+
+				c.close();
 			}
+
+
 			Cursor c2 = connection.getAllDataGCS(FileNameSelected);
 			if(c2.moveToFirst()){
-				if(c.getCount() != c2.getCount()){
+				if(count != c2.getCount()){
 					do {
 						LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 						if(!arr_ID.contains(c2.getString(50))){
@@ -605,6 +623,7 @@ public class SortingRouteActivity extends RootActivity {
 								if(c1.moveToFirst()){
 									BCS_END = c1.getString(0);
 								}
+								c1.close();
 								if(map.get("LOAI_BCS").equals("KT") || map.get("LOAI_BCS").equals(BCS_END)){
 									map.put("STT_ORG", stt + "");
 									map.put("STT_ROUTE", stt + "");
@@ -618,8 +637,11 @@ public class SortingRouteActivity extends RootActivity {
 					} while(c2.moveToNext());
 				}
 			}
+
+			c2.close();
 			return ListViewData;
 		} catch (Exception e) {
+			Log.e(TAG, "GetGCSDataFromFile: " + e.getMessage() );
 			return null;
 		}
 		

@@ -1186,7 +1186,7 @@ public class AsyncCallWS {
 
                     offset += ChunkSize;
 
-                    int count = (int) (offset * 100 / FileSize);
+                    int count = (int) ((long)offset * 100 / FileSize);
                     publishProgress(count);
                 }
 

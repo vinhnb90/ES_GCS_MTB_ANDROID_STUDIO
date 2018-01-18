@@ -1303,7 +1303,8 @@ public class Activity_Main extends Activity implements
 
         dialog_transfer_data.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_transfer_data.setContentView(R.layout.dialog_transfer_data);
-
+        dialog_transfer_data.setCanceledOnTouchOutside(false);
+//        dialog_transfer_data.setCancelable(false);
         lvChonSo = (ListView) dialog_transfer_data.findViewById(R.id.lvChonSo);
 
         final CheckBox chkCheckAll = (CheckBox) dialog_transfer_data
@@ -2043,7 +2044,7 @@ public class Activity_Main extends Activity implements
                             int m = Integer.parseInt(time.split(":")[1]
                                     .toString());
                             int s = Integer.parseInt(time.split(":")[2]
-                                    .toString());
+                                     .toString());
                             time = (h < 12 ? "0" + h : "0" + (h - 12)) + ":"
                                     + (m < 10 ? "0" + m : m) + ":"
                                     + (s < 10 ? "0" + s : s)

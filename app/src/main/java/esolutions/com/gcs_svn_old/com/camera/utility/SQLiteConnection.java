@@ -1,10 +1,5 @@
 package esolutions.com.gcs_svn_old.com.camera.utility;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,12 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+
 import esolutions.com.gcs_svn_old.com.camera.entity.EntityGCS;
 import esolutions.com.gcs_svn_old.com.camera.entity.EntityIndex;
 import esolutions.com.gcs_svn_old.com.camera.entity.EntityLog;
 import esolutions.com.gcs_svn_old.com.camera.entity.EntityLogDelete;
 import esolutions.com.gcs_svn_old.com.camera.entity.EntityRoute;
-import esolutions.com.gcs_svn_old.com.camera.entity.EntitySo;
 
 public class SQLiteConnection extends SQLiteOpenHelper {
 
@@ -97,6 +96,22 @@ public class SQLiteConnection extends SQLiteOpenHelper {
         database.execSQL(CREATE_TABLE_CHISO);
         return null;
     }
+
+    public String CreateTableSqlite_TABLE_NAME_CUSTOMER() {
+        String sql_check = "SELECT name FROM sqlite_master WHERE name='GCS_CUSTOMER'";
+
+        database = this.getReadableDatabase();
+        Cursor table_exist = database.rawQuery(sql_check, null);
+        if (table_exist != null && table_exist.moveToFirst()) {
+            return "exist";
+        }
+        database = this.getWritableDatabase();
+        database.execSQL(TABLE_NAME_CUSTOMER);
+        return null;
+    }
+
+
+
 
     /**
      * Tạo bảng GCS_SO_NVGCS nếu chưa có
@@ -1115,6 +1130,7 @@ public class SQLiteConnection extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             dem = Integer.parseInt(c.getString(0));
         }
+        c.close();
         return dem;
     }
 
