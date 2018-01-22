@@ -985,7 +985,8 @@ public class Activity_Camera_MTB extends Activity {
             public void afterTextChanged(Editable et) {
                 try {
                     if (etTimKiem.getText().toString().equals("")) {
-                        selected_index = getPos();
+//                        selected_index = getPos();
+                        selected_index = 0;
                         Activity_Camera_MTB.this.lvCustomer.setSelection(selected_index);
                         setDataOnEditText(selected_index, 0);
 //                        etCSMoi.requestFocus();
@@ -2360,29 +2361,28 @@ public class Activity_Camera_MTB extends Activity {
                     CanhBaoChenhLechTongSLCto3Pha(0, ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                 }
             } else if (Common.cfgInfo.isWarningEnable()) {// Cảnh báo theo %
-
                 if (SL_MOI + SL_THAO > SL_CU
                         && SLChenhLech * 100 >= ((float) Common.cfgInfo.getVuotDinhMuc())) {
                     if (SLChenhLech * 100 < 50) {
-                            CreateDialogCanhBao(Color.parseColor("#005789"), "Sản lượng mới vượt quá "
-                                    + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
-                                    "so với mức " + Common.cfgInfo.getVuotDinhMuc()
-                                    + "% đã đặt trong cấu hình "
-                                    + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) +  "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
-                                    "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                        CreateDialogCanhBao(Color.parseColor("#005789"), "Sản lượng mới vượt quá "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
+                                "so với mức " + Common.cfgInfo.getVuotDinhMuc()
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 50 && SLChenhLech * 100 < 100) {
                         CreateDialogCanhBao(Color.parseColor("#FFCC00"), "Sản lượng mới vượt quá "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getVuotDinhMuc()
                                 + "% đã đặt trong cấu hình "
-                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) +   "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
                                 "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 100) {
                         CreateDialogCanhBao(Color.parseColor("#FF0000"), "Sản lượng mới vượt quá "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getVuotDinhMuc()
                                 + "% đã đặt trong cấu hình "
-                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) +   "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
                                 "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     }
                 } else if (SL_MOI + SL_THAO < SL_CU

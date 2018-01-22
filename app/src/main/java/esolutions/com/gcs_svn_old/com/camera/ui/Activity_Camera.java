@@ -426,7 +426,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                                 btnLoad.setEnabled(false);
                                 comm.msbox("Thông báo", "Cần kết nối tới gậy camera", Activity_Camera.this);
                             } else if (!isSNAPSHOT) {
-                                showDialogMessageOK("Mất kết nối tới gậy camera. \nCần làm mới lại kết nối gậy camera", new IDialog() {
+                                showDialogMessageOK(Activity_Camera.this, "Kết nối tới gậy camera chập chờn. \nNên làm mới lại kết nối gậy camera", new IDialog() {
                                     @Override
                                     public void clickOK() throws Exception {
                                         refreshGayCamera(Activity.RESULT_OK);
@@ -437,7 +437,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                                 ivCamera.setVisibility(View.GONE);
                             }
                         }
-                    }, 200);
+                    }, 500);
 
                 }
             });
@@ -557,8 +557,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
 
     }
 
-    private void showDialogMessageOK(String message, final IDialog click) {
-        final Dialog dialog = new Dialog(this);
+    public static void showDialogMessageOK(final Context context, String message, final IDialog click) {
+        final Dialog dialog = new Dialog(context);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_message);
@@ -577,13 +577,7 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                     click.clickOK();
                 } catch (final Exception e) {
                     e.printStackTrace();
-                    getRootView().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            comm.msbox("Thông báo lỗi", e.toString(), Activity_Camera.this);
-                        }
-                    })
-                    ;
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -1785,7 +1779,8 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
             public void afterTextChanged(Editable et) {
                 try {
                     if (etTimKiem.getText().toString().equals("")) {
-                        selected_index = getPos();
+//                        selected_index = getPos();
+                        selected_index = 0;
                         Activity_Camera.this.lvCustomer.setSelection(selected_index);
                         setDataOnEditText(selected_index, 0);
 //                        etCSMoi.requestFocus();
@@ -3234,17 +3229,23 @@ public class Activity_Camera extends Activity implements DialogInterface.OnCance
                         CreateDialogCanhBao(Color.parseColor("#005789"), "Sản lượng mới vượt quá "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getVuotDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 50 && SLChenhLech * 100 < 100) {
                         CreateDialogCanhBao(Color.parseColor("#FFCC00"), "Sản lượng mới vượt quá "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getVuotDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     } else if (SLChenhLech * 100 >= 100) {
                         CreateDialogCanhBao(Color.parseColor("#FF0000"), "Sản lượng mới vượt quá "
                                 + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "% " : "") +
                                 "so với mức " + Common.cfgInfo.getVuotDinhMuc()
-                                + "% đã đặt trong cấu hình tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
+                                + "% đã đặt trong cấu hình "
+                                + ((SL_CU != 0.0f) ? Common.round(SLChenhLech * 100, 2) + "tương ứng với " + (SL_MOI - SL_CU + SL_THAO) + "kw/h" : "") +
+                                "\nBạn có muốn lưu ?", ID_SQLITE, CS_MOI, SL_MOI, tinh_trang_moi, LOAI_BCS, SO_CTO);
                     }
                 } else if (SL_MOI + SL_THAO < SL_CU
                         && SLChenhLech * 100 >= ((float) Common.cfgInfo.getDuoiDinhMuc())) {

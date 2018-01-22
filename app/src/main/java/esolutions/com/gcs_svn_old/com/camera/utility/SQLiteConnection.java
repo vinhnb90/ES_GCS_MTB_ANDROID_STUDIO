@@ -1019,6 +1019,41 @@ public class SQLiteConnection extends SQLiteOpenHelper {
         return database.rawQuery(strQuery, null);
     }
 
+    public Cursor getAllDataGCSVinhTuy(String fileName) {
+        database = this.getReadableDatabase();
+//        String strQuery = "SELECT * FROM " + TABLE_NAME_CHISO + " WHERE STR_CHECK_DSOAT <> 'CHECK' AND STR_CHECK_DSOAT <> 'CTO_DTU' AND MA_QUYEN = '" +
+//                fileName + "'";
+//Đối với đơn vị Vĩnh Tuy Hà nội, hiện đang có những khách hàng có STR_CHECK_DSOAT là CHECK hoặc CTO_DTU lấy được dữ liệu xuống MTB, nên bỏ đi điều kiện CHECK_DOISOAT
+        //nếu cần nên phục hồi lại đoạn code phía trên
+
+        String strQuery = "SELECT * FROM " + TABLE_NAME_CHISO + " WHERE MA_QUYEN = '" +
+                fileName + "'";
+        return database.rawQuery(strQuery, null);
+    }
+
+    public Cursor getAllDataGCSsoftVinhTuy(String fileName) {
+        database = this.getReadableDatabase();
+//        String strQuery = "SELECT * FROM "
+//                + TABLE_NAME_CHISO
+//                + " a, "
+//                + TABLE_NAME_ROUTE
+//                + " b WHERE a.SERY_CTO = b.SERY_CTO AND a.LOAI_BCS = b.LOAI_BCS AND " +
+//                "STR_CHECK_DSOAT <> 'CHECK' AND STR_CHECK_DSOAT <> 'CTO_DTU' AND MA_QUYEN = '" +
+//                fileName + "' ORDER BY STT_ROUTE";
+
+//Đối với đơn vị Vĩnh Tuy Hà nội, hiện đang có những khách hàng có STR_CHECK_DSOAT là CHECK hoặc CTO_DTU lấy được dữ liệu xuống MTB, nên bỏ đi điều kiện CHECK_DOISOAT
+        //nếu cần nên phục hồi lại đoạn code phía trên
+        String strQuery = "SELECT * FROM "
+                + TABLE_NAME_CHISO
+                + " a, "
+                + TABLE_NAME_ROUTE
+                + " b WHERE a.SERY_CTO = b.SERY_CTO AND a.LOAI_BCS = b.LOAI_BCS" +
+                " AND MA_QUYEN = '" +
+                fileName + "' ORDER BY STT_ROUTE";
+        return database.rawQuery(strQuery, null);
+    }
+
+
     public Cursor getAllDataGCS2(String fileName) {
         database = this.getReadableDatabase();
         String strQuery = "SELECT * FROM " + TABLE_NAME_CHISO + " WHERE MA_QUYEN = '" + fileName + "'";
@@ -1064,6 +1099,7 @@ public class SQLiteConnection extends SQLiteOpenHelper {
                 + " b WHERE a.SERY_CTO = b.SERY_CTO AND a.LOAI_BCS = b.LOAI_BCS AND " +
                 "STR_CHECK_DSOAT <> 'CHECK' AND STR_CHECK_DSOAT <> 'CTO_DTU' AND MA_QUYEN = '" +
                 fileName + "' ORDER BY STT_ROUTE";
+
         return database.rawQuery(strQuery, null);
     }
 
@@ -1630,6 +1666,44 @@ public class SQLiteConnection extends SQLiteOpenHelper {
     public long deleteDataRoute(String TEN_FILE) {
         database = this.getWritableDatabase();
         return database.delete(TABLE_NAME_ROUTE, "TEN_FILE=?", new String[]{TEN_FILE});
+    }
+
+    public List<String> getKHNgoaiLoTrinh(String fileName)
+    {
+        database = this.getWritableDatabase();
+        String strQuery = "SELECT * FROM \n" +
+                "(SELECT GCS_CHISO_HHU.TEN_KHANG, GCS_CHISO_HHU.MA_KHANG, GCS_CHISO_HHU.SERY_CTO, GCS_CHISO_HHU.MA_QUYEN,\n" +
+                "GCS_LO_TRINH.STT_ORG, GCS_LO_TRINH.STT_ROUTE\n" +
+                "FROM   GCS_CHISO_HHU \n" +
+                "       LEFT JOIN GCS_LO_TRINH \n" +
+                "          ON GCS_CHISO_HHU.SERY_CTO = GCS_LO_TRINH.SERY_CTO WHERE GCS_CHISO_HHU.MA_QUYEN = ?\n" +
+                "\t\t  \t  \n" +
+                "UNION ALL\n" +
+                "\n" +
+                "SELECT GCS_CHISO_HHU.TEN_KHANG, GCS_CHISO_HHU.MA_KHANG, GCS_CHISO_HHU.SERY_CTO, GCS_CHISO_HHU.MA_QUYEN,\n" +
+                "GCS_LO_TRINH.STT_ORG, GCS_LO_TRINH.STT_ROUTE\n" +
+                "FROM   GCS_LO_TRINH\n" +
+                "       LEFT JOIN GCS_CHISO_HHU\n" +
+                "          ON GCS_CHISO_HHU.SERY_CTO = GCS_LO_TRINH.SERY_CTO\n" +
+                "WHERE  GCS_CHISO_HHU.SERY_CTO IS NULL\n" +
+                ")\n" +
+                "\n" +
+                "WHERE STT_ORG IS NULL OR STT_ROUTE IS NULL\n";
+        Cursor cursor = database.rawQuery(strQuery, new String[]{fileName});
+        if(cursor.getCount()==0)
+        return new ArrayList<>();
+        else
+        {
+            List<String> stringList = new ArrayList<>();
+            cursor.moveToFirst();
+            while (cursor.moveToNext())
+            {
+                String MA_KHANG = cursor.getString(cursor.getColumnIndex("MA_KHANG"));
+                stringList.add(MA_KHANG);
+            }
+
+            return stringList;
+        }
     }
 
     public long deleteAllDataLoTrinh() {
