@@ -94,6 +94,8 @@ public class AsyncTaskCameraFiltMTB extends AsyncTask<String, LinkedHashMap<Stri
 				Activity_Camera_MTB.selected_index = ((Activity_Camera_MTB) activityParent).getPos();
 				((Activity_Camera_MTB) activityParent).lvCustomer.setSelection(Activity_Camera_MTB.selected_index);
 			}
+
+			((Activity_Camera_MTB) activityParent).setImage();
 //			((Activity_Camera_MTB) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
 //	
 //				@Override

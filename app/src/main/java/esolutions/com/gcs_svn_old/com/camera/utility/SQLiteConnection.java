@@ -106,7 +106,7 @@ public class SQLiteConnection extends SQLiteOpenHelper {
             return "exist";
         }
         database = this.getWritableDatabase();
-        database.execSQL(TABLE_NAME_CUSTOMER);
+        database.execSQL(CREATE_TABLE_CUSTOMER);
         return null;
     }
 

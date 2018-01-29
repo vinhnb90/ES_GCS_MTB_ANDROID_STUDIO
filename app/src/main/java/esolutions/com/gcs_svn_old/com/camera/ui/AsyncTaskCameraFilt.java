@@ -122,6 +122,7 @@ public class AsyncTaskCameraFilt extends AsyncTask<String, LinkedHashMap<String,
                 Activity_Camera.selected_index = ((Activity_Camera) activityParent).getPos();
                 ((Activity_Camera) activityParent).lvCustomer.setSelection(Activity_Camera.selected_index);
             }
+            ((Activity_Camera) activityParent).setImage();
 //			((Activity_Camera) activityParent).lvCustomer.setOnItemClickListener(new OnItemClickListener() {
 //
 //				@Override

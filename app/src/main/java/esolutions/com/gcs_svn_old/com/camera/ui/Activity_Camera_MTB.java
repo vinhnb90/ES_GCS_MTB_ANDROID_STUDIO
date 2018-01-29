@@ -985,14 +985,25 @@ public class Activity_Camera_MTB extends Activity {
             public void afterTextChanged(Editable et) {
                 try {
                     if (etTimKiem.getText().toString().equals("")) {
+                        selected_index = getPos();
+//                        selected_index = 0;
+                        Activity_Camera_MTB.this.lvCustomer.setSelection(selected_index);
+                        setDataOnEditText(selected_index, 0);
+//                        etCSMoi.requestFocus();
+//                        etCSMoi.selectAll();
+                        setImage();
+                        showHidePmax(selected_index);
+                    }else {
 //                        selected_index = getPos();
                         selected_index = 0;
                         Activity_Camera_MTB.this.lvCustomer.setSelection(selected_index);
                         setDataOnEditText(selected_index, 0);
 //                        etCSMoi.requestFocus();
 //                        etCSMoi.selectAll();
+                        setImage();
                         showHidePmax(selected_index);
                     }
+
                 } catch (Exception ex) {
 //					comm.msbox("Lỗi", "afterTextChanged: " + ex.toString(), Activity_Camera.this);
                 }
